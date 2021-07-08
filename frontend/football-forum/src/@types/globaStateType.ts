@@ -1,4 +1,4 @@
-import * as memesTypes from '../types/memesTypes';
+import * as memesTypes from './memesTypes';
 
 type stateType = {
     memes: {

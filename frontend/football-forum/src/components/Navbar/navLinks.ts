@@ -1,8 +1,9 @@
 const navLinks = [
-    { title: `Memy`, path: `/memes` },
+    { title: `Memy`, path: `/` },
     { title: `Tabele`, path: `/tables` },
     { title: `Mecze`, path: `/matches` },
-    { title: `Komentujemy!`, path: `/comments` }
+    { title: `Komentujemy!`, path: `/livechat` },
+    { title: `Dodaj Mema`, path: `/addmem` }
   ];
 
 export default navLinks;

@@ -5,10 +5,10 @@ import { Container } from '@material-ui/core';
 import useStyles from './styles'
 import { ClassNameMap } from '@material-ui/styles';
 import Mem from '../Memes/Mem/Mem';
-import getMemes from '../../actions/memesActions';
+import { getMemes } from '../../actions/memesActions';
 import MessageBox from '../MessageBox/MessageBox'
 import LoadingBox from '../LoadingBox/LoadingBox';
-import stateType from '../../types/globaStateType';
+import stateType from '../../@types/globaStateType';
 
 function MemesContainer(): JSX.Element {
 

@@ -7,3 +7,15 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.test {
+  background-color: yellow;
+  width:500px;
+  height:500px;
+  color:black;
+}
+
+.viewMem {
+  max-width: 800px;
+  max-height: 600px;
+}

@@ -13,7 +13,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import useStyles from './styles'
 import image from '../../../assets/pitch.jpg';
-import * as memesTypes from '../../../types/memesTypes';
+import * as memesTypes from '../../../@types/memesTypes';
 
 function Mem(props: memesTypes.Mem): JSX.Element {
 
@@ -37,7 +37,7 @@ function Mem(props: memesTypes.Mem): JSX.Element {
       />
       <CardMedia
         className={classes.media}
-        image={props.file || image}
+        image={`data:image/png;base64,${props.file}` || image}
         title={props.title}
       />
       <CardContent>
