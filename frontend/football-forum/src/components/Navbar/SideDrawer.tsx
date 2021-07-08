@@ -1,14 +1,17 @@
-import { Drawer, IconButton, List, ListItem, ListItemText } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
 import React from "react";
 import { useState } from "react";
+
+import { Drawer, IconButton, List, ListItem, ListItemText } from "@material-ui/core";
+import { Menu } from "@material-ui/icons";
+import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import useStyles from './styles';
 
 import navLinks from './navLinks';
 
-const SideDrawer = () => {
+
+function SideDrawer(): JSX.Element {
   
-  const classes = useStyles();
+  const classes: ClassNameMap = useStyles();
   const [stateMobileNav, setStateMobileNav] = useState(false);
 
   const toggleDrawer = (stateMobileNav: boolean) => (_event: any) => {

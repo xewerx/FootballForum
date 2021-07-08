@@ -10,12 +10,14 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import useStyles from './styles'
 import image from '../../../assets/pitch.jpg';
+import * as memesTypes from '../../../types/memesTypes';
 
-const Mem = () => {
+function Mem(props: memesTypes.Mem): JSX.Element {
 
-  const classes = useStyles();
+  const classes: ClassNameMap = useStyles();
 
   return (
     <Card className={classes.root}>
@@ -30,17 +32,17 @@ const Mem = () => {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Tytuł mema"
-        subheader="16.03.2021 14:58"
+        title={props.title}
+        subheader={props.createdAt}
       />
       <CardMedia
         className={classes.media}
-        image={image || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
-        title="mem"
+        image={props.file || image}
+        title={props.title}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Tutaj będzie prosze ja ciebie opis mema
+          {props.description ? props.description : "Brak opisu"}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

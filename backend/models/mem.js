@@ -1,20 +1,23 @@
 import mongoose from 'mongoose';
 
 const memSchema = mongoose.Schema({
-    tittle: String,
-    description: String,
-    creator: String,
-    file: String,
+    tittle: { type: String, required: true},
+    description: { type: String, required: true},
+    creator: { type: String, required: true},
+    file: { type: String, required: true},
     likes: {
         type: [String],
         default: []
     },
     createdAt: {
         type: Date,
-        default: new Date()
+        default: new Date(),
+        required: true
     }
+}, {
+    timestamps: true
 })
 
-const mem = mongoose.model('memes', memSchema);
+const Mem = mongoose.model('memes', memSchema);
 
-export default mem;
+export default Mem;

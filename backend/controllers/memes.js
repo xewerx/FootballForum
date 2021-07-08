@@ -1,12 +1,17 @@
 import mongoose from 'mongoose';
 import Mem from '../models/mem.js';
 
+import { sampleMemes } from '../data.js';
+
 export const getMemes = async (req, res) => {
     try {
-        const memes = await Mem.find();
+        const memes = await Mem.find({});
         res.status(200).json(memes);
     } catch (error){
-        console.log(error);
-        res.status(404).json({message: "Something went wrong"});
+        res.status(500).json({message: error.message});
     }
-}
+};
+
+export const addMemes = async (req, res) => {
+
+};

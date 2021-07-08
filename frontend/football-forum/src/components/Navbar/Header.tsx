@@ -1,13 +1,15 @@
-import { AppBar, Container, Hidden, IconButton, List, ListItem, ListItemText, Toolbar } from "@material-ui/core";
 import React from "react";
+
+import { AppBar, Container, Hidden, IconButton, List, ListItem, ListItemText, Toolbar } from "@material-ui/core";
 import SideDrawer from "./SideDrawer";
+import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import useStyles from './styles'
 
 import navLinks from './navLinks';
 
-const Header = () => {
+function Header(): JSX.Element {
 
-  const classes = useStyles();
+  const classes: ClassNameMap = useStyles();
 
   return (
     <>
