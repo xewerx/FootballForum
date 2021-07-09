@@ -18,12 +18,11 @@ export type MemState = {
 export type MemesAction = {
     type: string
     payload?: Mem | AxiosResponse | string
-    error?: string
 }
 
 export type DispatchType = (args: MemesAction) => MemesAction
 
-export type newMem = {
+export type NewMem = {
     title: string
     description: string
     image: string

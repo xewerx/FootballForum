@@ -7,25 +7,27 @@ const initialState = {
 }
 
 export const getMemesReducer = (state: types.MemState = initialState, action: types.MemesAction) => {
-    switch(action.type) {
+    switch (action.type) {
         case MEMES_LIST_REQUEST:
             return { loading: true };
         case MEMES_LIST_SUCCESS:
             return { loading: false, memes: action.payload };
         case MEMES_LIST_FAIL:
-            return { loading: false, memes: action.error };
+            return { loading: false, error: action.payload };
         default:
             return state;
     }
 }
 
 export const uploadMemReducer = (state: types.MemState = initialState, action: types.MemesAction) => {
-    switch(action.type) {
+    switch (action.type) {
         case UPLOAD_MEM_REQUEST:
             return { loading: true };
         case UPLOAD_MEM_SUCCESS:
-            return { ...state, loading: false, memes: action.payload};
+            return { ...state, loading: false, memes: action.payload };
         case UPLOAD_MEM_FAIL:
-            return { ...state, loading: false, memes: action.payload};
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
     }
 }

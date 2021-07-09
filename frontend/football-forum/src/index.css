@@ -1,20 +1,155 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
-}
-
-* > body {
-  margin: 0;
+html {
+  font-size: 62.5; /* 16px x 62.5 = 10px = 1rem */
   box-sizing: border-box;
 }
 
-.test {
-  background-color: yellow;
-  width:500px;
-  height:500px;
-  color:black;
+body {
+  margin: 0;
+  height: 100vh;
+  font-size: 1.6rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  height: 100%;
+}
+
+/* Layout */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.row > div {
+  width: 60%;
+  min-width: 20rem;
+}
+
+/* Custom */
+h1 {
+  font-size: 2rem;
+  padding: 1rem 0;
+}
+
+input, select, textarea, button {
+  padding: 1rem;
+  border-radius: 0.2rem;
+  border: 0.1rem #a4a4a4 solid;
+  font-size: 1rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.elementHover:hover {
+  border: 0.1rem #404040 solid;
+  cursor: pointer;
+}
+
+button.primary {
+  background-color: #009933;
+}
+
+button.block {
+  width: 100%;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+li {
+  margin-top: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Form */
+.form {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.form > div {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.form label {
+  margin: 1rem 0 0 0.5rem;
+}
+
+/* Alert */
+.success {
+  color: #20a020;
+}
+
+.danger {
+  color: #a02020;
+}
+
+.alert {
+  padding: 1rem;
+  border: 0.1rem solid transparent;
+  border-radius: 0.5rem;
+}
+
+.alert-info {
+  color: #2020a0;
+  background-color: #e0e0ff;
+}
+
+.alert-danger {
+  color: #a02020;
+  background-color: #ffe0e0e0;
+}
+
+.alert-success {
+  color: #20a020;
+  background-color: #ffe0e0e0;
+}
+
+/* Dropdown */
+.dropdown-content {
+  position: absolute;
+  display: none;
+  left: 0;
+  z-index: 1;
+  margin-top: 1rem;
+  background-color: #d8d8d8;
+  color: #124413;
+  font-size: 1rem;
+}
+
+.dropdown-content a {
+  color: #124413;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content li {
+  padding: 0.8rem 1rem 0.8rem 1rem;
+  margin-top: 0;
+  border: 0.1rem#d8d8d8 solid;
+}
+
+.dropdown-content li:hover {
+  background-color: #ffffff;
+  border: 0.1rem#124413 solid;
+}
+
+/* TESTS */
 .viewMem {
   max-width: 800px;
   max-height: 600px;

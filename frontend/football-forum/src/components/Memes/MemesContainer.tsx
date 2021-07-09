@@ -23,7 +23,7 @@ function MemesContainer(): JSX.Element {
     }, [dispatch])
 
     return (
-        <Container className={classes.root} maxWidth='sm' >
+        <Container className={classes.root}>
             {loading ? <LoadingBox></LoadingBox>
                 :
                 error ? <MessageBox variant="danger">{error}</MessageBox>

@@ -12,7 +12,7 @@ export const getMemes = () => async (dispatch: types.DispatchType) => {
     }
 }
 
-export const uploadMem = (data: types.newMem) => async (dispatch: types.DispatchType) => {
+export const uploadMem = (data: types.NewMem) => async (dispatch: types.DispatchType) => {
     dispatch({ type: UPLOAD_MEM_REQUEST });
     try {
         const result = await axios.post('/api/memes/upload', data);

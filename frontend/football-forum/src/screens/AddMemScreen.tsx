@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import MessageBox from '../components/MessageBox/MessageBox'
-import { newMem } from '../@types/memesTypes';
+import { NewMem } from '../@types/memesTypes';
 import { uploadMem } from '../actions/memesActions';
 import { useDispatch } from 'react-redux';
 function AddMemScreen(): JSX.Element {
@@ -56,7 +56,7 @@ function AddMemScreen(): JSX.Element {
             setError("Zbyt duzy plik");
             console.log("ZA DUZY PLIK")
         }
-        const payload: newMem = {
+        const payload: NewMem = {
             image: base64,
             title: title,
             creator: creator,
@@ -68,7 +68,7 @@ function AddMemScreen(): JSX.Element {
 
     return (
         <>
-            <form onSubmit={(e) => onFileSubmit(e)} >
+            <form className="form" onSubmit={(e) => onFileSubmit(e)} >
                 <div>
                     <h1>Add mem</h1>
                 </div>

@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles({
   bar: {
-    backgroundColor: 'green'
+    backgroundColor: '#124413',
   },
   navbarDisplayFlex: {
     display: `flex`,
@@ -20,9 +20,9 @@ export default makeStyles({
   list: {
     width: 250,
   },
-  linkTextBlack: {
+  linkTextGreen: {
     textDecoration: `none`,
     textTransform: `uppercase`,
-    color: `black`
+    color: `#124413`
   },
 });

@@ -14,6 +14,7 @@ import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import useStyles from './styles'
 import image from '../../../assets/pitch.jpg';
 import * as memesTypes from '../../../@types/memesTypes';
+import moment from 'moment';
 
 function Mem(props: memesTypes.Mem): JSX.Element {
 
@@ -33,7 +34,7 @@ function Mem(props: memesTypes.Mem): JSX.Element {
           </IconButton>
         }
         title={props.title}
-        subheader={props.createdAt}
+        subheader={moment(props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
       />
       <CardMedia
         className={classes.media}

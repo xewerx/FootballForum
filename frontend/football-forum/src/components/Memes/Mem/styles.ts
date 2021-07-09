@@ -3,7 +3,6 @@ import { red } from '@material-ui/core/colors';
 
 export default makeStyles((theme) => ({
     root: {
-      maxWidth: 645,
       marginBottom: 140
     },
     media: {

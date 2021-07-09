@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { AppBar, Container, Hidden, IconButton, List, ListItem, ListItemText, Toolbar } from "@material-ui/core";
 import SideDrawer from "./SideDrawer";
@@ -7,10 +8,20 @@ import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import useStyles from './styles'
 
 import navLinks from './navLinks';
+import stateType from '../../@types/globaStateType';
+import { signout } from '../../actions/userActions';
 
 function Header(): JSX.Element {
 
   const classes: ClassNameMap = useStyles();
+
+  const user = useSelector((state: stateType) => state.userSignin);
+  const { userInfo } = user;
+
+  const dispatch = useDispatch();
+    const signoutHandler = () => {
+        dispatch(signout());
+    }
 
   return (
     <>
@@ -36,6 +47,32 @@ function Header(): JSX.Element {
                     </ListItem>
                   </Link>
                 ))}
+                {userInfo ?
+                <Link to={'/signin'} className={classes.linkText}>
+                    <ListItem button className="dropdown">
+                      <ListItemText primary={userInfo.name} />
+                      <div >
+                        <ul className="dropdown-content">
+                          <li>
+                            <Link to="/myprofile">Profil</Link>
+                          </li>
+                          <li>
+                            <Link to="/addmem">Dodaj&nbsp;mema</Link>
+                          </li>
+                          <li>
+                            <Link to="#signout" onClick={signoutHandler}>Wyloguj</Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </ListItem>
+                  </Link>
+                  :
+                  <Link to={'/signin'} className={classes.linkText}>
+                    <ListItem button>
+                      <ListItemText primary={'Zaloguj sie'} />
+                    </ListItem>
+                  </Link>
+                }
               </List>
             </Hidden>
             <Hidden mdUp>

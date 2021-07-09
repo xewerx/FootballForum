@@ -7,6 +7,7 @@ import TablesScreen from './screens/TablesScreen';
 import MatchesScreen from './screens/MatchesScreen';
 import LivechatScreen from './screens/LivechatScreen';
 import AddMemScreen from './screens/AddMemScreen';
+import SigninScreen from './screens/SigninScreen';
 
 function App(): JSX.Element {
 
@@ -14,11 +15,14 @@ function App(): JSX.Element {
     <>
       <BrowserRouter>
         <Header />
-        <Route path="/" component={HomeScreen} exact></Route>
-        <Route path="/tables" component={TablesScreen}></Route>
-        <Route path="/matches" component={MatchesScreen}></Route>
-        <Route path="/livechat" component={LivechatScreen}></Route>
-        <Route path="/addmem" component={AddMemScreen}></Route>
+        <main className="row">
+          <Route path="/" component={HomeScreen} exact></Route>
+          <Route path="/tables" component={TablesScreen}></Route>
+          <Route path="/matches" component={MatchesScreen}></Route>
+          <Route path="/livechat" component={LivechatScreen}></Route>
+          <Route path="/addmem" component={AddMemScreen}></Route>
+          <Route path="/signin" component={SigninScreen}></Route>
+        </main>
       </BrowserRouter>
 
     </>

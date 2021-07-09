@@ -1,5 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Drawer, IconButton, List, ListItem, ListItemText } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
@@ -7,16 +8,25 @@ import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import useStyles from './styles';
 
 import navLinks from './navLinks';
-
+import stateType from '../../@types/globaStateType';
+import { signout } from '../../actions/userActions';
 
 function SideDrawer(): JSX.Element {
-  
+
   const classes: ClassNameMap = useStyles();
   const [stateMobileNav, setStateMobileNav] = useState(false);
+
+  const user = useSelector((state: stateType) => state.userSignin);
+  const { userInfo } = user;
 
   const toggleDrawer = (stateMobileNav: boolean) => (_event: any) => {
     setStateMobileNav(stateMobileNav);
   };
+
+  const dispatch = useDispatch();
+    const signoutHandler = () => {
+        dispatch(signout());
+    }
 
   const sideDrawerList = () => (
     <div
@@ -27,12 +37,37 @@ function SideDrawer(): JSX.Element {
     >
       <List component="nav">
         {navLinks.map(({ title, path }) => (
-          <a href={path} key={title} className={classes.linkTextBlack}>
+          <Link to={path} key={title} className={classes.linkTextGreen}>
             <ListItem button>
               <ListItemText primary={title} />
             </ListItem>
-          </a>
+          </Link>
         ))}
+        {userInfo ?
+          <>
+            <Link to={'/myprofile'} className={classes.linkTextGreen}>
+              <ListItem button>
+                <ListItemText primary="Profil" />
+              </ListItem>
+            </Link>
+            <Link to={'/addmem'} className={classes.linkTextGreen}>
+              <ListItem button>
+                <ListItemText primary="Dodaj mema" />
+              </ListItem>
+            </Link>
+            <Link to={'#signout'} onClick={signoutHandler} className={classes.linkTextGreen}>
+              <ListItem button>
+                <ListItemText primary="Wyloguj" />
+              </ListItem>
+            </Link>
+          </>
+          :
+          <Link to={'/signin'} className={classes.linkTextGreen}>
+            <ListItem button>
+              <ListItemText primary={'Zaloguj sie'} />
+            </ListItem>
+          </Link>
+        }
       </List>
     </div>
   );

@@ -1,7 +1,4 @@
-import mongoose from 'mongoose';
 import Mem from '../models/mem.js';
-
-import { sampleMemes } from '../data.js';
 
 export const getMemes = async (req, res) => {
     try {
