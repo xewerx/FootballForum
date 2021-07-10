@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { History } from 'history';
 
 import LoadingBox from '../components/LoadingBox/LoadingBox';
 import MessageBox from '../components/MessageBox/MessageBox';
 import { signin } from '../actions/userActions';
 import stateType from '../@types/globaStateType';
 
-function SigninScreen(props: any) {
+interface propsType {
+    history: History
+}
+
+function SigninScreen(props: propsType): JSX.Element{
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('')
@@ -26,7 +31,7 @@ function SigninScreen(props: any) {
             props.history.push('/');
         }
     }, [props.history, userInfo]);
-    console.log(localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo') || '{}') : null)
+
     return (
         <div>
             <form className="form" onSubmit={submitHandler}>
@@ -35,16 +40,16 @@ function SigninScreen(props: any) {
                 </div>
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input className="elementHover" type="email" id="email" placeholder="Enter email" required onChange={(e) => setEmail(e.target.value)}></input>
+                    <input className="elementHover" type="email" id="email" placeholder="Podaj email" required onChange={(e) => setEmail(e.target.value)}></input>
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
-                    <input className="elementHover" type="password" id="password" placeholder="Enter password" required onChange={(e) => setPassword(e.target.value)}></input>
+                    <label htmlFor="password">Haslo</label>
+                    <input className="elementHover" type="password" id="password" placeholder="Podaj haslo" required onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 {error && <MessageBox variant="danger">{error}</MessageBox>}
                 {loading && <LoadingBox></LoadingBox>}
                 <div>
-                    <button className="primary elementHover" type="submit">Sign In</button>
+                    <button className="primary elementHover" type="submit">Zaloguj sie</button>
                 </div>
                 <div>
                     <label>

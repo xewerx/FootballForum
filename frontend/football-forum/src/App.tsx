@@ -8,6 +8,7 @@ import MatchesScreen from './screens/MatchesScreen';
 import LivechatScreen from './screens/LivechatScreen';
 import AddMemScreen from './screens/AddMemScreen';
 import SigninScreen from './screens/SigninScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 function App(): JSX.Element {
 
@@ -22,6 +23,7 @@ function App(): JSX.Element {
           <Route path="/livechat" component={LivechatScreen}></Route>
           <Route path="/addmem" component={AddMemScreen}></Route>
           <Route path="/signin" component={SigninScreen}></Route>
+          <Route path="/register" component={RegisterScreen}></Route>
         </main>
       </BrowserRouter>
 

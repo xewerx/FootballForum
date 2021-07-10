@@ -26,5 +26,4 @@ export type NewMem = {
     title: string
     description: string
     image: string
-    creator: string
 }

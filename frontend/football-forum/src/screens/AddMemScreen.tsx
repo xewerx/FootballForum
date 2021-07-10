@@ -14,7 +14,6 @@ function AddMemScreen(): JSX.Element {
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [creator, setCreator] = useState<string>('');
 
     const dispatch = useDispatch();
     // const [selectedFile, setSelectedFile] = useState<string>('');
@@ -54,43 +53,36 @@ function AddMemScreen(): JSX.Element {
 
         if (Number(size) > 5242880) { // wieksze niz 5MB
             setError("Zbyt duzy plik");
-            console.log("ZA DUZY PLIK")
         }
         const payload: NewMem = {
             image: base64,
             title: title,
-            creator: creator,
             description: description
         }
         dispatch(uploadMem(payload));
-        console.log("payload", payload)
     }
 
     return (
-        <>
+        <div>
             <form className="form" onSubmit={(e) => onFileSubmit(e)} >
                 <div>
-                    <h1>Add mem</h1>
+                    <h1>Dodaj mema</h1>
                 </div>
                 {error && <MessageBox variant="danger">{error}</MessageBox>}
                 <div>
-                    <label htmlFor="title">Title</label>
-                    <input type="text" id="title" placeholder="Enter title" required onChange={(e) => setTitle(e.target.value)}></input>
+                    <label htmlFor="title">Tytul</label>
+                    <input type="text" id="title" placeholder="Podaj tytul" required onChange={(e) => setTitle(e.target.value)}></input>
                 </div>
                 <div>
-                    <label htmlFor="description">Description</label>
-                    <input type="text" id="description" placeholder="Enter description" required onChange={(e) => setDescription(e.target.value)}></input>
-                </div>
-                <div>
-                    <label htmlFor="creator">Creator</label>
-                    <input type="text" id="creator" placeholder="Enter creator" required onChange={(e) => setCreator(e.target.value)}></input>
+                    <label htmlFor="description">Opis</label>
+                    <input type="text" id="description" placeholder="Podaj opis" required onChange={(e) => setDescription(e.target.value)}></input>
                 </div>
                 <div onChange={(e) => onChangeInput(e)}>
-                    <label htmlFor="file">File</label>
+                    <label htmlFor="file">Plik</label>
                     <input type="file" name="avatar" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} />
                 </div>
                 <div>
-                    <button className="primary" type="submit">Upload</button>
+                    <button className="primary" type="submit">Dodaj</button>
                 </div>
 
             </form>
@@ -100,7 +92,7 @@ function AddMemScreen(): JSX.Element {
                 <img className="viewMem" src={`data:image/png;base64,${base64}`}></img>
             </div>
 
-        </>
+        </div>
     )
 }
 

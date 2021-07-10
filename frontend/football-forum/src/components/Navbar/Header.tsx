@@ -48,24 +48,22 @@ function Header(): JSX.Element {
                   </Link>
                 ))}
                 {userInfo ?
-                <Link to={'/signin'} className={classes.linkText}>
                     <ListItem button className="dropdown">
-                      <ListItemText primary={userInfo.name} />
+                      <ListItemText primary={userInfo.name} className={classes.linkText}/>
                       <div >
                         <ul className="dropdown-content">
                           <li>
-                            <Link to="/myprofile">Profil</Link>
+                            <Link to="/myprofile" className="fullWidth">Profil</Link>
                           </li>
                           <li>
-                            <Link to="/addmem">Dodaj&nbsp;mema</Link>
+                            <Link to="/addmem" className="fullWidth">Dodaj&nbsp;mema</Link>
                           </li>
                           <li>
-                            <Link to="#signout" onClick={signoutHandler}>Wyloguj</Link>
+                            <Link to="#signout" onClick={signoutHandler} className="fullWidth">Wyloguj</Link>
                           </li>
                         </ul>
                       </div>
                     </ListItem>
-                  </Link>
                   :
                   <Link to={'/signin'} className={classes.linkText}>
                     <ListItem button>

@@ -13,6 +13,12 @@ export interface Credentials {
     password: string
 }
 
+export interface NewUserData {
+    email: string
+    password: string
+    name: string
+}
+
 export type UserAction = {
     type: string
     payload?: Credentials | AxiosResponse | string
@@ -25,7 +31,7 @@ export type UserState = {
         email: string
         isAdmin: boolean
         token: string
-    }
+    } | null
     loading: Boolean
     error: string | null
 }

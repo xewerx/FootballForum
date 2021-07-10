@@ -72,6 +72,12 @@ a {
   text-decoration: none;
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Form */
 .form {
   max-width: 60rem;
@@ -132,6 +138,8 @@ a {
 
 .dropdown-content a {
   color: #124413;
+  display: block;
+  padding: 0.8rem 1rem 0.8rem 1rem;
 }
 
 .dropdown:hover .dropdown-content {
@@ -139,7 +147,7 @@ a {
 }
 
 .dropdown-content li {
-  padding: 0.8rem 1rem 0.8rem 1rem;
+  
   margin-top: 0;
   border: 0.1rem#d8d8d8 solid;
 }
