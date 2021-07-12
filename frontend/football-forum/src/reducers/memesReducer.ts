@@ -3,7 +3,8 @@ import * as types from '../@types/memesTypes';
 
 const initialState = {
     loading: true,
-    memes: []
+    memes: [],
+    error: null
 }
 
 export const getMemesReducer = (state: types.MemState = initialState, action: types.MemesAction) => {

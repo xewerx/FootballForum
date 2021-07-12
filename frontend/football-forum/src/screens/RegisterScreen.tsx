@@ -50,19 +50,19 @@ function RegisterScreen(props: propsType): JSX.Element {
                 </div>
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input className="elementHover" type="email" id="email" placeholder="Podaj email" required onChange={(e) => setEmail(e.target.value)}></input>
+                    <input className="element-hover" type="email" id="email" placeholder="Podaj email" required onChange={(e) => setEmail(e.target.value)}></input>
                 </div>
                 <div>
                     <label htmlFor="name">Imie</label>
-                    <input className="elementHover" type="text" id="name" placeholder="Podaj imie" required onChange={(e) => setName(e.target.value)}></input>
+                    <input className="element-hover" type="text" id="name" placeholder="Podaj imie" required onChange={(e) => setName(e.target.value)}></input>
                 </div>
                 <div>
                     <label htmlFor="password">Haslo</label>
-                    <input className="elementHover" type="password" id="password" placeholder="Podaj haslo" required onChange={(e) => setPassword(e.target.value)}></input>
+                    <input className="element-hover" type="password" id="password" placeholder="Podaj haslo" required onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 <div>
                     <label htmlFor="confirmPassword">Potwierdz haslo</label>
-                    <input className="elementHover" type="password" id="confirmPassword" placeholder="Potwierdz haslo" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
+                    <input className="element-hover" type="password" id="confirmPassword" placeholder="Potwierdz haslo" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
                 </div>
                 {confirmPasswordError ? (<MessageBox variant="danger">Hasla nie sa takie same</MessageBox>)
                 :
@@ -70,7 +70,7 @@ function RegisterScreen(props: propsType): JSX.Element {
                 }
                 {loading && <LoadingBox></LoadingBox>}
                 <div>
-                    <button className="primary elementHover" type="submit">Zarejestruj sie</button>
+                    <button className="primary element-hover" type="submit">Zarejestruj sie</button>
                 </div>
                 <div>
                     <label>

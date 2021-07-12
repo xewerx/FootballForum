@@ -6,7 +6,7 @@ import useStyles from './styles'
 import { ClassNameMap } from '@material-ui/styles';
 import Mem from '../Memes/Mem/Mem';
 import { getMemes } from '../../actions/memesActions';
-import MessageBox from '../MessageBox/MessageBox'
+import MessageBox from '../MessageBox/MessageBox';
 import LoadingBox from '../LoadingBox/LoadingBox';
 import stateType from '../../@types/globaStateType';
 
@@ -17,7 +17,7 @@ function MemesContainer(): JSX.Element {
 
     const memesList = useSelector((state: stateType) => state.memes);
     const { loading, memes, error } = memesList;
-
+    
     useEffect(() => {
         dispatch(getMemes());
     }, [dispatch])
@@ -29,7 +29,7 @@ function MemesContainer(): JSX.Element {
                 error ? <MessageBox variant="danger">{error}</MessageBox>
                     :
                     memes.map(mem => (
-                        <Mem key={mem._id} _id={mem._id} title={mem.title} description={mem.description} creator={mem.creator} file={mem.file} likes={mem.likes} createdAt={mem.createdAt}/>
+                        <Mem key={mem._id} _id={mem._id} title={mem.title} description={mem.description} creatorName={mem.creatorName} creatorId={mem.creatorId} file={mem.file} likes={mem.likes} createdAt={mem.createdAt}/>
                     ))
             }
         </Container>

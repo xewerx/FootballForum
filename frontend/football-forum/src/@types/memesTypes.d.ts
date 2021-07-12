@@ -4,7 +4,8 @@ export interface Mem {
     _id: string
     title: string
     description: string
-    creator: string
+    creatorId: string
+    creatorName: string
     file: string
     likes: string[]
     createdAt: Date
@@ -13,6 +14,7 @@ export interface Mem {
 export type MemState = {
     memes: Mem[]
     loading: Boolean
+    error: string | null
 }
 
 export type MemesAction = {

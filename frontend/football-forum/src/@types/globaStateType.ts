@@ -1,10 +1,11 @@
 import * as memesTypes from './memesTypes';
+import * as leagueTablesTypes from './leagueTablesTypes';
 
 type stateType = {
     memes: {
         memes: memesTypes.Mem[],
-        loading: Boolean
-        error: string
+        loading: boolean
+        error: string | null
     }
     userSignin: {
         userInfo: {
@@ -15,7 +16,7 @@ type stateType = {
             token: string
         }
         loading: Boolean
-        error: string
+        error: string | null
     },
     userRegister: {
         userInfo: {
@@ -25,9 +26,14 @@ type stateType = {
             isAdmin: boolean
             token: string
         }
-        loading: Boolean
-        error: string
+        loading: boolean
+        error: string | null
     },
+    leagueTable: {
+        table: leagueTablesTypes.FootballAPIResponse
+        loading: boolean
+        error: string | null
+    }
 }
 
 export default stateType;

@@ -34,7 +34,7 @@ function Mem(props: memesTypes.Mem): JSX.Element {
           </IconButton>
         }
         title={props.title}
-        subheader={moment(props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+        subheader={`${moment(props.createdAt).format('MMMM Do YYYY, h:mm ')} by ${props.creatorName}`}
       />
       <CardMedia
         className={classes.media}

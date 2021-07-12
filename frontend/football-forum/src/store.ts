@@ -1,5 +1,6 @@
 import { createStore, compose, applyMiddleware, combineReducers, Store } from 'redux';
 import thunk from 'redux-thunk';
+import { getLeagueTablesReducer } from './reducers/leagueTablesReduces';
 
 import { getMemesReducer } from './reducers/memesReducer';
 import { signinReducer, registerReducer } from './reducers/userReducer';
@@ -7,7 +8,8 @@ import { signinReducer, registerReducer } from './reducers/userReducer';
 const rootReducer = combineReducers({
     memes: getMemesReducer,
     userSignin: signinReducer,
-    userRegister: registerReducer
+    userRegister: registerReducer,
+    leagueTable: getLeagueTablesReducer
 });
 
 const composeEnhancer = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;  // extension z przegladarki do reduxa

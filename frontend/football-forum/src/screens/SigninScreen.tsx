@@ -40,16 +40,16 @@ function SigninScreen(props: propsType): JSX.Element{
                 </div>
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input className="elementHover" type="email" id="email" placeholder="Podaj email" required onChange={(e) => setEmail(e.target.value)}></input>
+                    <input className="element-hover" type="email" id="email" placeholder="Podaj email" required onChange={(e) => setEmail(e.target.value)}></input>
                 </div>
                 <div>
                     <label htmlFor="password">Haslo</label>
-                    <input className="elementHover" type="password" id="password" placeholder="Podaj haslo" required onChange={(e) => setPassword(e.target.value)}></input>
+                    <input className="element-hover" type="password" id="password" placeholder="Podaj haslo" required onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 {error && <MessageBox variant="danger">{error}</MessageBox>}
                 {loading && <LoadingBox></LoadingBox>}
                 <div>
-                    <button className="primary elementHover" type="submit">Zaloguj sie</button>
+                    <button className="primary element-hover" type="submit">Zaloguj sie</button>
                 </div>
                 <div>
                     <label>
