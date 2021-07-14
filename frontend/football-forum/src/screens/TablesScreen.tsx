@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getLeagueTable } from '../actions/leagueTableActions';
-import { data } from '../assets/sampleData';
+//import { data } from '../assets/sampleData';
 import stateType from '../@types/globaStateType';
 import MessageBox from '../components/MessageBox/MessageBox';
 import LoadingBox from '../components/LoadingBox/LoadingBox';

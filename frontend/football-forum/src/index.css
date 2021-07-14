@@ -215,3 +215,46 @@ a {
 .button-selected {
   border: 0.15rem #009933 solid; 
 }
+
+/* Livechat */
+.livechat-container {
+  width: 80vw;
+  max-height: 80vh;
+  margin-top: 4rem;
+  border: 0.15rem #009933 solid; 
+  padding: 1rem;
+}
+
+.ce-chat-title {
+  position: relative !important;
+}
+
+.ce-message-form-container {
+  position: relative !important;
+}
+
+#ce-send-message-button, .ce-my-message-bubble{
+  background-color: #009933 !important;
+}
+
+.ce-chat-feed, .ce-chat-feed-container {
+  height: 60vh !important;
+  max-height: 60vh !important;
+}
+
+.ce-feed-container-bottom {
+  height: 0 !important;
+}
+
+.ce-chat-title, .ce-feed-container-top {
+  display: none !important;
+}
+
+#ce-scroll-down-bar, #ce-connecting-popup {
+  bottom: 30vh !important;
+}
+
+#ce-send-message-button {
+  padding: 2px 6px !important;
+}
+
