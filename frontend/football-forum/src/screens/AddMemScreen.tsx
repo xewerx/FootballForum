@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import MessageBox from '../components/MessageBox/MessageBox'
+import MessageBox from '../components/MessageBox/MessageBox';
+import LoadingBox from '../components/LoadingBox/LoadingBox';
 import { NewMem } from '../@types/memesTypes';
 import { uploadMem } from '../actions/memesActions';
-import { useDispatch } from 'react-redux';
-function AddMemScreen(): JSX.Element {
+import stateType from '../@types/globaStateType';
+import { History } from 'history';
+
+interface propsType {
+    history: History
+}
+
+function AddMemScreen(props: propsType): JSX.Element {
 
     const [imagePreview, setImagePreview] = useState<any>('');
     const [base64, setBase64] = useState<string>('');
@@ -14,6 +22,12 @@ function AddMemScreen(): JSX.Element {
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
+
+    const user = useSelector((state: stateType) => state.userSignin);
+    const { userInfo } = user;
+
+    const memes = useSelector((state: stateType) => state.uploadMem);
+    const { loading, response } = memes;
 
     const dispatch = useDispatch();
     // const [selectedFile, setSelectedFile] = useState<string>('');
@@ -62,13 +76,18 @@ function AddMemScreen(): JSX.Element {
         dispatch(uploadMem(payload));
     }
 
+    useEffect(() => {
+        if(!userInfo) {
+            props.history.push('/');
+        }
+    }, [props.history, userInfo]);
+
     return (
         <div>
             <form className="form" onSubmit={(e) => onFileSubmit(e)} >
                 <div>
                     <h1>Dodaj mema</h1>
                 </div>
-                {error && <MessageBox variant="danger">{error}</MessageBox>}
                 <div>
                     <label htmlFor="title">Tytul</label>
                     <input type="text" id="title" placeholder="Podaj tytul" required onChange={(e) => setTitle(e.target.value)}></input>
@@ -81,6 +100,9 @@ function AddMemScreen(): JSX.Element {
                     <label htmlFor="file">Plik</label>
                     <input type="file" name="avatar" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} />
                 </div>
+                {error && <MessageBox variant="danger">{error}</MessageBox>}
+                {response && <MessageBox variant="success">{response}</MessageBox>}
+                {loading && <LoadingBox></LoadingBox>}
                 <div>
                     <button className="primary" type="submit">Dodaj</button>
                 </div>

@@ -1,31 +1,43 @@
-import { AxiosResponse } from "axios"
-
 export interface Mem {
-    _id: string
-    title: string
-    description: string
-    creatorId: string
-    creatorName: string
-    file: string
-    likes: string[]
-    createdAt: Date
+    readonly _id: string
+    readonly title: string
+    readonly description: string
+    readonly creatorId: string
+    readonly creatorName: string
+    readonly file: string
+    readonly likes: string[]
+    readonly createdAt: Date
 }
 
-export type MemState = {
+export interface NewMem {
+    readonly title: string
+    readonly description: string
+    readonly image: string
+}
+
+export interface MemState {
     memes: Mem[]
     loading: Boolean
-    error: string | null
+    error?: string | null
 }
 
-export type MemesAction = {
+export interface UploadMemState {
+    loading: boolean
+    response?: string
+}
+
+export type GetMemesAction = {
     type: string
-    payload?: Mem | AxiosResponse | string
+    payload?: Mem[] | string
+    error?: string
+}
+
+export type UploadMemAction = {
+    type: string
+    payload?: string
 }
 
 export type DispatchType = (args: MemesAction) => MemesAction
 
-export type NewMem = {
-    title: string
-    description: string
-    image: string
-}
+
+

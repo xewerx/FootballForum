@@ -3,9 +3,9 @@ import Mem from '../models/mem.js';
 export const getMemes = async (req, res) => {
     try {
         const memes = await Mem.find().sort({createdAt: -1});
-        res.status(200).json(memes);
+        return res.status(200).json(memes);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).send({ message: error.message });
     }
 };
 
@@ -18,7 +18,8 @@ export const uploadMem = async (req, res) => {
         newMem.creatorName = req.user.name;
         newMem.file = req.body.image;
         await newMem.save();
+        return res.status(200).send({ message: "Mem dodany pomyslnie"});
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).send({ message: error.message });
     }
 };

@@ -5,7 +5,9 @@ import * as types from "../@types/leagueTablesTypes";
 export const getLeagueTable = (ID: number) => async (dispatch: types.DispatchType) => {
     dispatch({ type: LEGAUE_TABLES_REQUEST });
     try {
-        const { data } = await axios.get(`https://v3.football.api-sports.io/standings?league=${ID}&season=2020`, {
+        const currentYear: number = new Date().getFullYear();
+        console.log(currentYear)
+        const { data }: {data: {response: types.FootballAPIResponse[]}} = await axios.get(`https://v3.football.api-sports.io/standings?league=${ID}&season=${currentYear}`, {
             headers: {
                 'x-rapidapi-host': 'v3.football.api-sports.io',
                 'x-apisports-key': '813cd9c0be7cfbbf95409292c1fe3bef'

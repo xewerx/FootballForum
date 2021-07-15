@@ -7,29 +7,29 @@ const initialState: types.UserState = {
     error: null
 };
 
-export const signinReducer = (state: types.UserState = initialState, action: types.UserAction) => {
+export const signinReducer = (state: types.UserState = initialState, action: types.UserAction): types.UserState => {
     switch (action.type) {
         case USER_SIGNIN_REQUEST:
-            return { loading: true };
+            return { ...state, loading: true };
         case USER_SIGNIN_SUCCESS:
-            return { loading: false, userInfo: action.payload };
+            return { ...state, loading: false, userInfo: action.payload as types.User };
         case USER_SIGNIN_FAIL:
-            return { loading: false, error: action.payload };
+            return { ...state, loading: false, error: action.error };
         case USER_SIGNOUT:
-            return {};
+            return { ...state, userInfo: null };
         default:
             return state;
     }
 }
 
-export const registerReducer = (state: types.UserState = {...initialState, userInfo: null}, action: types.UserAction) => {
+export const registerReducer = (state: types.UserState = { ...initialState, userInfo: null }, action: types.UserAction): types.UserState => {
     switch (action.type) {
         case USER_REGISTER_REQUEST:
-            return { loading: true };
+            return { ...state, loading: true };
         case USER_REGISTER_SUCCESS:
-            return { loading: false, userInfo: action.payload };
+            return { ...state, loading: false, userInfo: action.payload as types.User};
         case USER_REGISTER_FAIL:
-            return { loading: false, error: action.payload };
+            return { ...state, loading: false, error: action.error };
         default:
             return state;
     }

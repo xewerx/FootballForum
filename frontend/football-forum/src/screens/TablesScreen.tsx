@@ -64,7 +64,7 @@ function TablesScreen(): JSX.Element {
                                 </tr>
                             </thead>
                             <tbody>
-                                {
+                                {table ?
                                     table.league.standings[0].map(team => (
                                         <tr key={team.team.id}>
                                             <td>{team.rank}</td>
@@ -78,6 +78,8 @@ function TablesScreen(): JSX.Element {
                                             <td>{team.all.goals.for - team.all.goals.against}</td>
                                         </tr>
                                     ))
+                                    :
+                                    <p>Brak danych</p>
                                 }
                             </tbody>
                         </table>

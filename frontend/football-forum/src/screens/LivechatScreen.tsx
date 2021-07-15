@@ -1,37 +1,48 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+
 import { ChatEngineWrapper, ChatSocket, ChatFeed } from 'react-chat-engine';
 import * as types from '../@types/livechatTypes';
+import { History } from 'history';
+import stateType from '../@types/globaStateType';
 
-function LivechatScreen() {
+interface propsType {
+    history: History
+}
 
-    const projectID = '261ea1dc-3296-4368-84df-95f540a02a7f';
-    const chatID = '41740';
-    const chatAccessKey='ca-4bfae2c5-9cf9-4764-b700-ca98acac2559';
-    const userName="Admin";
+function LivechatScreen(props: propsType) {
 
+    const user = useSelector((state: stateType) => state.userSignin);
+    const { userInfo } = user;
 
     return (
-        <div className="livechat-container">
-            <ChatEngineWrapper>
-                <ChatSocket
-                    projectID={projectID}
-                    chatID={chatID}
-                    chatAccessKey={chatAccessKey}
-                    userName={userName}
-                    
-                    onConnect={() => console.log("CONNECT")}
+        userInfo ?
+            <div className="livechat-container">
+                <ChatEngineWrapper>
+                    <ChatSocket
+                        projectID={userInfo.livechat_projectID}
+                        chatID={userInfo.livechat_chatID}
+                        chatAccessKey={userInfo.livechat_chatAccessKey}
+                        userName={userInfo.name}
 
-                    onNewMessage={(chatId: string, message: types.messageType) => {
-                        if(message.sender_username !== userName) {
-                            new Audio('https://chat-engine-assets.s3.amazonaws.com/click.mp3').play();
-                        }
-                        
-                    }}
+                        onConnect={() => console.log("CONNECT")}
 
-                />
-                <ChatFeed activeChat={chatID} />
-            </ChatEngineWrapper>
-        </div>
+                        onNewMessage={(chatId: string, message: types.messageType) => {
+                            if (message.sender_username !== userInfo.name) {
+                                new Audio('https://chat-engine-assets.s3.amazonaws.com/click.mp3').play();
+                            }
+
+                        }}
+
+                    />
+                    <ChatFeed activeChat={userInfo.livechat_chatID} />
+                </ChatEngineWrapper>
+            </div>
+            :
+            <div>
+                <p>Zaloguj sie aby korzystac z livechatu</p>
+            </div>
+
     )
 }
 

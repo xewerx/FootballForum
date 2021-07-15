@@ -1,14 +1,15 @@
-import { AxiosResponse } from "axios"
-
 export interface User {
-    _id: string
-    name: string
-    email: string
-    isAdmin: boolean
-    token: string
+    readonly _id: string
+    readonly name: string
+    readonly email: string
+    readonly isAdmin: boolean
+    readonly token: string
+    readonly livechat_projectID: string
+    readonly livechat_chatID: string
+    readonly livechat_chatAccessKey: string
 }
 
-export interface Credentials {
+export interface LoginCredentials {
     email: string
     password: string
 }
@@ -19,21 +20,16 @@ export interface NewUserData {
     name: string
 }
 
-export type UserAction = {
-    type: string
-    payload?: Credentials | AxiosResponse | string
+export interface UserState {
+    userInfo: User | null
+    loading: Boolean
+    error?: string | null
 }
 
-export type UserState = {
-    userInfo: {
-        _id: string
-        name: string
-        email: string
-        isAdmin: boolean
-        token: string
-    } | null
-    loading: Boolean
-    error: string | null
+export type UserAction = {
+    type: string
+    payload?: User | NewUserData | LoginCredentials
+    error?: string | null
 }
 
 export type DispatchType = (args: UserAction) => UserAction

@@ -1,5 +1,3 @@
-import { AxiosResponse } from "axios"
-
 export interface FootballAPIResponse {
     league: {
         id: number
@@ -57,15 +55,16 @@ export interface FootballAPIResponse {
     }
 }
 
-export type LeagueTablesState = {
-    table: FootballAPIResponse | null
+export interface LeagueTablesState {
+    table: FootballAPIResponse
     loading: boolean
-    error: string | null
+    error?: string | null
 }
 
 export type LeagueTablesAction = {
         type: string
-        payload?: FootballAPIResponse | AxiosResponse | string
+        payload: FootballAPIResponse
+        error?: string
     }
 
 export type DispatchType = (args: LeagueTablesAction) => LeagueTablesAction

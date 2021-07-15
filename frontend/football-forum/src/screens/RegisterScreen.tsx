@@ -18,20 +18,26 @@ function RegisterScreen(props: propsType): JSX.Element {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
-    const [confirmPasswordError, setConfirmPasswordError] = useState<boolean>(false)
+    const [validationPasswordError, setValidationPasswordError] = useState<string>('')
 
     const userRegister = useSelector((state: stateType) => state.userRegister);
     const userSignin = useSelector((state: stateType) => state.userSignin);
     const { loading, error } = userRegister;
     const { userInfo } = userSignin;
     
+    const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
+
     const dispatch = useDispatch();
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        
+        
         if(password !== confirmPassword) {
-            setConfirmPasswordError(true);
-        } else {
-            setConfirmPasswordError(false);
+            setValidationPasswordError("Hasla nie sa takie same");
+        } else if(!strongPassword.test(password)) {
+            setValidationPasswordError("Haslo jest zbyt slabe");
+        }else {
+            setValidationPasswordError('');
             dispatch(register({name, email, password}));
         }
     }
@@ -64,7 +70,7 @@ function RegisterScreen(props: propsType): JSX.Element {
                     <label htmlFor="confirmPassword">Potwierdz haslo</label>
                     <input className="element-hover" type="password" id="confirmPassword" placeholder="Potwierdz haslo" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
                 </div>
-                {confirmPasswordError ? (<MessageBox variant="danger">Hasla nie sa takie same</MessageBox>)
+                {validationPasswordError ? (<MessageBox variant="danger">{validationPasswordError}</MessageBox>)
                 :
                 error ? (<MessageBox variant="danger">{error}</MessageBox>) : <></>
                 }

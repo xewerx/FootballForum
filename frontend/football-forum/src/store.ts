@@ -1,12 +1,14 @@
 import { createStore, compose, applyMiddleware, combineReducers, Store } from 'redux';
 import thunk from 'redux-thunk';
+
 import { getLeagueTablesReducer } from './reducers/leagueTablesReduces';
-
-import { getMemesReducer } from './reducers/memesReducer';
+import { getMemesReducer, uploadMemReducer } from './reducers/memesReducer';
 import { signinReducer, registerReducer } from './reducers/userReducer';
+import stateType from './@types/globaStateType';
 
-const rootReducer = combineReducers({
+const rootReducer = combineReducers<stateType>({
     memes: getMemesReducer,
+    uploadMem: uploadMemReducer,
     userSignin: signinReducer,
     userRegister: registerReducer,
     leagueTable: getLeagueTablesReducer
