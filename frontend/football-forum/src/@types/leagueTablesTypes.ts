@@ -56,14 +56,14 @@ export interface FootballAPIResponse {
 }
 
 export interface LeagueTablesState {
-    table: FootballAPIResponse
+    table?: FootballAPIResponse | null
     loading: boolean
     error?: string | null
 }
 
 export type LeagueTablesAction = {
         type: string
-        payload: FootballAPIResponse
+        payload?: FootballAPIResponse | null
         error?: string
     }
 

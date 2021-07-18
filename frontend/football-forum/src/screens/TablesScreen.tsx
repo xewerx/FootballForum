@@ -8,7 +8,7 @@ import MessageBox from '../components/MessageBox/MessageBox';
 import LoadingBox from '../components/LoadingBox/LoadingBox';
 
 function TablesScreen(): JSX.Element {
-    
+
     const selectedButton = document.querySelector('.button-selected');
 
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function TablesScreen(): JSX.Element {
 
     const leagueTable = useSelector((state: stateType) => state.leagueTable);
     const { loading, table, error } = leagueTable;
-    
+
     useEffect(() => {
         dispatch(getLeagueTable(39));
     }, [dispatch])
@@ -65,7 +65,7 @@ function TablesScreen(): JSX.Element {
                             </thead>
                             <tbody>
                                 {table ?
-                                    table.league.standings[0].map(team => (
+                                    table.league.standings[0].map(team => (  //nigdy nie bedzie nullem 
                                         <tr key={team.team.id}>
                                             <td>{team.rank}</td>
                                             <td>{team.team.name}</td>
@@ -79,7 +79,17 @@ function TablesScreen(): JSX.Element {
                                         </tr>
                                     ))
                                     :
-                                    <p>Brak danych</p>
+                                    <tr>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

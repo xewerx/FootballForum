@@ -216,6 +216,10 @@ a {
   border: 0.15rem #009933 solid; 
 }
 
+.no-data {
+  text-align: center;
+}
+
 /* Livechat */
 .livechat-container {
   width: 80vw;

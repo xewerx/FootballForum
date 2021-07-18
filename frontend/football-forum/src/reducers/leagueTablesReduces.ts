@@ -12,7 +12,7 @@ export const getLeagueTablesReducer = (state: types.LeagueTablesState = initialS
         case LEGAUE_TABLES_REQUEST:
             return { ...state, loading: true, error: null };
         case LEGAUE_TABLES_SUCCESS:
-            return { ...state, loading: false, table: action.payload };
+            return { ...state, loading: false, table: action.payload};
         case LEGAUE_TABLES_FAIL:
             return { ...state, loading: false, error: action.error };
         default:

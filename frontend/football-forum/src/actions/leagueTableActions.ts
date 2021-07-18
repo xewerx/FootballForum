@@ -5,8 +5,7 @@ import * as types from "../@types/leagueTablesTypes";
 export const getLeagueTable = (ID: number) => async (dispatch: types.DispatchType) => {
     dispatch({ type: LEGAUE_TABLES_REQUEST });
     try {
-        const currentYear: number = new Date().getFullYear();
-        console.log(currentYear)
+        const currentYear: number = new Date().getFullYear();  // Gdy sezon sie nie zacznie API dla niektorych lig zwraca undefined ! ! !
         const { data }: {data: {response: types.FootballAPIResponse[]}} = await axios.get(`https://v3.football.api-sports.io/standings?league=${ID}&season=${currentYear}`, {
             headers: {
                 'x-rapidapi-host': 'v3.football.api-sports.io',
@@ -16,6 +15,6 @@ export const getLeagueTable = (ID: number) => async (dispatch: types.DispatchTyp
         const ligueTables: types.FootballAPIResponse = data.response[0];
         dispatch({ type: LEGAUE_TABLES_SUCCESS, payload: ligueTables });
     } catch (error) {
-        dispatch({ type: LEGAUE_TABLES_FAIL, payload: error.message });
+        dispatch({ type: LEGAUE_TABLES_FAIL, error: error.message });
     }
 }
