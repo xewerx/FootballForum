@@ -20,6 +20,12 @@ export interface NewUserData {
     name: string
 }
 
+export interface EditUserState {
+    loading: boolean
+    error?: string
+    result: string | null
+}
+
 export interface UserState {
     userInfo: User | null
     loading: Boolean
@@ -28,7 +34,7 @@ export interface UserState {
 
 export type UserAction = {
     type: string
-    payload?: User | NewUserData | LoginCredentials
+    payload?: User | NewUserData | LoginCredentials | string
     error?: string | null
 }
 

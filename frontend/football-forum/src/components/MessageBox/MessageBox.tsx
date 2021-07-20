@@ -1,10 +1,10 @@
 import React from 'react'
 
-type propsType = {
+type IProps = {
     variant: string
     children: string
 }
-function MessageBox(props: propsType) { // props.children - wartosc podana w komponencie - bezposrednio miedzy tagami
+const MessageBox: React.FC<IProps> = (props) => {  // props.children - wartosc podana w komponencie - bezposrednio miedzy tagami
     return (
         <div className={`alert alert-${props.variant || 'info'}`}> 
             {props.children} 

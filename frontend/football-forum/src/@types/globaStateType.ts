@@ -7,6 +7,7 @@ type stateType = {
     uploadMem: memesTypes.UploadMemState
     userSignin: userTypes.UserState,
     userRegister: userTypes.UserState,
+    userEdit: userTypes.EditUserState
     leagueTable: leagueTablesTypes.LeagueTablesState  
 }
 

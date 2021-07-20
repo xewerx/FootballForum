@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import { getLeagueTablesReducer } from './reducers/leagueTablesReduces';
 import { getMemesReducer, uploadMemReducer } from './reducers/memesReducer';
-import { signinReducer, registerReducer } from './reducers/userReducer';
+import { signinReducer, registerReducer, editProfileReducer } from './reducers/userReducer';
 import stateType from './@types/globaStateType';
 
 const rootReducer = combineReducers<stateType>({
@@ -11,6 +11,7 @@ const rootReducer = combineReducers<stateType>({
     uploadMem: uploadMemReducer,
     userSignin: signinReducer,
     userRegister: registerReducer,
+    userEdit: editProfileReducer,
     leagueTable: getLeagueTablesReducer
 });
 

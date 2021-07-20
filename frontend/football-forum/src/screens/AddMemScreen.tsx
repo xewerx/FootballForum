@@ -8,13 +8,13 @@ import { uploadMem } from '../actions/memesActions';
 import stateType from '../@types/globaStateType';
 import { History } from 'history';
 
-interface propsType {
+interface IProps {
     history: History
 }
 
-function AddMemScreen(props: propsType): JSX.Element {
+const AddMemScreen: React.FC<IProps> = (props) => {
 
-    const [imagePreview, setImagePreview] = useState<any>('');
+    const [imagePreview, setImagePreview] = useState<string>();
     const [base64, setBase64] = useState<string>('');
     const [size, setSize] = useState<string>();
 
@@ -56,7 +56,7 @@ function AddMemScreen(props: propsType): JSX.Element {
                 //setFile(file)
                 setSize(file.size);
                 //setName(file.name)
-                setImagePreview(reader.result)
+                setImagePreview(reader.result as string)
             }
             reader.readAsDataURL(file);
         }

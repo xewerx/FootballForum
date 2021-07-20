@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LoadingBox(): JSX.Element {
+const LoadingBox: React.FC = () => {
     return (
         <div className="center">
             <i className="fa fa-spinner fa-spin fa-fw"></i>

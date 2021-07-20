@@ -7,7 +7,7 @@ import stateType from '../@types/globaStateType';
 import MessageBox from '../components/MessageBox/MessageBox';
 import LoadingBox from '../components/LoadingBox/LoadingBox';
 
-function TablesScreen(): JSX.Element {
+const TablesScreen: React.FC = () => {
 
     const selectedButton = document.querySelector('.button-selected');
 

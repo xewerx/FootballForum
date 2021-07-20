@@ -8,11 +8,11 @@ import MessageBox from '../components/MessageBox/MessageBox';
 import { signin } from '../actions/userActions';
 import stateType from '../@types/globaStateType';
 
-interface propsType {
+interface IProps {
     history: History
 }
 
-function SigninScreen(props: propsType): JSX.Element{
+const SigninScreen: React.FC<IProps> = (props) => {
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('')

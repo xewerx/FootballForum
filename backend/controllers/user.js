@@ -1,10 +1,12 @@
-import bcrypt from 'bcrypt';
+import bcrypt, { hashSync } from 'bcrypt';
 import * as EmailValidator from 'email-validator';
 
 import User from '../models/user.js';
 import { generateToken } from '../middleware/auth.js';
 
 import data from '../data.js';
+
+const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
 
 export const seed = async (req, res) => {
     try {
@@ -19,14 +21,14 @@ export const seed = async (req, res) => {
 export const signin = async (req, res) => {
 
     if (!req.body.email || !req.body.password) {
-        return res.status(400).send({ message: 'No email or password' });
+        return res.status(400).send({ message: 'Brak adresu email lub hasła' });
     }
 
     try {
         const user = await User.findOne({ email: req.body.email });
         if (user) {
             if (bcrypt.compareSync(req.body.password, user.password)) {
-                return res.send({
+                return res.status(200).send({
                     _id: user._id,
                     name: user.name,
                     email: user.email,
@@ -38,7 +40,7 @@ export const signin = async (req, res) => {
                 });
             }
         }
-        return res.status(401).send({ message: 'Invalid email or password' });
+        return res.status(401).send({ message: 'Niepoprawny email lub hasło' });
     } catch (error) {
         return res.status(500).send({ message: error.message });
     }
@@ -46,17 +48,15 @@ export const signin = async (req, res) => {
 
 export const register = async (req, res) => {
 
-    const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
-
     if (!strongPassword.test(req.body.password)) {
-        return res.status(400).send({ message: "Haslo jest zbyt slabe" });
+        return res.status(400).send({ message: "Hasło jest zbyt słabe" });
     }
     if (!EmailValidator.validate(req.body.email)) {
         return res.status(400).send({ message: "Niepoprawny adres email" });
     }
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-        return res.status(400).send({ message: "Adres email jest zajety" });
+        return res.status(400).send({ message: "Adres email jest zajęty" });
     }
 
     try {
@@ -66,7 +66,7 @@ export const register = async (req, res) => {
             password: bcrypt.hashSync(req.body.password, 8)
         });
         const createdUser = await user.save();
-        return res.send({
+        return res.status(200).send({
             _id: createdUser._id,
             name: createdUser.name,
             email: createdUser.email,
@@ -79,5 +79,41 @@ export const register = async (req, res) => {
     } catch (error) {
         return res.status(500).send({ message: error.message });
     }
+}
 
+export const editProfile = async (req, res) => {
+    console.log(req.body);
+    let user = null;
+    if(!req.body.email) {
+        return res.status(400).send({ message: "Niepoprawne dane" }); // oszczedzam na zapytaniu do bazy 
+    }
+
+    try {
+        user = await User.findOne({ email: req.body.email });
+    } catch (error) {
+        return res.status(500).send({ message: error.message });
+    }
+
+    if(!user) {
+        return res.status(400).send({ message: "Niepoprawne dane" });
+    }
+
+    if(req.body.name) {
+        user.name = req.body.name;
+    }
+
+    if(req.body.password) {
+        if (!strongPassword.test(req.body.password)) {
+            return res.status(400).send({ message: "Hasło jest zbyt slabe" });
+        } else {
+            user.password = bcrypt.hashSync(req.body.password, 8)
+        }
+    }
+
+    try {
+        await user.save();
+        return res.status(200).send({ message: "Dane zapisane pomyślnie"})
+    } catch (error) {
+        return res.status(500).send({ message: error.message });
+    }
 }

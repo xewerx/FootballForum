@@ -16,7 +16,7 @@ import image from '../../../assets/pitch.jpg';
 import * as memesTypes from '../../../@types/memesTypes';
 import moment from 'moment';
 
-function Mem(props: memesTypes.Mem): JSX.Element {
+const Mem: React.FC<memesTypes.Mem> = (props) => {
 
   const classes: ClassNameMap = useStyles();
 

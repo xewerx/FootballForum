@@ -11,7 +11,7 @@ import navLinks from './navLinks';
 import stateType from '../../@types/globaStateType';
 import { signout } from '../../actions/userActions';
 
-function Header(): JSX.Element {
+const Header: React.FC = () => {
 
   const classes: ClassNameMap = useStyles();
 

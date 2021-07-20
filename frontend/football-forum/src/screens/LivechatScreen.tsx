@@ -6,11 +6,11 @@ import * as types from '../@types/livechatTypes';
 import { History } from 'history';
 import stateType from '../@types/globaStateType';
 
-interface propsType {
+interface IProps {
     history: History
 }
 
-function LivechatScreen(props: propsType) {
+const LivechatScreen: React.FC<IProps> = (props) => {
 
     const user = useSelector((state: stateType) => state.userSignin);
     const { userInfo } = user;

@@ -10,7 +10,7 @@ import MessageBox from '../MessageBox/MessageBox';
 import LoadingBox from '../LoadingBox/LoadingBox';
 import stateType from '../../@types/globaStateType';
 
-function MemesContainer(): JSX.Element {
+const MemesContainer: React.FC = () => {
 
     const classes: ClassNameMap = useStyles();
     const dispatch = useDispatch();

@@ -8,11 +8,11 @@ import MessageBox from '../components/MessageBox/MessageBox';
 import { register } from '../actions/userActions';
 import stateType from '../@types/globaStateType';
 
-interface propsType {
+interface IProps {
     history: History
 }
 
-function RegisterScreen(props: propsType): JSX.Element {
+const RegisterScreen: React.FC<IProps> = (props) => {
 
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -30,8 +30,6 @@ function RegisterScreen(props: propsType): JSX.Element {
     const dispatch = useDispatch();
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        
-        
         if(password !== confirmPassword) {
             setValidationPasswordError("Hasla nie sa takie same");
         } else if(!strongPassword.test(password)) {

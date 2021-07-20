@@ -11,7 +11,7 @@ import navLinks from './navLinks';
 import stateType from '../../@types/globaStateType';
 import { signout } from '../../actions/userActions';
 
-function SideDrawer(): JSX.Element {
+const SideDrawer: React.FC = () => {
 
   const classes: ClassNameMap = useStyles();
   const [stateMobileNav, setStateMobileNav] = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function MatchesScreen() {
+const MatchesScreen: React.FC = () => {
     return (
         <div>
             mecze
