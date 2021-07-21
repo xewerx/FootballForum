@@ -6,10 +6,6 @@ const memSchema = mongoose.Schema({
     creatorId: { type: String, required: true},
     creatorName: { type: String, required: true},
     file: { type: String, required: true},
-    likes: {
-        type: [String],
-        default: []
-    },
     createdAt: {
         type: Date,
         default: new Date(),
@@ -19,6 +15,6 @@ const memSchema = mongoose.Schema({
     timestamps: true
 })
 
-const Mem = mongoose.model('memes', memSchema);
+const MemNoAccepted = mongoose.model('memesNoAccepted', memSchema);
 
-export default Mem;
+export default MemNoAccepted;

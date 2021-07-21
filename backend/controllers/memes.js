@@ -1,8 +1,9 @@
-import Mem from '../models/mem.js';
+import MemAccepted from '../models/memAccepted.js';
+import MemNoAccepted from '../models/memNoAccepted.js';
 
 export const getMemes = async (req, res) => {
     try {
-        const memes = await Mem.find().sort({createdAt: -1});
+        const memes = await MemAccepted.find().sort({createdAt: -1});
         return res.status(200).json(memes);
     } catch (error) {
         return res.status(500).send({ message: error.message });
@@ -11,7 +12,7 @@ export const getMemes = async (req, res) => {
 
 export const uploadMem = async (req, res) => {
     try {
-        const newMem = new Mem;
+        const newMem = new MemNoAccepted;
         newMem.title = req.body.title;
         newMem.description = req.body.description;
         newMem.creatorId = req.user._id;

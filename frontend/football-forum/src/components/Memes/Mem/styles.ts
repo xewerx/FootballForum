@@ -11,4 +11,16 @@ export default makeStyles((theme) => ({
     avatar: {
       backgroundColor: red[500],
     },
+    buttonsContainer: {
+      display: 'flex',
+    },
+    button: {
+      width: '100%'
+    },
+    buttonAccept: {
+      backgroundColor: '#20a020'
+    },
+    buttonDiscard: {
+      backgroundColor: '#a02020'
+    }
   }));

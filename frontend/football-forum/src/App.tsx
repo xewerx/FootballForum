@@ -10,6 +10,7 @@ import AddMemScreen from './screens/AddMemScreen';
 import SigninScreen from './screens/SigninScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import MyProfileScreen from './screens/MyProfileScreen';
+import AcceptMemesScreen from './screens/AcceptMemesScreen';
 
 function App(): JSX.Element {
 
@@ -26,9 +27,9 @@ function App(): JSX.Element {
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/myprofile" component={MyProfileScreen}></Route>
+          <Route path="/acceptmem" component={AcceptMemesScreen}></Route>
         </main>
       </BrowserRouter>
-
     </>
   );
 }

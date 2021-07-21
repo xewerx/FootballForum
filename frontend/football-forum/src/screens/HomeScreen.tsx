@@ -4,7 +4,7 @@ import MemesContainer from '../components/Memes/MemesContainer';
 const HomeScreen: React.FC = () => {
     return (
         <div>
-            <MemesContainer></MemesContainer>
+            <MemesContainer isAcceptationMemes={false}></MemesContainer>
         </div>
     )
 }

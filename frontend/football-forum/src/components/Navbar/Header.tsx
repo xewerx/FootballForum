@@ -19,9 +19,9 @@ const Header: React.FC = () => {
   const { userInfo } = user;
 
   const dispatch = useDispatch();
-    const signoutHandler = () => {
-        dispatch(signout());
-    }
+  const signoutHandler = () => {
+    dispatch(signout());
+  }
 
   return (
     <>
@@ -48,22 +48,28 @@ const Header: React.FC = () => {
                   </Link>
                 ))}
                 {userInfo ?
-                    <ListItem button className="dropdown">
-                      <ListItemText primary={userInfo.name} className={classes.linkText}/>
-                      <div >
-                        <ul className="dropdown-content">
+                  <ListItem button className="dropdown">
+                    <ListItemText primary={userInfo.name} className={classes.linkText} />
+                    <div >
+                      <ul className="dropdown-content">
+                        <li>
+                          <Link to="/myprofile" className="fullWidth">Profil</Link>
+                        </li>
+                        <li>
+                          <Link to="/addmem" className="fullWidth">Dodaj&nbsp;mema</Link>
+                        </li>
+                        {
+                          userInfo.isAdmin &&
                           <li>
-                            <Link to="/myprofile" className="fullWidth">Profil</Link>
+                            <Link to="/acceptmem" className="fullWidth">Akceptacje</Link>
                           </li>
-                          <li>
-                            <Link to="/addmem" className="fullWidth">Dodaj&nbsp;mema</Link>
-                          </li>
-                          <li>
-                            <Link to="#signout" onClick={signoutHandler} className="fullWidth">Wyloguj</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </ListItem>
+                        }
+                        <li>
+                          <Link to="#signout" onClick={signoutHandler} className="fullWidth">Wyloguj</Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </ListItem>
                   :
                   <Link to={'/signin'} className={classes.linkText}>
                     <ListItem button>
