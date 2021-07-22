@@ -24,6 +24,7 @@ const AcceptMemesScreen: React.FC<IProps> = (props) => {
         <div>
             <h1>Akceptuj memy</h1>
             <p>Tutaj jako admin akceptujesz memy dodane przez innych użytkowników forum. Przed akceptacją nie pojawią się one na głównej stronie.</p>
+            
             <MemesContainer isAcceptationMemes={true} ></MemesContainer>
         </div>
     )
