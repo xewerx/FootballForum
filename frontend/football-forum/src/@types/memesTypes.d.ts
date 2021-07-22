@@ -19,6 +19,7 @@ export interface MemState {
     memes: Mem[]
     loading: Boolean
     error?: string | null
+    result?: string
 }
 
 export interface UploadMemState {
@@ -30,6 +31,7 @@ export type GetMemesAction = {
     type: string
     payload?: Mem[] | string
     error?: string
+    _id?: string
 }
 
 export type UploadMemAction = {

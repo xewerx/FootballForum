@@ -24,9 +24,9 @@ const SideDrawer: React.FC = () => {
   };
 
   const dispatch = useDispatch();
-    const signoutHandler = () => {
-        dispatch(signout());
-    }
+  const signoutHandler = () => {
+    dispatch(signout());
+  }
 
   const sideDrawerList = () => (
     <div
@@ -55,6 +55,14 @@ const SideDrawer: React.FC = () => {
                 <ListItemText primary="Dodaj mema" />
               </ListItem>
             </Link>
+            {
+              userInfo.isAdmin &&
+              <Link to="/acceptmem" className={classes.linkTextGreen}>
+                <ListItem button>
+                  <ListItemText primary="Akceptacje" />
+                </ListItem>
+              </Link>
+            }
             <Link to={'#signout'} onClick={signoutHandler} className={classes.linkTextGreen}>
               <ListItem button>
                 <ListItemText primary="Wyloguj" />

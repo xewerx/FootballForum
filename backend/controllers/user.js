@@ -82,7 +82,6 @@ export const register = async (req, res) => {
 }
 
 export const editProfile = async (req, res) => {
-    console.log(req.body);
     let user = null;
     if(!req.body.email) {
         return res.status(400).send({ message: "Niepoprawne dane" }); // oszczedzam na zapytaniu do bazy 

@@ -89,7 +89,7 @@ const AddMemScreen: React.FC<IProps> = (props) => {
                     <h1>Dodaj mema</h1>
                 </div>
                 <div>
-                    <label htmlFor="title">Tytul</label>
+                    <label htmlFor="title">Tytuł</label>
                     <input type="text" id="title" placeholder="Podaj tytul" required onChange={(e) => setTitle(e.target.value)}></input>
                 </div>
                 <div>
