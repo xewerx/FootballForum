@@ -7,6 +7,7 @@ import { NewMem } from '../@types/memesTypes';
 import { uploadMem } from '../actions/memesActions';
 import stateType from '../@types/globaStateType';
 import { History } from 'history';
+import { SET_INIT_STATE } from '../constants/memesConstants';
 
 interface IProps {
     history: History
@@ -27,7 +28,7 @@ const AddMemScreen: React.FC<IProps> = (props) => {
     const { userInfo } = user;
 
     const memes = useSelector((state: stateType) => state.uploadMem);
-    const { loading, response } = memes;
+    let { loading, response } = memes;
 
     const dispatch = useDispatch();
     // const [selectedFile, setSelectedFile] = useState<string>('');
@@ -80,7 +81,8 @@ const AddMemScreen: React.FC<IProps> = (props) => {
         if(!userInfo) {
             props.history.push('/');
         }
-    }, [props.history, userInfo]);
+        dispatch({ type: SET_INIT_STATE }) // SET INIT STATE IN ORDER TO DELETE ORDER MESSAGE BOX 
+    }, [dispatch, props.history, userInfo]);
 
     return (
         <div>
@@ -98,7 +100,7 @@ const AddMemScreen: React.FC<IProps> = (props) => {
                 </div>
                 <div onChange={(e) => onChangeInput(e)}>
                     <label htmlFor="file">Plik</label>
-                    <input type="file" name="avatar" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} />
+                    <input type="file" name="mem" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} />
                 </div>
                 {error && <MessageBox variant="danger">{error}</MessageBox>}
                 {response && <MessageBox variant="success">{response}</MessageBox>}

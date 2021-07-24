@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_FAIL, USER_EDIT_SUCCESS } from '../constants/userConstants';
+import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_FAIL, USER_EDIT_SUCCESS, UPLOAD_AVATAR_REQUEST } from '../constants/userConstants';
 import * as types from "../@types/userTypes";
 import stateType from "../@types/globaStateType";
 
@@ -7,6 +7,7 @@ export const signin = (credentials: types.LoginCredentials) => async (dispatch: 
     dispatch({ type: USER_SIGNIN_REQUEST, payload: credentials });
     try {
         const { data }: {data: types.User} = await axios.post('/api/user/signin', credentials);
+        console.log(data)
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
     } catch(error) {
@@ -42,6 +43,21 @@ export const editProfile = (editProfileData: types.NewUserData) => async (dispat
         } else {
             dispatch({ type: USER_EDIT_FAIL, error: "Niepoprawne dane" });
         }
+    } catch(error) {
+        dispatch({ type: USER_EDIT_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
+    }
+};
+
+export const uploadAvatar = (avatar: types.Avatar) => async (dispatch: types.DispatchType, getState: () => stateType) => {
+    dispatch({ type: UPLOAD_AVATAR_REQUEST });
+    try {
+        const { userSignin: { userInfo } } = getState();
+        const { data, status }: {data: {message: string}, status: number} = await axios.post('/api/user/avatar', avatar, {
+            headers: {
+                Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
+            }
+        });
+        console.log(data,status)
     } catch(error) {
         dispatch({ type: USER_EDIT_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
     }

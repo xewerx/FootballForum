@@ -2,6 +2,7 @@ export interface User {
     readonly _id: string
     readonly name: string
     readonly email: string
+    readonly avatar: string | null
     readonly isAdmin: boolean
     readonly token: string
     readonly livechat_projectID: string
@@ -18,6 +19,10 @@ export interface NewUserData {
     email: string
     password: string
     name: string
+}
+
+export interface Avatar {
+    image: string
 }
 
 export interface EditUserState {

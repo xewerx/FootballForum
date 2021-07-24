@@ -1,4 +1,4 @@
-import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_SUCCESS, USER_EDIT_FAIL } from '../constants/userConstants';
+import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_SUCCESS, USER_EDIT_FAIL, SET_INIT_STATE } from '../constants/userConstants';
 import * as types from '../@types/userTypes';
 
 const IStateUser: types.UserState = {
@@ -48,6 +48,8 @@ export const editProfileReducer = (state: types.EditUserState =  IStateEditUser,
             return { ...state, loading: false, result: action.payload as string}; // result zwrocony jako string za API
         case USER_EDIT_FAIL:
             return { ...state, loading: false, error: action.error as string};
+        case SET_INIT_STATE:
+            return IStateEditUser;
         default:
             return state;
     }
