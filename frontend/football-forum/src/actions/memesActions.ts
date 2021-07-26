@@ -7,6 +7,7 @@ export const getMemes = () => async (dispatch: types.DispatchType) => {
     dispatch({ type: MEMES_LIST_REQUEST });
     try {
         const { data }: {data: types.Mem[]} = await axios.get('/api/memes');
+        console.log(data)
         dispatch({ type: MEMES_LIST_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: MEMES_LIST_FAIL, payload: error.message });

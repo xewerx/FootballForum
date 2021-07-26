@@ -7,7 +7,6 @@ import MessageBox from '../components/MessageBox/MessageBox';
 import { editProfile, uploadAvatar } from '../actions/userActions';
 import { History } from 'history';
 import { SET_INIT_STATE } from '../constants/userConstants';
-import { Avatar } from '../@types/userTypes';
 
 interface IProps {
     history: History
@@ -89,10 +88,8 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
         if (Number(size) > 5242880) { // wieksze niz 5MB
             setErrorAvatar("Zbyt duzy plik");
         }
-        const payload: Avatar = {
-            image: base64,
-        }
-        dispatch(uploadAvatar(payload));
+        
+        dispatch(uploadAvatar(base64));
     }
 
     useEffect(() => {
@@ -103,8 +100,7 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
             setName(userInfo!.name);  // screen tylko dla zalogowanych wiec te dane zawsze sa dostepne 
             setEmail(userInfo!.email);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, props.history]); // bez userInfo zeby mi state nie czyscilo po zmianie danych usera 
+    }, [dispatch, props.history, userInfo]); // bez userInfo zeby mi state nie czyscilo po zmianie danych usera 
 
     return (
         <div>

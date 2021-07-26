@@ -1,9 +1,15 @@
 import MemAccepted from '../models/memAccepted.js';
 import MemNoAccepted from '../models/memNoAccepted.js';
+import Avatar from '../models/avatar.js';
 
 export const getMemes = async (req, res) => {
     try {
         const memes = await MemAccepted.find().sort({createdAt: -1});
+
+        for(const mem of memes) {
+            let avatar = await Avatar.findOne({ ownerId: mem.creatorId });
+            mem.creatorAvatar = avatar ? avatar.image : null
+        }
         return res.status(200).json(memes);
     } catch (error) {
         return res.status(500).send({ message: error.message });

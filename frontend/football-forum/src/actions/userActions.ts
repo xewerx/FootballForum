@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_FAIL, USER_EDIT_SUCCESS, UPLOAD_AVATAR_REQUEST } from '../constants/userConstants';
+import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_FAIL, USER_EDIT_SUCCESS } from '../constants/userConstants';
 import * as types from "../@types/userTypes";
 import stateType from "../@types/globaStateType";
 
@@ -48,16 +48,23 @@ export const editProfile = (editProfileData: types.NewUserData) => async (dispat
     }
 };
 
-export const uploadAvatar = (avatar: types.Avatar) => async (dispatch: types.DispatchType, getState: () => stateType) => {
-    dispatch({ type: UPLOAD_AVATAR_REQUEST });
+export const uploadAvatar = (avatar: string) => async (dispatch: types.DispatchType, getState: () => stateType) => {
+    console.log(avatar)
+    dispatch({ type: USER_EDIT_REQUEST });
     try {
         const { userSignin: { userInfo } } = getState();
-        const { data, status }: {data: {message: string}, status: number} = await axios.post('/api/user/avatar', avatar, {
+        const { data, status }: {data: {message: string}, status: number} = await axios.post('/api/user/avatar', {image: avatar}, {
             headers: {
                 Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
             }
         });
-        console.log(data,status)
+        if(status === 200) {
+            dispatch({ type: USER_SIGNIN_SUCCESS, payload: {...userInfo, avatar: avatar } as types.User }); // zmiana danych w stacie Usera - tylko name w sumie
+            localStorage.setItem('userInfo', JSON.stringify({...userInfo, avatar: avatar }));
+            dispatch({ type: USER_EDIT_SUCCESS, payload: data.message });
+        } else {
+            dispatch({ type: USER_EDIT_FAIL, error: "Niepoprawne dane" });
+        }
     } catch(error) {
         dispatch({ type: USER_EDIT_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
     }

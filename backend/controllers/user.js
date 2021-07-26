@@ -126,12 +126,17 @@ export const uploadAvatar = async (req, res) => {
     if(!req.body.image) {
         return res.status(400).send({ message: "Niepoprawne dane" });
     }
-    let user;
     try {
-        const newAvatar = new Avatar;
-        newAvatar.image = req.body.image;
-        newAvatar.ownerId = req.user._id;
-        await newAvatar.save();
+        const currentAvatar = await Avatar.findOne({ ownerId: req.user._id })
+        if(currentAvatar) {
+            currentAvatar.image = req.body.image;
+            await currentAvatar.save();
+        } else {
+            const newAvatar = new Avatar;
+            newAvatar.image = req.body.image;
+            newAvatar.ownerId = req.user._id;
+            await newAvatar.save();
+        }
         return res.status(200).send({ message: "Awatar ustawiony pomyślnie"})
     } catch (error) {
         return res.status(500).send({ message: error.message });
@@ -139,12 +144,12 @@ export const uploadAvatar = async (req, res) => {
 };
 
 export const getAvatar = async (req, res) => {
-    if(!req.body.ownerId) {
+    if(!req.params.id) {
         return res.status(400).send({ message: "Niepoprawne dane" });
     }
     let avatar;
     try {
-        avatar = await Avatar.findOne({ ownerId: req.body.ownerId });
+        avatar = await Avatar.findOne({ ownerId: req.params.id });
         return res.status(200).send({ avatar: avatar })
     } catch (error) {
         return res.status(500).send({ message: error.message });

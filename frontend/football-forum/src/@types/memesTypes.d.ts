@@ -2,6 +2,7 @@ export interface Mem {
     readonly _id: string
     readonly title: string
     readonly description: string
+    readonly creatorAvatar: string | null
     readonly creatorId: string
     readonly creatorName: string
     readonly file: string

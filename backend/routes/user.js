@@ -8,7 +8,8 @@ import { isAuth } from '../middleware/auth.js';
 const router = express.Router();
 
 router.get('/seed', seed);
-router.get('/avatar', getAvatar);
+router.get('/avatar/:id', getAvatar);
+
 router.post('/signin', signin);
 router.post('/register', register);
 router.post('/edit', isAuth, editProfile);

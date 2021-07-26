@@ -21,10 +21,6 @@ export interface NewUserData {
     name: string
 }
 
-export interface Avatar {
-    image: string
-}
-
 export interface EditUserState {
     loading: boolean
     error?: string

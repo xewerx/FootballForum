@@ -23,7 +23,6 @@ const MemForAcceptation: React.FC<memesTypes.Mem> = (props) => {
   const dispatch = useDispatch();
 
   const acceptMem = () => {
-    console.log(props._id)
     dispatch(acceptOrDiscardMem(props._id, "acceptmem"));
   };
 
