@@ -40,7 +40,7 @@ const MemesContainer: React.FC<IProps> = (props) => {
                     error ? <MessageBox variant="danger">{error}</MessageBox>
                         :
                         memes.map(mem => (
-                            <MemForAcceptation key={mem._id} _id={mem._id} title={mem.title} description={mem.description} creatorName={mem.creatorName} creatorId={mem.creatorId} file={mem.file} likes={mem.likes} createdAt={mem.createdAt} />
+                            <MemForAcceptation key={mem._id} _id={mem._id} title={mem.title} creatorAvatar={mem.creatorAvatar} description={mem.description} creatorName={mem.creatorName} creatorId={mem.creatorId} file={mem.file} likes={mem.likes} createdAt={mem.createdAt} />
                         ))
                 }
             </Container>
@@ -53,7 +53,7 @@ const MemesContainer: React.FC<IProps> = (props) => {
                         memes.length === 0 ? <MessageBox variant="danger">Brak memów :(, weź coś dodaj!</MessageBox>
                         :
                         memes.map(mem => (
-                            <Mem key={mem._id} _id={mem._id} title={mem.title} description={mem.description} creatorName={mem.creatorName} creatorId={mem.creatorId} file={mem.file} likes={mem.likes} createdAt={mem.createdAt} />
+                            <Mem key={mem._id} _id={mem._id} title={mem.title} creatorAvatar={mem.creatorAvatar} description={mem.description} creatorName={mem.creatorName} creatorId={mem.creatorId} file={mem.file} likes={mem.likes} createdAt={mem.createdAt} />
                         ))
                 }
             </Container>

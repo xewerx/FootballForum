@@ -34,9 +34,12 @@ const MemForAcceptation: React.FC<memesTypes.Mem> = (props) => {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            T
-          </Avatar>
+          props.creatorAvatar ?
+            <Avatar aria-label="recipe" className={classes.avatar} src={`data:image/png;base64,${props.creatorAvatar}`}></Avatar>
+            :
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              {props.creatorName[0].toUpperCase()}
+            </Avatar>
         }
         title={props.title}
         subheader={`${moment(props.createdAt).format('MMMM Do YYYY, h:mm ')} by ${props.creatorName}`}

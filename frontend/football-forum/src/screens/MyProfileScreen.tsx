@@ -88,7 +88,7 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
         if (Number(size) > 5242880) { // wieksze niz 5MB
             setErrorAvatar("Zbyt duzy plik");
         }
-        
+
         dispatch(uploadAvatar(base64));
     }
 
@@ -110,7 +110,7 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
             {error && <MessageBox variant="danger">{error}</MessageBox>}
             {loading && <LoadingBox></LoadingBox>}
             {result && <MessageBox variant="success">{result}</MessageBox>}
-            <form className="form" onSubmit={submitChangeNameHandler}>
+            <form className="form my-profile-form" onSubmit={submitChangeNameHandler}>
                 <div>
                     <label htmlFor="name">Nazwa</label>
                     <input className="element-hover" type="text" id="name" required value={name} onChange={(e) => setName(e.target.value)}></input>
@@ -120,7 +120,7 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
                 </div>
             </form>
 
-            <form className="form" onSubmit={submitChangePasswordHandler}>
+            <form className="form my-profile-form" onSubmit={submitChangePasswordHandler}>
                 <div>
                     <label htmlFor="password">Nowe hasło</label>
                     <input className="element-hover" type="password" id="password" placeholder="Podaj hasło" required onChange={(e) => setPassword(e.target.value)}></input>
@@ -130,15 +130,17 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
                     <input className="element-hover" type="password" id="confirmPassword" placeholder="Potwierdz hasło" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
                 </div>
                 {validationPasswordError ? (<MessageBox variant="danger">{validationPasswordError}</MessageBox>)
-                     : <></>
+                    : <></>
                 }
                 <div>
                     <button className="primary element-hover" type="submit">Zmień hasło</button>
                 </div>
             </form>
 
-            <form onChange={(e) => onChangeInput(e)} onSubmit={(e) => onFileSubmit(e)}>
-                <input type="file" name="avatar" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} required/>
+            <form className="form my-profile-form" onChange={(e) => onChangeInput(e)} onSubmit={(e) => onFileSubmit(e)}>
+                <div>
+                    <input type="file" name="avatar" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} required />
+                </div>
                 <div>
                     <button className="primary element-hover" type="submit">Ustaw awatar</button>
                 </div>

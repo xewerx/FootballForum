@@ -19,14 +19,17 @@ import moment from 'moment';
 const Mem: React.FC<memesTypes.Mem> = (props) => {
 
   const classes: ClassNameMap = useStyles();
-  
+
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {props.creatorName[0].toUpperCase()}
-          </Avatar>
+          props.creatorAvatar ?
+            <Avatar aria-label="recipe" className={classes.avatar} src={`data:image/png;base64,${props.creatorAvatar}`}></Avatar>
+            :
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              {props.creatorName[0].toUpperCase()}
+            </Avatar>
         }
         action={
           <IconButton aria-label="settings">

@@ -35,7 +35,10 @@ h1 {
   padding: 1rem 0;
 }
 
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
   padding: 1rem;
   border-radius: 0.2rem;
   border: 0.1rem #a4a4a4 solid;
@@ -94,6 +97,10 @@ a {
   margin: 1rem 0 0 0.5rem;
 }
 
+.my-profile-form {
+  margin-bottom: 4rem;
+}
+
 /* Alert */
 .success {
   color: #20a020;
@@ -147,7 +154,6 @@ a {
 }
 
 .dropdown-content li {
-  
   margin-top: 0;
   border: 0.1rem#d8d8d8 solid;
 }
@@ -163,6 +169,7 @@ a {
   margin: 25px 0;
   font-size: 1rem;
   min-width: 400px;
+  width: 100%;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -178,6 +185,12 @@ a {
 .content-table th,
 .content-table td {
   padding: 12px 15px;
+  vertical-align:middle
+}
+
+.td-logo {
+  padding: 12px 0 !important;
+  text-align: right;
 }
 
 .content-table tbody tr {
@@ -192,7 +205,7 @@ a {
   border-bottom: 2px solid #009933;
 }
 
-.league-table {
+.table {
   display: flex;
   flex-direction: column;
   margin-top: 5rem;
@@ -209,15 +222,19 @@ a {
 }
 
 .table-buttons-container button:hover {
-  border: 0.15rem #009933 solid; 
+  border: 0.15rem #009933 solid;
 }
 
 .button-selected {
-  border: 0.15rem #009933 solid; 
+  border: 0.15rem #009933 solid;
 }
 
 .no-data {
   text-align: center;
+}
+
+.team-logo {
+  max-width: 25px;
 }
 
 /* Livechat */
@@ -225,7 +242,7 @@ a {
   width: 80vw;
   max-height: 80vh;
   margin-top: 4rem;
-  border: 0.15rem #009933 solid; 
+  border: 0.15rem #009933 solid;
   padding: 1rem;
 }
 
@@ -237,11 +254,13 @@ a {
   position: relative !important;
 }
 
-#ce-send-message-button, .ce-my-message-bubble{
+#ce-send-message-button,
+.ce-my-message-bubble {
   background-color: #009933 !important;
 }
 
-.ce-chat-feed, .ce-chat-feed-container {
+.ce-chat-feed,
+.ce-chat-feed-container {
   height: 60vh !important;
   max-height: 60vh !important;
 }
@@ -250,15 +269,16 @@ a {
   height: 0 !important;
 }
 
-.ce-chat-title, .ce-feed-container-top {
+.ce-chat-title,
+.ce-feed-container-top {
   display: none !important;
 }
 
-#ce-scroll-down-bar, #ce-connecting-popup {
+#ce-scroll-down-bar,
+#ce-connecting-popup {
   bottom: 30vh !important;
 }
 
 #ce-send-message-button {
   padding: 2px 6px !important;
 }
-

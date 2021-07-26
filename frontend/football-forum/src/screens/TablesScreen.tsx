@@ -35,7 +35,7 @@ const TablesScreen: React.FC = () => {
     // EkstraklasaId = 106
 
     return (
-        <div className="league-table">
+        <div className="table">
             <div className="table-buttons-container">
                 <button className="block button-selected" onClick={(e) => selectLeagueTable(e, 39)}>Premier League</button>
                 <button className="block" onClick={(e) => selectLeagueTable(e, 140)}>La Liga</button>
@@ -53,6 +53,7 @@ const TablesScreen: React.FC = () => {
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th></th>
                                     <th>Druzyna</th>
                                     <th>M</th>
                                     <th>PKT</th>
@@ -68,6 +69,7 @@ const TablesScreen: React.FC = () => {
                                     table.league.standings[0].map(team => (  //nigdy nie bedzie nullem 
                                         <tr key={team.team.id}>
                                             <td>{team.rank}</td>
+                                            <td className="td-logo"><img className="team-logo" src={team.team.logo} alt="logo"></img></td>
                                             <td>{team.team.name}</td>
                                             <td>{team.all.played}</td>
                                             <td>{team.points}</td>

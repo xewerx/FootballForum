@@ -1,28 +1,16 @@
 export interface MatchesAPIResponse {
-    get: string
-    parameters: {
-        live: string
-        league: string
-    }
-    errors: []
-    results: number
-    paging: {
-        current: number
-        total: number
-    }
-    response: {
         fixture: {
             id: number
-            referee: string | null
+            referee: string
             timezone: string
             date: string
             timestamp: number
             periods: {
                 first: number
-                second: number | null
+                second: number
             }
             venue: {
-                id: null
+                id: number
                 name: string
                 city: string
             }
@@ -77,20 +65,19 @@ export interface MatchesAPIResponse {
                 away: number | null
             }
         }
-        events: []
-    }[]
 }
 
+
 export interface MatchesState {
-    matches?: MatchesAPIResponse | null
+    matches?: MatchesAPIResponse[] | null
     loading: boolean
     error?: string | null
 }
 
-export type LeagueTablesAction = {
+export type MatchesAction = {
         type: string
-        payload?: MatchesAPIResponse | null
+        payload?: MatchesAPIResponse[] | null
         error?: string
     }
 
-export type DispatchType = (args: LeagueTablesAction) => LeagueTablesAction
+export type DispatchType = (args: MatchesAction) => MatchesAction

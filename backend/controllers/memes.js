@@ -4,11 +4,11 @@ import Avatar from '../models/avatar.js';
 
 export const getMemes = async (req, res) => {
     try {
-        const memes = await MemAccepted.find().sort({createdAt: -1});
+        let memes = await MemAccepted.find().sort({createdAt: -1});
 
-        for(const mem of memes) {
+        for(let mem of memes) {
             let avatar = await Avatar.findOne({ ownerId: mem.creatorId });
-            mem.creatorAvatar = avatar ? avatar.image : null
+            mem._doc.creatorAvatar = avatar ? avatar.image : null // add addiotional property which is no in schema
         }
         return res.status(200).json(memes);
     } catch (error) {
@@ -18,7 +18,12 @@ export const getMemes = async (req, res) => {
 
 export const getMemesToAcceptation = async (req, res) => {
     try {
-        const memes = await MemNoAccepted.find().sort({createdAt: -1});
+        let memes = await MemNoAccepted.find().sort({createdAt: -1});
+
+        for(let mem of memes) {
+            let avatar = await Avatar.findOne({ ownerId: mem.creatorId });
+            mem._doc.creatorAvatar = avatar ? avatar.image : null // add addiotional property which is no in schema
+        }
         return res.status(200).json(memes);
     } catch (error) {
         return res.status(500).send({ message: error.message });
