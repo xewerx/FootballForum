@@ -72,3 +72,16 @@ export const discardMem = async (req, res) => {
         }
     } 
 };
+
+export const deleteMem = async (req, res) => {
+    if(!req.params.id) {
+        return res.status(400).send({ message: "Niepoprawne dane" });
+    }
+
+    try {
+        await MemAccepted.deleteOne({_id: req.params.id});
+        return res.status(200).send({ message: "Mem usunięty pomyślnie!"});
+    } catch (error) {
+        return res.status(500).send({ message: error.message });
+    }
+};

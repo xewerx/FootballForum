@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MEMES_LIST_FAIL, MEMES_LIST_REQUEST, MEMES_LIST_SUCCESS, UPLOAD_MEM_REQUEST, UPLOAD_MEM_SUCCESS, UPLOAD_MEM_FAIL, ACCEPT_OR_DISCARD_MEM_REQUEST, ACCEPT_OR_DISCARD_MEM_SUCCESS, ACCEPT_OR_DISCARD_MEM_FAIL } from '../constants/memesConstants';
+import { MEMES_LIST_FAIL, MEMES_LIST_REQUEST, MEMES_LIST_SUCCESS, UPLOAD_MEM_REQUEST, UPLOAD_MEM_SUCCESS, UPLOAD_MEM_FAIL, ACCEPT_OR_DELETE_MEM_REQUEST, ACCEPT_OR_DELETE_MEM_SUCCESS, ACCEPT_OR_DELETE_MEM_FAIL } from '../constants/memesConstants';
 import * as types from "../@types/memesTypes"
 import stateType from "../@types/globaStateType"
 
@@ -50,8 +50,8 @@ export const uploadMem = (mem: types.NewMem) => async (dispatch: types.DispatchT
     }
 };
 
-export const acceptOrDiscardMem = (_id: string, action: "acceptmem" | "discardmem") => async (dispatch: types.DispatchType, getState: () => stateType) => { // love ts <3
-        dispatch({ type: ACCEPT_OR_DISCARD_MEM_REQUEST });
+export const acceptOrDeleteMem = (_id: string, action: "acceptmem" | "discardmem") => async (dispatch: types.DispatchType, getState: () => stateType) => { // love ts <3
+        dispatch({ type: ACCEPT_OR_DELETE_MEM_REQUEST });
         try {
             const { userSignin: { userInfo } } = getState();
             if(!userInfo) {
@@ -62,8 +62,26 @@ export const acceptOrDiscardMem = (_id: string, action: "acceptmem" | "discardme
                     Authorization: `Bearer ${userInfo.token}`
                 }
             });
-            dispatch({ type: ACCEPT_OR_DISCARD_MEM_SUCCESS, payload: data.message, _id: _id});
+            dispatch({ type: ACCEPT_OR_DELETE_MEM_SUCCESS, payload: data.message, _id: _id});
         } catch (error) {
-            dispatch({ type: ACCEPT_OR_DISCARD_MEM_FAIL, payload: error.message });
+            dispatch({ type: ACCEPT_OR_DELETE_MEM_FAIL, payload: error.message });
         }
 };
+
+export const deleteMem = (_id: string) => async (dispatch: types.DispatchType, getState: () => stateType) => {
+    dispatch({ type: ACCEPT_OR_DELETE_MEM_REQUEST });
+    try {
+        const { userSignin: { userInfo } } = getState();
+        if(!userInfo) {
+            return;
+        }
+        const { data }: {data: {message: string}} = await axios.delete(`/api/memes/delete/${_id}`, {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        });
+        dispatch({ type: ACCEPT_OR_DELETE_MEM_SUCCESS, payload: data.message, _id: _id });
+    } catch (error) {
+        dispatch({ type: ACCEPT_OR_DELETE_MEM_FAIL, payload: error.message });
+    }
+}

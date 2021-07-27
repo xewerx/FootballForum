@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import image from '../../../assets/pitch.jpg';
 import * as memesTypes from '../../../@types/memesTypes';
-import { acceptOrDiscardMem } from '../../../actions/memesActions';
+import { acceptOrDeleteMem } from '../../../actions/memesActions';
 
 
 
@@ -23,11 +23,10 @@ const MemForAcceptation: React.FC<memesTypes.Mem> = (props) => {
   const dispatch = useDispatch();
 
   const acceptMem = () => {
-    dispatch(acceptOrDiscardMem(props._id, "acceptmem"));
+    dispatch(acceptOrDeleteMem(props._id, "acceptmem"));
   };
-
   const discardMem = () => {
-    dispatch(acceptOrDiscardMem(props._id, "discardmem"));
+    dispatch(acceptOrDeleteMem(props._id, "discardmem"));
   };
 
   return (

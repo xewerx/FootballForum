@@ -9,17 +9,28 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
+
 import useStyles from './styles'
 import image from '../../../assets/pitch.jpg';
 import * as memesTypes from '../../../@types/memesTypes';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import stateType from '../../../@types/globaStateType';
+import { deleteMem } from '../../../actions/memesActions';
 
 const Mem: React.FC<memesTypes.Mem> = (props) => {
 
   const classes: ClassNameMap = useStyles();
 
+  const user = useSelector((state: stateType) => state.userSignin);
+  const { userInfo } = user;
+  
+  const dispatch = useDispatch();
+  const deleteHandler = () => {
+    dispatch(deleteMem(props._id));
+  }
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -32,8 +43,9 @@ const Mem: React.FC<memesTypes.Mem> = (props) => {
             </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+          userInfo?.isAdmin &&
+          <IconButton onClick={deleteHandler} aria-label="settings">
+            <DeleteIcon />
           </IconButton>
         }
         title={props.title}
