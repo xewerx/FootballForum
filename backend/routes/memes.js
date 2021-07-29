@@ -9,8 +9,9 @@ router.get('/', getMemes);
 router.get('/toaccept', isAuth, isAdmin, getMemesToAcceptation);
 
 router.post('/upload', isAuth, uploadMem);
-router.post('/acceptmem', isAuth, isAdmin, acceptMem);
-router.post('/discardmem', isAuth, isAdmin, discardMem);
+
+router.put('/acceptmem', isAuth, isAdmin, acceptMem);
+router.put('/discardmem', isAuth, isAdmin, discardMem);
 
 router.delete('/delete/:id', isAuth, isAdmin, deleteMem);
 

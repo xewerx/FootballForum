@@ -65,16 +65,20 @@ const AddMemScreen: React.FC<IProps> = (props) => {
 
     const onFileSubmit = (e: any) => {
         e.preventDefault()
-
-        if (Number(size) > 5242880) { // wieksze niz 5MB
+        if (!size) {
+            setError("Dodaj plik");
+            return
+        } else if (Number(size) > 5242880) { // wieksze niz 5MB
             setError("Zbyt duzy plik");
+        } else {
+            setError("");
+            const payload: NewMem = {
+                image: base64,
+                title: title,
+                description: description
+            }
+            dispatch(uploadMem(payload));
         }
-        const payload: NewMem = {
-            image: base64,
-            title: title,
-            description: description
-        }
-        dispatch(uploadMem(payload));
     }
 
     useEffect(() => {

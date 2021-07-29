@@ -6,7 +6,6 @@ import LoadingBox from '../components/LoadingBox/LoadingBox';
 import MessageBox from '../components/MessageBox/MessageBox';
 import { editProfile, uploadAvatar } from '../actions/userActions';
 import { History } from 'history';
-import { SET_INIT_STATE } from '../constants/userConstants';
 
 interface IProps {
     history: History
@@ -22,7 +21,6 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
     const { loading, error, result } = userEdit;
 
     const [name, setName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
     const [validationPasswordError, setValidationPasswordError] = useState<string>('')
@@ -38,13 +36,13 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
             setValidationPasswordError("Hasło jest zbyt słabe");
         } else {
             setValidationPasswordError('');
-            dispatch(editProfile({ email, password, name: '' })); // przekazanie pustego name - na backendzie nie przejdzie ifa
+            dispatch(editProfile({ email: userInfo!.email, password, name: '' })); // przekazanie pustego name - na backendzie nie przejdzie ifa
         }
     };
 
     const submitChangeNameHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatch(editProfile({ email, name, password: '' })); // przekazanie pustego password - na backendzie nie przejdzie ifa
+        dispatch(editProfile({ email: userInfo!.email, name, password: '' })); // przekazanie pustego password - na backendzie nie przejdzie ifa
     }
 
     // SET AVATAR
@@ -58,12 +56,12 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
         let file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = _handleReaderLoaded
+            reader.onload = handleReaderLoaded
             reader.readAsBinaryString(file)
         }
     }
 
-    const _handleReaderLoaded = (readerEvt: any) => {
+    const handleReaderLoaded = (readerEvt: any) => {
         let binaryString = readerEvt.target.result;
         setBase64(btoa(binaryString));
     }
@@ -96,9 +94,7 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
         if (!userInfo) {
             props.history.push('/');
         } else {
-            dispatch({ type: SET_INIT_STATE }) // SET INIT STATE IN ORDER TO DELETE ORDER MESSAGE BOX 
             setName(userInfo!.name);  // screen tylko dla zalogowanych wiec te dane zawsze sa dostepne 
-            setEmail(userInfo!.email);
         }
     }, [dispatch, props.history, userInfo]); // bez userInfo zeby mi state nie czyscilo po zmianie danych usera 
 

@@ -9,7 +9,7 @@ import LoadingBox from '../components/LoadingBox/LoadingBox';
 
 const TablesScreen: React.FC = () => {
 
-    const selectedButton = document.querySelector('.button-selected');
+    const selectedButton: HTMLElement = document.querySelector('.button-selected')!;
 
     const dispatch = useDispatch();
     const selectLeagueTable = (e: React.MouseEvent<any>, ID: number) => {

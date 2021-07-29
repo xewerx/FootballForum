@@ -19,20 +19,36 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import stateType from '../../../@types/globaStateType';
 import { deleteMem } from '../../../actions/memesActions';
+import ConfirmBox from '../../ConfirmBox.ts/ConfirmBox';
 
 const Mem: React.FC<memesTypes.Mem> = (props) => {
 
   const classes: ClassNameMap = useStyles();
-
+  
   const user = useSelector((state: stateType) => state.userSignin);
   const { userInfo } = user;
   
   const dispatch = useDispatch();
-  const deleteHandler = () => {
+
+  const discardMem = () => {
     dispatch(deleteMem(props._id));
-  }
+    const confirmBox: HTMLElement = document.querySelector(".confirm-box-container")!;
+    confirmBox!.style.display = "none";
+  };
+
+  const cancelDiscardMem = () => {
+    const confirmBox: HTMLElement = document.querySelector(".confirm-box-container")!;
+    confirmBox!.style.display = "none";
+  };
+
+  const showConfirmBox = () => {
+    const confirmBox: HTMLElement = document.querySelector(".confirm-box-container")!;
+    confirmBox!.style.display = "flex";
+  };
+  
   return (
     <Card className={classes.root}>
+      <ConfirmBox question="Usunąć mema?" accept={discardMem} discard={cancelDiscardMem}></ConfirmBox>
       <CardHeader
         avatar={
           props.creatorAvatar ?
@@ -44,7 +60,7 @@ const Mem: React.FC<memesTypes.Mem> = (props) => {
         }
         action={
           userInfo?.isAdmin &&
-          <IconButton onClick={deleteHandler} aria-label="settings">
+          <IconButton onClick={showConfirmBox} aria-label="delete">
             <DeleteIcon />
           </IconButton>
         }

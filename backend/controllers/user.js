@@ -6,6 +6,7 @@ import { generateToken } from '../middleware/auth.js';
 
 import data from '../data.js';
 import Avatar from '../models/avatar.js';
+import MemAccepted from '../models/memAccepted.js';
 
 const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
 
@@ -137,7 +138,7 @@ export const uploadAvatar = async (req, res) => {
             newAvatar.ownerId = req.user._id;
             await newAvatar.save();
         }
-        return res.status(200).send({ message: "Awatar ustawiony pomyślnie"})
+        return res.status(200).send({ message: "Awatar ustawiony pomyślnie"});
     } catch (error) {
         return res.status(500).send({ message: error.message });
     }
@@ -151,6 +152,18 @@ export const getAvatar = async (req, res) => {
     try {
         avatar = await Avatar.findOne({ ownerId: req.params.id });
         return res.status(200).send({ avatar: avatar })
+    } catch (error) {
+        return res.status(500).send({ message: error.message });
+    }
+};
+
+export const like = async (req, res) => {
+    if(!req.params.id) {
+        return res.status(400).send({ message: "Niepoprawne dane" });
+    }
+    try {
+        await MemAccepted.updateOne({ _id: req.params.id }, { $addToSet: { likes: req.user._id }}); // The $addToSet operator adds a value to an array unless the value is already present, in which case $addToSet does nothing to that array.
+        return res.status(200).send({ message: "Like dodany pomyślnie"});
     } catch (error) {
         return res.status(500).send({ message: error.message });
     }

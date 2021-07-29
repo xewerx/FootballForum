@@ -31,7 +31,7 @@ export const editProfile = (editProfileData: types.NewUserData) => async (dispat
     dispatch({ type: USER_EDIT_REQUEST, payload: editProfileData });
     try {
         const { userSignin: { userInfo } } = getState();
-        const { data, status }: {data: {message: string}, status: number} = await axios.post('/api/user/edit', editProfileData, {
+        const { data, status }: {data: {message: string}, status: number} = await axios.put('/api/user/edit', editProfileData, {
             headers: {
                 Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
             }

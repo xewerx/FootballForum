@@ -282,3 +282,46 @@ a {
 #ce-send-message-button {
   padding: 2px 6px !important;
 }
+
+/* ConfirmBox */
+.confirm-box-container {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  padding: 2rem 2rem;
+  border-radius: 0.2rem;
+  border: 0.1rem #a02020 solid;
+  font-size: 1rem;
+  color: #124413;
+  background-color: #f3f3f3;
+}
+
+.confirm-box-container > div > button {
+  margin: 0.5rem;
+  margin-top: 1rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button-accept {
+  color: #20a020;
+  border: 1px solid;
+}
+
+.button-accept:hover {
+  color: #f3f3f3;
+  background-color: #20a020;
+}
+
+.button-discard {
+  color: #a02020;
+  border: 1px solid;
+}
+
+.button-discard:hover {
+  color: #f3f3f3;
+  background-color: #a02020;
+}

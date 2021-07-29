@@ -57,7 +57,7 @@ export const acceptOrDeleteMem = (_id: string, action: "acceptmem" | "discardmem
             if(!userInfo) {
                 return;
             }
-            const { data }: {data: {message: string}} = await axios.post(`/api/memes/${action}`, {_id}, {
+            const { data }: {data: {message: string}} = await axios.put(`/api/memes/${action}`, {_id}, {
                 headers: {
                     Authorization: `Bearer ${userInfo.token}`
                 }
