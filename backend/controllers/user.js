@@ -157,13 +157,18 @@ export const getAvatar = async (req, res) => {
     }
 };
 
-export const like = async (req, res) => {
-    if(!req.params.id) {
+export const likeOrUnlike = async (req, res) => {
+    if(!req.params.id || req.body.isLike === undefined) {
         return res.status(400).send({ message: "Niepoprawne dane" });
     }
     try {
-        await MemAccepted.updateOne({ _id: req.params.id }, { $addToSet: { likes: req.user._id }}); // The $addToSet operator adds a value to an array unless the value is already present, in which case $addToSet does nothing to that array.
-        return res.status(200).send({ message: "Like dodany pomyślnie"});
+        if(req.body.isLike) {
+            await MemAccepted.updateOne({ _id: req.params.id }, { $addToSet: { likes: req.user._id }}); // The $addToSet operator adds a value to an array unless the value is already present, in which case $addToSet does nothing to that array.
+        } else {
+            await MemAccepted.updateOne({ _id: req.params.id }, { $pull: { likes: req.user._id }}); 
+        }
+        const mem = await MemAccepted.findOne({ _id: req.params.id });
+        return res.status(200).send({ message: mem.likes });
     } catch (error) {
         return res.status(500).send({ message: error.message });
     }

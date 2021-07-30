@@ -21,5 +21,8 @@ export default makeStyles((theme) => ({
     },
     buttonDiscard: {
       backgroundColor: '#a02020'
+    },
+    like: {
+      maxWidth: '30px'
     }
   }));

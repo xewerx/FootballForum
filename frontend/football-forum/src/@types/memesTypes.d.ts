@@ -6,7 +6,7 @@ export interface Mem {
     readonly creatorId: string
     readonly creatorName: string
     readonly file: string
-    readonly likes: string[]
+    likes: string[] // not readonly because I update it when I give like 
     readonly createdAt: Date
 }
 
@@ -30,7 +30,7 @@ export interface UploadMemState {
 
 export type GetMemesAction = {
     type: string
-    payload?: Mem[] | string
+    payload?: Mem[] | string | string[]
     error?: string
     _id?: string
 }
@@ -40,7 +40,7 @@ export type UploadMemAction = {
     payload?: string
 }
 
-export type DispatchType = (args: MemesAction) => MemesAction
+export type DispatchType = (args: GetMemesAction) => GetMemesAction
 
 
 

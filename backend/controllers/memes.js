@@ -1,6 +1,7 @@
 import MemAccepted from '../models/memAccepted.js';
 import MemNoAccepted from '../models/memNoAccepted.js';
 import Avatar from '../models/avatar.js';
+import User from '../models/user.js';
 
 export const getMemes = async (req, res) => {
     try {
@@ -9,6 +10,8 @@ export const getMemes = async (req, res) => {
         for(let mem of memes) {
             let avatar = await Avatar.findOne({ ownerId: mem.creatorId });
             mem._doc.creatorAvatar = avatar ? avatar.image : null // add addiotional property which is no in schema
+            let creator = await User.findOne({ _id: mem.creatorId });
+            mem.creatorName = creator ? creator.name : "unknown"; // set creator name for mem by id of creator
         }
         return res.status(200).json(memes);
     } catch (error) {
@@ -23,6 +26,8 @@ export const getMemesToAcceptation = async (req, res) => {
         for(let mem of memes) {
             let avatar = await Avatar.findOne({ ownerId: mem.creatorId });
             mem._doc.creatorAvatar = avatar ? avatar.image : null // add addiotional property which is no in schema
+            let creator = await User.findOne({ _id: mem.creatorId });
+            mem.creatorName = creator ? creator.name : "unknown"; // set creator name for mem by id of creator
         }
         return res.status(200).json(memes);
     } catch (error) {

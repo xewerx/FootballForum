@@ -49,7 +49,6 @@ export const editProfile = (editProfileData: types.NewUserData) => async (dispat
 };
 
 export const uploadAvatar = (avatar: string) => async (dispatch: types.DispatchType, getState: () => stateType) => {
-    console.log(avatar)
     dispatch({ type: USER_EDIT_REQUEST });
     try {
         const { userSignin: { userInfo } } = getState();
@@ -74,3 +73,4 @@ export const signout = () => (dispatch: types.DispatchType) => {
     dispatch({ type: USER_SIGNOUT });
     localStorage.removeItem('userInfo');
 };
+

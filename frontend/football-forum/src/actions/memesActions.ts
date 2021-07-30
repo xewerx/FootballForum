@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MEMES_LIST_FAIL, MEMES_LIST_REQUEST, MEMES_LIST_SUCCESS, UPLOAD_MEM_REQUEST, UPLOAD_MEM_SUCCESS, UPLOAD_MEM_FAIL, ACCEPT_OR_DELETE_MEM_REQUEST, ACCEPT_OR_DELETE_MEM_SUCCESS, ACCEPT_OR_DELETE_MEM_FAIL } from '../constants/memesConstants';
+import { MEMES_LIST_FAIL, MEMES_LIST_REQUEST, MEMES_LIST_SUCCESS, UPLOAD_MEM_REQUEST, UPLOAD_MEM_SUCCESS, UPLOAD_MEM_FAIL, ACCEPT_OR_DELETE_MEM_REQUEST, ACCEPT_OR_DELETE_MEM_SUCCESS, ACCEPT_OR_DELETE_MEM_FAIL, LIKE_OR_UNLIKE_MEM_REQUEST, LIKE_OR_UNLIKE_MEM_SUCCESS, LIKE_OR_UNLIKE_MEM_FAIL } from '../constants/memesConstants';
 import * as types from "../@types/memesTypes"
 import stateType from "../@types/globaStateType"
 
@@ -84,4 +84,23 @@ export const deleteMem = (_id: string) => async (dispatch: types.DispatchType, g
     } catch (error) {
         dispatch({ type: ACCEPT_OR_DELETE_MEM_FAIL, payload: error.message });
     }
-}
+};
+
+export const likeOrUnlike = (isLike: boolean, memId: string) => async (dispatch: types.DispatchType, getState: () => stateType) => {
+    dispatch({ type: LIKE_OR_UNLIKE_MEM_REQUEST });
+    try {
+        const { userSignin: { userInfo } } = getState();
+        const { data, status }: {data: {message: string[]}, status: number} = await axios.put(`/api/user/like/${memId}`, {isLike: isLike}, {
+            headers: {
+                Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
+            }
+        });
+        if(status === 200) {
+            dispatch({ type: LIKE_OR_UNLIKE_MEM_SUCCESS, payload: data.message, _id: memId }); // zmiana danych w stacie Usera - tylko name w sumie
+        } else {
+            dispatch({ type: LIKE_OR_UNLIKE_MEM_FAIL, error: "Niepoprawne dane" });
+        }
+    } catch(error) {
+        dispatch({ type: LIKE_OR_UNLIKE_MEM_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
+    }
+};
