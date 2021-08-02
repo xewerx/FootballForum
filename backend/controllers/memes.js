@@ -24,11 +24,14 @@ export const getMemesToAcceptation = async (req, res) => {
         let memes = await MemNoAccepted.find().sort({createdAt: -1});
 
         for(let mem of memes) {
-            let avatar = await Avatar.findOne({ ownerId: mem.creatorId });
-            mem._doc.creatorAvatar = avatar ? avatar.image : null // add addiotional property which is no in schema
-            let creator = await User.findOne({ _id: mem.creatorId });
-            mem.creatorName = creator ? creator.name : "unknown"; // set creator name for mem by id of creator
+            if(!mem.creatorId.split(' ')[0] === 'GA') { // if mem not from google user has a avatar of creator and maybe other creator name(use could change it)
+                let avatar = await Avatar.findOne({ ownerId: mem.creatorId });
+                mem._doc.creatorAvatar = avatar ? avatar.image : null // add addiotional property which is no in schema
+                let creator = await User.findOne({ _id: mem.creatorId });
+                mem.creatorName = creator ? creator.name : "unknown"; // set creator name for mem by id of creator
+            }
         }
+
         return res.status(200).json(memes);
     } catch (error) {
         return res.status(500).send({ message: error.message });
@@ -40,8 +43,8 @@ export const uploadMem = async (req, res) => {
         const newMem = new MemNoAccepted;
         newMem.title = req.body.title;
         newMem.description = req.body.description;
-        newMem.creatorId = req.user._id;
-        newMem.creatorName = req.user.name;
+        newMem.creatorId = req.user._id || `GA ${req.user.sub}`; // custom id or google auth id
+        newMem.creatorName = req.user.name || req.user.given_name; // custom name or google name
         newMem.file = req.body.image;
         await newMem.save();
         return res.status(200).send({ message: "Mem dodany pomyslnie!"});

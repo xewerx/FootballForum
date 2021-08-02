@@ -20,9 +20,9 @@ const LivechatScreen: React.FC<IProps> = (props) => {
             <div className="livechat-container">
                 <ChatEngineWrapper>
                     <ChatSocket
-                        projectID={userInfo.livechat_projectID}
-                        chatID={userInfo.livechat_chatID}
-                        chatAccessKey={userInfo.livechat_chatAccessKey}
+                        projectID={userInfo.livechat_credentials!.livechat_projectID}
+                        chatID={userInfo.livechat_credentials!.livechat_chatID}
+                        chatAccessKey={userInfo.livechat_credentials!.livechat_chatAccessKey}
                         userName={userInfo.name}
 
                         onConnect={() => console.log("CONNECT")}
@@ -35,7 +35,7 @@ const LivechatScreen: React.FC<IProps> = (props) => {
                         }}
 
                     />
-                    <ChatFeed activeChat={userInfo.livechat_chatID} />
+                    <ChatFeed activeChat={userInfo.livechat_credentials!.livechat_chatID} />
                 </ChatEngineWrapper>
             </div>
             :

@@ -39,9 +39,11 @@ export const signin = async (req, res) => {
                     avatar: avatar ? avatar.image : null, // from avatars
                     isAdmin: user.isAdmin,
                     token: generateToken(user),
-                    livechat_projectID: process.env.LIVECHAT_PROJECTID,
-                    livechat_chatID: process.env.LIVECHAT_CHATID,
-                    livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY
+                    livechat_credentials: { 
+                        livechat_projectID: process.env.LIVECHAT_PROJECTID,
+                        livechat_chatID: process.env.LIVECHAT_CHATID,
+                        livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY 
+                    }
                 });
             }
         }
@@ -78,9 +80,11 @@ export const register = async (req, res) => {
             avatar: "",
             isAdmin: createdUser.isAdmin,
             token: generateToken(createdUser),
-            livechat_projectID: process.env.LIVECHAT_PROJECTID,
-            livechat_chatID: process.env.LIVECHAT_CHATID,
-            livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY
+            livechat_credentials: { 
+                livechat_projectID: process.env.LIVECHAT_PROJECTID,
+                livechat_chatID: process.env.LIVECHAT_CHATID,
+                livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY 
+            }
         });
     } catch (error) {
         return res.status(500).send({ message: error.message });
@@ -172,4 +176,12 @@ export const likeOrUnlike = async (req, res) => {
     } catch (error) {
         return res.status(500).send({ message: error.message });
     }
+};
+
+export const getLiveChatCredentials = (req, res) => {
+    return res.status(200).send({ 
+        livechat_projectID: process.env.LIVECHAT_PROJECTID,
+        livechat_chatID: process.env.LIVECHAT_CHATID,
+        livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY 
+    });
 };

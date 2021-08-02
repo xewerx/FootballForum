@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_FAIL, USER_EDIT_SUCCESS } from '../constants/userConstants';
+import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_FAIL, USER_EDIT_SUCCESS, LIVECHAT_CREDENTIALS_SUCCESS, LIVECHAT_CREDENTIALS_FAIL } from '../constants/userConstants';
 import * as types from "../@types/userTypes";
 import stateType from "../@types/globaStateType";
 
@@ -74,3 +74,16 @@ export const signout = () => (dispatch: types.DispatchType) => {
     localStorage.removeItem('userInfo');
 };
 
+export const getLiveChatCredentials = () => async (dispatch: types.DispatchType, getState: () => stateType) => {
+    try {
+        const { userSignin: { userInfo } } = getState();
+        const { data }: {data: types.LivechatCredentials} = await axios.get('/api/user/livechat-credentials',  {
+            headers: {
+                Authorization: userInfo!.token // tylko dla zalogowanych googlem
+            }
+        });
+        dispatch({ type: LIVECHAT_CREDENTIALS_SUCCESS, payload: data})
+    } catch(error) {
+        dispatch({ type: LIVECHAT_CREDENTIALS_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
+    }
+};

@@ -4,11 +4,16 @@ export interface User {
     readonly email: string
     readonly avatar: string | null
     readonly isAdmin: boolean
+    readonly isGoogleAuthUser: boolean
     readonly token: string
-    readonly livechat_projectID: string
-    readonly livechat_chatID: string
-    readonly livechat_chatAccessKey: string
+    readonly livechat_credentials?: LivechatCredentials
 }
+
+export interface LivechatCredentials {
+    livechat_projectID: string
+    livechat_chatID: string
+    livechat_chatAccessKey: string
+};
 
 export interface LoginCredentials {
     email: string
@@ -35,7 +40,7 @@ export interface UserState {
 
 export type UserAction = {
     type: string
-    payload?: User | NewUserData | LoginCredentials | string
+    payload?: User | NewUserData | LoginCredentials | LivechatCredentials | string
     error?: string | null
 }
 

@@ -34,7 +34,6 @@ const MemesContainer: React.FC<IProps> = (props) => {
         props.isAcceptationMemes ?
             <Container className={classes.root}>
                 {result && <MessageBox variant="success">{result}</MessageBox>}
-                {error && <MessageBox variant="danger">{error}</MessageBox>}
                 {loading ? <LoadingBox></LoadingBox>
                     :
                     error ? <MessageBox variant="danger">{error}</MessageBox>

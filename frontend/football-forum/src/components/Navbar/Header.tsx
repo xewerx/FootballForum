@@ -52,7 +52,7 @@ const Header: React.FC = () => {
                   <ListItem button className="dropdown">
                     {
                       userInfo.avatar ?
-                        <Avatar aria-label="recipe" className={classes.avatar} src={`data:image/png;base64,${userInfo.avatar}`}></Avatar>
+                        <Avatar aria-label="recipe" className={classes.avatar} src={userInfo.isGoogleAuthUser ? userInfo.avatar : `data:image/png;base64,${userInfo.avatar}`}></Avatar>
                         :
                         <Avatar aria-label="recipe" className={classes.avatar}>
                           {userInfo.name[0].toUpperCase()}

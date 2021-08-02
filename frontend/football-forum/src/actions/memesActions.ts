@@ -10,7 +10,7 @@ export const getMemes = () => async (dispatch: types.DispatchType) => {
         console.log(data)
         dispatch({ type: MEMES_LIST_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: MEMES_LIST_FAIL, payload: error.message });
+        dispatch({ type: MEMES_LIST_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
     }
 };
 
@@ -28,7 +28,8 @@ export const getMemesToAcceptation = () => async (dispatch: types.DispatchType, 
         });
         dispatch({ type: MEMES_LIST_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: MEMES_LIST_FAIL, payload: error.message });
+        console.log(error)
+        dispatch({ type: MEMES_LIST_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
     }
 };
 
@@ -46,7 +47,7 @@ export const uploadMem = (mem: types.NewMem) => async (dispatch: types.DispatchT
         });
         dispatch({ type: UPLOAD_MEM_SUCCESS, payload: data.message });
     } catch (error) {
-        dispatch({ type: UPLOAD_MEM_FAIL, payload: error.message });
+        dispatch({ type: UPLOAD_MEM_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
     }
 };
 
@@ -64,7 +65,7 @@ export const acceptOrDeleteMem = (_id: string, action: "acceptmem" | "discardmem
             });
             dispatch({ type: ACCEPT_OR_DELETE_MEM_SUCCESS, payload: data.message, _id: _id});
         } catch (error) {
-            dispatch({ type: ACCEPT_OR_DELETE_MEM_FAIL, payload: error.message });
+            dispatch({ type: ACCEPT_OR_DELETE_MEM_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
         }
 };
 
@@ -82,7 +83,7 @@ export const deleteMem = (_id: string) => async (dispatch: types.DispatchType, g
         });
         dispatch({ type: ACCEPT_OR_DELETE_MEM_SUCCESS, payload: data.message, _id: _id });
     } catch (error) {
-        dispatch({ type: ACCEPT_OR_DELETE_MEM_FAIL, payload: error.message });
+        dispatch({ type: ACCEPT_OR_DELETE_MEM_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
     }
 };
 

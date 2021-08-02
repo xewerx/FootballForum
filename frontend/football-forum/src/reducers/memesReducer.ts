@@ -25,7 +25,7 @@ export const getAndAcceptOrDiscardMemesReducer = (state: types.MemState = IState
             const index: number = state.memes.findIndex(mem => mem._id === action._id);
             state.memes[index].likes = action.payload as string[];
             return { ...state, memes: state.memes };
-        case MEMES_LIST_FAIL || ACCEPT_OR_DELETE_MEM_FAIL || LIKE_OR_UNLIKE_MEM_FAIL:
+        case ACCEPT_OR_DELETE_MEM_FAIL || LIKE_OR_UNLIKE_MEM_FAIL || MEMES_LIST_FAIL:
             return { ...state, loading: false, error: action.error };
         case SET_INIT_STATE:
             return IStateGetMemes;
