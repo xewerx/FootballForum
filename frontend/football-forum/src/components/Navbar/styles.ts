@@ -7,6 +7,8 @@ export default makeStyles({
   navbarDisplayFlex: {
     display: `flex`,
     justifyContent: `space-between`,
+    alignItems: `center`,
+    maxWidth: 'auto'
   },
   navListDisplayFlex: {
     display: `flex`,

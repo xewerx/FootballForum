@@ -8,6 +8,8 @@ import SideDrawer from "./SideDrawer";
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import useStyles from './styles'
 import noLikeIcon from '../../assets/nolike.png';
+import { ReactComponent as LogoPart1 } from '../../assets/logo_part1.svg';
+import { ReactComponent as LogoPart2 } from '../../assets/logo_part2.svg';
 
 import navLinks from './navLinks';
 import stateType from '../../@types/globaStateType';
@@ -35,10 +37,13 @@ const Header: React.FC = () => {
     <>
       <AppBar className={classes.bar} position="static">
         <Toolbar component="nav">
-          <Container maxWidth="md" className={classes.navbarDisplayFlex}>
+          <Container className={classes.navbarDisplayFlex}>
             <IconButton edge="start" aria-label="home">
-              <a href="/" style={{ color: `white` }}>
-                LOGO
+              <a href="/">
+                <div className="logo-container">
+                  <LogoPart1 />
+                  <LogoPart2 />
+                </div>
               </a>
             </IconButton>
 

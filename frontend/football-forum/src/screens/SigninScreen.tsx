@@ -5,7 +5,7 @@ import { History } from 'history';
 
 import LoadingBox from '../components/LoadingBox/LoadingBox';
 import MessageBox from '../components/MessageBox/MessageBox';
-import { signin } from '../actions/userActions';
+import { getLiveChatCredentials, signin } from '../actions/userActions';
 import stateType from '../@types/globaStateType';
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import { USER_SIGNIN_FAIL, USER_SIGNIN_SUCCESS } from '../constants/userConstants';
@@ -51,6 +51,7 @@ const SigninScreen: React.FC<IProps> = (props) => {
                 type: USER_SIGNIN_SUCCESS, payload: userData
             });
             localStorage.setItem('userInfo', JSON.stringify(userData));
+            dispatch(getLiveChatCredentials());
         } catch (error) {
             console.log(error);
         }

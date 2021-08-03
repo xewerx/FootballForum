@@ -131,6 +131,10 @@ a {
   background-color: #ffe0e0e0;
 }
 
+.logo-container {
+fill: #d8d8d8;
+}
+
 /* Dropdown */
 .dropdown-content {
   position: absolute;

@@ -8,10 +8,12 @@ export const getMemes = async (req, res) => {
         let memes = await MemAccepted.find().sort({createdAt: -1});
 
         for(let mem of memes) {
-            let avatar = await Avatar.findOne({ ownerId: mem.creatorId });
-            mem._doc.creatorAvatar = avatar ? avatar.image : null // add addiotional property which is no in schema
-            let creator = await User.findOne({ _id: mem.creatorId });
-            mem.creatorName = creator ? creator.name : "unknown"; // set creator name for mem by id of creator
+            if(!mem.creatorId.split(' ')[0] === 'GA') { // if mem not from google user has a avatar of creator and maybe other creator name(use could change it)
+                let avatar = await Avatar.findOne({ ownerId: mem.creatorId });
+                mem._doc.creatorAvatar = avatar ? avatar.image : null // add addiotional property which is no in schema
+                let creator = await User.findOne({ _id: mem.creatorId });
+                mem.creatorName = creator ? creator.name : "unknown"; // set creator name for mem by id of creator
+            }
         }
         return res.status(200).json(memes);
     } catch (error) {
