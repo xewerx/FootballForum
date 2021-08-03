@@ -1,5 +1,6 @@
-import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_SUCCESS, USER_EDIT_FAIL } from '../constants/userConstants';
+import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_EDIT_REQUEST, USER_EDIT_SUCCESS, USER_EDIT_FAIL, SET_INIT_STATE, LIVECHAT_CREDENTIALS_SUCCESS } from '../constants/userConstants';
 import * as types from '../@types/userTypes';
+
 
 const IStateUser: types.UserState = {
     userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo') || '{}') : null,
@@ -17,6 +18,8 @@ export const signinReducer = (state: types.UserState = IStateUser, action: types
             return { ...state, loading: false, error: action.error };
         case USER_SIGNOUT:
             return { ...state, userInfo: null };
+        case LIVECHAT_CREDENTIALS_SUCCESS:
+            return { ...state }
         default:
             return state;
     }
@@ -27,7 +30,7 @@ export const registerReducer = (state: types.UserState = { ...IStateUser, userIn
         case USER_REGISTER_REQUEST:
             return { ...state, loading: true };
         case USER_REGISTER_SUCCESS:
-            return { ...state, loading: false, userInfo: action.payload as types.User}; // dane typu User zwrocone z API po zarejestrowaniu
+            return { ...state, loading: false, userInfo: action.payload as types.User }; // dane typu User zwrocone z API po zarejestrowaniu
         case USER_REGISTER_FAIL:
             return { ...state, loading: false, error: action.error };
         default:
@@ -40,14 +43,16 @@ const IStateEditUser: types.EditUserState = {
     result: null
 };
 
-export const editProfileReducer = (state: types.EditUserState =  IStateEditUser, action: types.UserAction): types.EditUserState => {
+export const editProfileReducer = (state: types.EditUserState = IStateEditUser, action: types.UserAction): types.EditUserState => {
     switch (action.type) {
         case USER_EDIT_REQUEST:
             return { ...state, loading: true };
         case USER_EDIT_SUCCESS:
-            return { ...state, loading: false, result: action.payload as string}; // result zwrocony jako string za API
+            return { ...state, loading: false, result: action.payload as string }; // result zwrocony jako string za API
         case USER_EDIT_FAIL:
-            return { ...state, loading: false, error: action.error as string};
+            return { ...state, loading: false, error: action.error as string };
+        case SET_INIT_STATE:
+            return IStateEditUser;
         default:
             return state;
     }

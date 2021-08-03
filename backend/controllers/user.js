@@ -5,6 +5,8 @@ import User from '../models/user.js';
 import { generateToken } from '../middleware/auth.js';
 
 import data from '../data.js';
+import Avatar from '../models/avatar.js';
+import MemAccepted from '../models/memAccepted.js';
 
 const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
 
@@ -19,6 +21,7 @@ export const seed = async (req, res) => {
 };
 
 export const signin = async (req, res) => {
+    let avatar;
 
     if (!req.body.email || !req.body.password) {
         return res.status(400).send({ message: 'Brak adresu email lub hasła' });
@@ -28,15 +31,19 @@ export const signin = async (req, res) => {
         const user = await User.findOne({ email: req.body.email });
         if (user) {
             if (bcrypt.compareSync(req.body.password, user.password)) {
+                avatar = await Avatar.findOne({ ownerId: user._id });
                 return res.status(200).send({
                     _id: user._id,
                     name: user.name,
                     email: user.email,
+                    avatar: avatar ? avatar.image : null, // from avatars
                     isAdmin: user.isAdmin,
                     token: generateToken(user),
-                    livechat_projectID: process.env.LIVECHAT_PROJECTID,
-                    livechat_chatID: process.env.LIVECHAT_CHATID,
-                    livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY
+                    livechat_credentials: { 
+                        livechat_projectID: process.env.LIVECHAT_PROJECTID,
+                        livechat_chatID: process.env.LIVECHAT_CHATID,
+                        livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY 
+                    }
                 });
             }
         }
@@ -44,7 +51,7 @@ export const signin = async (req, res) => {
     } catch (error) {
         return res.status(500).send({ message: error.message });
     }
-}
+};
 
 export const register = async (req, res) => {
 
@@ -70,19 +77,21 @@ export const register = async (req, res) => {
             _id: createdUser._id,
             name: createdUser.name,
             email: createdUser.email,
+            avatar: "",
             isAdmin: createdUser.isAdmin,
             token: generateToken(createdUser),
-            livechat_projectID: process.env.LIVECHAT_PROJECTID,
-            livechat_chatID: process.env.LIVECHAT_CHATID,
-            livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY
+            livechat_credentials: { 
+                livechat_projectID: process.env.LIVECHAT_PROJECTID,
+                livechat_chatID: process.env.LIVECHAT_CHATID,
+                livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY 
+            }
         });
     } catch (error) {
         return res.status(500).send({ message: error.message });
     }
-}
+};
 
 export const editProfile = async (req, res) => {
-    console.log(req.body);
     let user = null;
     if(!req.body.email) {
         return res.status(400).send({ message: "Niepoprawne dane" }); // oszczedzam na zapytaniu do bazy 
@@ -116,4 +125,63 @@ export const editProfile = async (req, res) => {
     } catch (error) {
         return res.status(500).send({ message: error.message });
     }
-}
+};
+
+export const uploadAvatar = async (req, res) => {
+    if(!req.body.image) {
+        return res.status(400).send({ message: "Niepoprawne dane" });
+    }
+    try {
+        const currentAvatar = await Avatar.findOne({ ownerId: req.user._id })
+        if(currentAvatar) {
+            currentAvatar.image = req.body.image;
+            await currentAvatar.save();
+        } else {
+            const newAvatar = new Avatar;
+            newAvatar.image = req.body.image;
+            newAvatar.ownerId = req.user._id;
+            await newAvatar.save();
+        }
+        return res.status(200).send({ message: "Awatar ustawiony pomyślnie"});
+    } catch (error) {
+        return res.status(500).send({ message: error.message });
+    }
+};
+
+export const getAvatar = async (req, res) => {
+    if(!req.params.id) {
+        return res.status(400).send({ message: "Niepoprawne dane" });
+    }
+    let avatar;
+    try {
+        avatar = await Avatar.findOne({ ownerId: req.params.id });
+        return res.status(200).send({ avatar: avatar })
+    } catch (error) {
+        return res.status(500).send({ message: error.message });
+    }
+};
+
+export const likeOrUnlike = async (req, res) => {
+    if(!req.params.id || req.body.isLike === undefined) {
+        return res.status(400).send({ message: "Niepoprawne dane" });
+    }
+    try {
+        if(req.body.isLike) {
+            await MemAccepted.updateOne({ _id: req.params.id }, { $addToSet: { likes: req.user._id }}); // The $addToSet operator adds a value to an array unless the value is already present, in which case $addToSet does nothing to that array.
+        } else {
+            await MemAccepted.updateOne({ _id: req.params.id }, { $pull: { likes: req.user._id }}); 
+        }
+        const mem = await MemAccepted.findOne({ _id: req.params.id });
+        return res.status(200).send({ message: mem.likes });
+    } catch (error) {
+        return res.status(500).send({ message: error.message });
+    }
+};
+
+export const getLiveChatCredentials = (req, res) => {
+    return res.status(200).send({ 
+        livechat_projectID: process.env.LIVECHAT_PROJECTID,
+        livechat_chatID: process.env.LIVECHAT_CHATID,
+        livechat_chatAccessKey: process.env.LIVECHAT_CHATACCESSKEY 
+    });
+};

@@ -78,7 +78,7 @@ const RegisterScreen: React.FC<IProps> = (props) => {
                 </div>
                 <div>
                     <label>
-                        Posiadasz juz konto? <Link to={`/register`}>Zaloguj sie</Link>
+                        Posiadasz juz konto? <Link to={`/signin`}>Zaloguj sie</Link>
                     </label>
                 </div>
             </form>

@@ -1,13 +1,13 @@
 import * as types from '../@types/leagueTablesTypes';
 import { LEGAUE_TABLES_FAIL, LEGAUE_TABLES_REQUEST, LEGAUE_TABLES_SUCCESS } from '../constants/leagueTablesConstants';
 
-const initialState: types.LeagueTablesState = {
+const IState: types.LeagueTablesState = {
     table: null,
     loading: true,
     error: null
 }
 
-export const getLeagueTablesReducer = (state: types.LeagueTablesState = initialState, action: types.LeagueTablesAction): types.LeagueTablesState => {
+export const getLeagueTablesReducer = (state: types.LeagueTablesState = IState, action: types.LeagueTablesAction): types.LeagueTablesState => {
     switch (action.type) {
         case LEGAUE_TABLES_REQUEST:
             return { ...state, loading: true, error: null };

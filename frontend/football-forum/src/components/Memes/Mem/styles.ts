@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { red } from '@material-ui/core/colors';
 
 export default makeStyles((theme) => ({
     root: {
@@ -9,7 +8,7 @@ export default makeStyles((theme) => ({
       paddingTop: '56.25%', // 16:9
     },
     avatar: {
-      backgroundColor: red[500],
+      backgroundColor: "gray",
     },
     buttonsContainer: {
       display: 'flex',
@@ -22,5 +21,8 @@ export default makeStyles((theme) => ({
     },
     buttonDiscard: {
       backgroundColor: '#a02020'
+    },
+    like: {
+      maxWidth: '30px'
     }
   }));

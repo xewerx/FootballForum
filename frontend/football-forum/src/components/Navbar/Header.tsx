@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { AppBar, Container, Hidden, IconButton, List, ListItem, ListItemText, Toolbar } from "@material-ui/core";
+import Avatar from '@material-ui/core/Avatar';
 import SideDrawer from "./SideDrawer";
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import useStyles from './styles'
@@ -49,6 +50,14 @@ const Header: React.FC = () => {
                 ))}
                 {userInfo ?
                   <ListItem button className="dropdown">
+                    {
+                      userInfo.avatar ?
+                        <Avatar aria-label="recipe" className={classes.avatar} src={userInfo.isGoogleAuthUser ? userInfo.avatar : `data:image/png;base64,${userInfo.avatar}`}></Avatar>
+                        :
+                        <Avatar aria-label="recipe" className={classes.avatar}>
+                          {userInfo.name[0].toUpperCase()}
+                        </Avatar>
+                    }
                     <ListItemText primary={userInfo.name} className={classes.linkText} />
                     <div >
                       <ul className="dropdown-content">

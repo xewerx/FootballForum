@@ -1,35 +1,44 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import useStyles from './styles'
+import moment from 'moment';
+
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-import useStyles from './styles'
 import image from '../../../assets/pitch.jpg';
 import * as memesTypes from '../../../@types/memesTypes';
-import moment from 'moment';
+import { acceptOrDeleteMem } from '../../../actions/memesActions';
+
+
 
 const MemForAcceptation: React.FC<memesTypes.Mem> = (props) => {
 
   const classes: ClassNameMap = useStyles();
+  const dispatch = useDispatch();
+
+  const acceptMem = () => {
+    dispatch(acceptOrDeleteMem(props._id, "acceptmem"));
+  };
+  const discardMem = () => {
+    dispatch(acceptOrDeleteMem(props._id, "discardmem"));
+  };
 
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            T
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          props.creatorAvatar ?
+            <Avatar aria-label="recipe" className={classes.avatar} src={`data:image/png;base64,${props.creatorAvatar}`}></Avatar>
+            :
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              {props.creatorName[0].toUpperCase()}
+            </Avatar>
         }
         title={props.title}
         subheader={`${moment(props.createdAt).format('MMMM Do YYYY, h:mm ')} by ${props.creatorName}`}
@@ -45,8 +54,8 @@ const MemForAcceptation: React.FC<memesTypes.Mem> = (props) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.buttonsContainer}>
-          <button className={`${classes.button} ${classes.buttonAccept}`}>Akceptuj</button>
-          <button className={`${classes.button} ${classes.buttonDiscard}`}>Odrzuć</button>
+        <button className={`${classes.button} ${classes.buttonAccept}`} onClick={acceptMem}>Akceptuj</button>
+        <button className={`${classes.button} ${classes.buttonDiscard}`} onClick={discardMem}>Odrzuć</button>
       </CardActions>
     </Card>
   );

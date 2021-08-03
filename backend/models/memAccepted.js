@@ -8,7 +8,8 @@ const memSchema = mongoose.Schema({
     file: { type: String, required: true},
     likes: {
         type: [String],
-        default: []
+        default: [],
+        required: true
     },
     createdAt: {
         type: Date,
