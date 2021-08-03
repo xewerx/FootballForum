@@ -7,6 +7,7 @@ import Avatar from '@material-ui/core/Avatar';
 import SideDrawer from "./SideDrawer";
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import useStyles from './styles'
+import noLikeIcon from '../../assets/nolike.png';
 
 import navLinks from './navLinks';
 import stateType from '../../@types/globaStateType';
@@ -19,8 +20,14 @@ const Header: React.FC = () => {
   const user = useSelector((state: stateType) => state.userSignin);
   const { userInfo } = user;
 
+  const setNoLikeAfterLogout = () => {
+    const likes = document.querySelectorAll<HTMLImageElement>(".likeIcon");
+    likes.forEach((like) => like.src = noLikeIcon)
+  };
+
   const dispatch = useDispatch();
   const signoutHandler = () => {
+    setNoLikeAfterLogout();
     dispatch(signout());
   }
 
@@ -32,7 +39,7 @@ const Header: React.FC = () => {
             <IconButton edge="start" aria-label="home">
               <a href="/" style={{ color: `white` }}>
                 LOGO
-                </a>
+              </a>
             </IconButton>
 
             <Hidden smDown>
@@ -61,9 +68,12 @@ const Header: React.FC = () => {
                     <ListItemText primary={userInfo.name} className={classes.linkText} />
                     <div >
                       <ul className="dropdown-content">
-                        <li>
-                          <Link to="/myprofile" className="fullWidth">Profil</Link>
-                        </li>
+                        {
+                          !userInfo.isGoogleAuthUser &&
+                          <li>
+                            <Link to="/myprofile" className="fullWidth">Profil</Link>
+                          </li>
+                        }
                         <li>
                           <Link to="/addmem" className="fullWidth">Dodaj&nbsp;mema</Link>
                         </li>

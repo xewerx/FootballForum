@@ -1,4 +1,5 @@
-import bcrypt, { hashSync } from 'bcrypt';
+//import bcrypt, { hashSync } from 'bcrypt';
+import bcrypt from 'bcrypt';
 import * as EmailValidator from 'email-validator';
 
 import User from '../models/user.js';
@@ -167,9 +168,9 @@ export const likeOrUnlike = async (req, res) => {
     }
     try {
         if(req.body.isLike) {
-            await MemAccepted.updateOne({ _id: req.params.id }, { $addToSet: { likes: req.user._id }}); // The $addToSet operator adds a value to an array unless the value is already present, in which case $addToSet does nothing to that array.
+            await MemAccepted.updateOne({ _id: req.params.id }, { $addToSet: { likes: req.user._id || req.user.sub }}); // The $addToSet operator adds a value to an array unless the value is already present, in which case $addToSet does nothing to that array.
         } else {
-            await MemAccepted.updateOne({ _id: req.params.id }, { $pull: { likes: req.user._id }}); 
+            await MemAccepted.updateOne({ _id: req.params.id }, { $pull: { likes: req.user._id || req.user.sub }}); // id custom user or id google user
         }
         const mem = await MemAccepted.findOne({ _id: req.params.id });
         return res.status(200).send({ message: mem.likes });

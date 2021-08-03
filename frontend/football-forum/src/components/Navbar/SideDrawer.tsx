@@ -6,6 +6,7 @@ import { Drawer, IconButton, List, ListItem, ListItemText } from "@material-ui/c
 import { Menu } from "@material-ui/icons";
 import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import useStyles from './styles';
+import noLikeIcon from '../../assets/nolike.png';
 
 import navLinks from './navLinks';
 import stateType from '../../@types/globaStateType';
@@ -23,8 +24,14 @@ const SideDrawer: React.FC = () => {
     setStateMobileNav(stateMobileNav);
   };
 
+  const setNoLikeAfterLogout = () => {
+    const likes = document.querySelectorAll<HTMLImageElement>(".likeIcon");
+    likes.forEach((like) => like.src = noLikeIcon)
+  };
+
   const dispatch = useDispatch();
   const signoutHandler = () => {
+    setNoLikeAfterLogout();
     dispatch(signout());
   }
 
@@ -45,11 +52,14 @@ const SideDrawer: React.FC = () => {
         ))}
         {userInfo ?
           <>
-            <Link to={'/myprofile'} className={classes.linkTextGreen}>
-              <ListItem button>
-                <ListItemText primary="Profil" />
-              </ListItem>
-            </Link>
+            {
+              !userInfo.isGoogleAuthUser &&
+              <Link to={'/myprofile'} className={classes.linkTextGreen}>
+                <ListItem button>
+                  <ListItemText primary="Profil" />
+                </ListItem>
+              </Link>
+            }
             <Link to={'/addmem'} className={classes.linkTextGreen}>
               <ListItem button>
                 <ListItemText primary="Dodaj mema" />

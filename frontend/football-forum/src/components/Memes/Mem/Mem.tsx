@@ -94,7 +94,7 @@ const Mem: React.FC<memesTypes.Mem> = (props) => {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="like" onClick={likeHandler} >
-          <img src={ like ? likeIcon : noLikeIcon } alt="<3" className={classes.like} />
+          <img src={ like ? likeIcon : noLikeIcon } alt="<3" className={`${classes.like} likeIcon`} />
         </IconButton>
         <span>{props.likes ? props.likes.length : "0"}</span>
       </CardActions>

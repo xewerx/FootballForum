@@ -6,7 +6,7 @@ export interface User {
     readonly isAdmin: boolean
     readonly isGoogleAuthUser: boolean
     readonly token: string
-    readonly livechat_credentials?: LivechatCredentials
+    livechat_credentials?: LivechatCredentials
 }
 
 export interface LivechatCredentials {
