@@ -35,7 +35,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <AppBar className={classes.bar} position="static">
+      <AppBar className={classes.bar} position="fixed">
         <Toolbar component="nav">
           <Container className={classes.navbarDisplayFlex}>
             <IconButton edge="start" aria-label="home">

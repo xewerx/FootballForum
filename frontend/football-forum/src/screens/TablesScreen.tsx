@@ -35,67 +35,70 @@ const TablesScreen: React.FC = () => {
     // EkstraklasaId = 106
 
     return (
-        <div className="table">
-            <div className="table-buttons-container">
-                <button className="block button-selected" onClick={(e) => selectLeagueTable(e, 39)}>Premier League</button>
-                <button className="block" onClick={(e) => selectLeagueTable(e, 140)}>La Liga</button>
-                <button className="block" onClick={(e) => selectLeagueTable(e, 135)}>Serie A</button>
-                <button className="block" onClick={(e) => selectLeagueTable(e, 78)}>Bundesliga</button>
-                <button className="block" onClick={(e) => selectLeagueTable(e, 61)}>Ligue 1</button>
-                <button className="block" onClick={(e) => selectLeagueTable(e, 106)}>Ekstraklasa</button>
-            </div>
-            {
-                loading ? <LoadingBox></LoadingBox>
-                    :
-                    error ? <MessageBox variant="danger">{error}</MessageBox>
+        <div className="screen-container">
+            <div className="table">
+            <h2>Dzisiejsze mecze</h2>
+                <div className="table-buttons-container">
+                    <button className="block button-selected" onClick={(e) => selectLeagueTable(e, 39)}>Premier League</button>
+                    <button className="block" onClick={(e) => selectLeagueTable(e, 140)}>La Liga</button>
+                    <button className="block" onClick={(e) => selectLeagueTable(e, 135)}>Serie A</button>
+                    <button className="block" onClick={(e) => selectLeagueTable(e, 78)}>Bundesliga</button>
+                    <button className="block" onClick={(e) => selectLeagueTable(e, 61)}>Ligue 1</button>
+                    <button className="block" onClick={(e) => selectLeagueTable(e, 106)}>Ekstraklasa</button>
+                </div>
+                {
+                    loading ? <LoadingBox></LoadingBox>
                         :
-                        <table className="content-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th></th>
-                                    <th>Druzyna</th>
-                                    <th>M</th>
-                                    <th>PKT</th>
-                                    <th>Z</th>
-                                    <th>R</th>
-                                    <th>P</th>
-                                    <th>BR</th>
-                                    <th>+/-</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {table ?
-                                    table.league.standings[0].map(team => (  //nigdy nie bedzie nullem 
-                                        <tr key={team.team.id}>
-                                            <td>{team.rank}</td>
-                                            <td className="td-logo"><img className="team-logo" src={team.team.logo} alt="logo"></img></td>
-                                            <td>{team.team.name}</td>
-                                            <td>{team.all.played}</td>
-                                            <td>{team.points}</td>
-                                            <td>{team.all.win}</td>
-                                            <td>{team.all.draw}</td>
-                                            <td>{team.all.lose}</td>
-                                            <td>{team.all.goals.for}</td>
-                                            <td>{team.all.goals.for - team.all.goals.against}</td>
-                                        </tr>
-                                    ))
-                                    :
+                        error ? <MessageBox variant="danger">{error}</MessageBox>
+                            :
+                            <table className="content-table">
+                                <thead>
                                     <tr>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
+                                        <th>#</th>
+                                        <th></th>
+                                        <th>Druzyna</th>
+                                        <th>M</th>
+                                        <th>PKT</th>
+                                        <th>Z</th>
+                                        <th>R</th>
+                                        <th>P</th>
+                                        <th>BR</th>
+                                        <th>+/-</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
-            }
+                                </thead>
+                                <tbody>
+                                    {table ?
+                                        table.league.standings[0].map(team => (  //nigdy nie bedzie nullem 
+                                            <tr key={team.team.id}>
+                                                <td>{team.rank}</td>
+                                                <td className="td-logo"><img className="team-logo" src={team.team.logo} alt="logo"></img></td>
+                                                <td>{team.team.name}</td>
+                                                <td>{team.all.played}</td>
+                                                <td>{team.points}</td>
+                                                <td>{team.all.win}</td>
+                                                <td>{team.all.draw}</td>
+                                                <td>{team.all.lose}</td>
+                                                <td>{team.all.goals.for}</td>
+                                                <td>{team.all.goals.for - team.all.goals.against}</td>
+                                            </tr>
+                                        ))
+                                        :
+                                        <tr>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                }
+            </div>
         </div>
     )
 }

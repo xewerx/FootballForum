@@ -11,12 +11,15 @@ import SigninScreen from './screens/SigninScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import MyProfileScreen from './screens/MyProfileScreen';
 import AcceptMemesScreen from './screens/AcceptMemesScreen';
+import Footer from './components/Footer/Footer';
 
 function App(): JSX.Element {
 
   return (
     <>
       <BrowserRouter>
+      <div className="overlayUnder"></div>
+      <div className="overlayAbove"></div>
         <Header />
         <main className="row">
           <Route path="/" component={HomeScreen} exact></Route>
@@ -29,6 +32,7 @@ function App(): JSX.Element {
           <Route path="/myprofile" component={MyProfileScreen}></Route>
           <Route path="/acceptmem" component={AcceptMemesScreen}></Route>
         </main>
+        <Footer />
       </BrowserRouter>
     </>
   );

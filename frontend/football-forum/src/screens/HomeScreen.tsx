@@ -5,7 +5,7 @@ const HomeScreen: React.FC = () => {
 
 
     return (
-        <div>
+        <div className="screen-container">
             <MemesContainer isAcceptationMemes={false}></MemesContainer>
         </div>
     )
