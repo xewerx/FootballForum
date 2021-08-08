@@ -13,6 +13,7 @@ export default makeStyles({
   navListDisplayFlex: {
     display: `flex`,
     justifyContent: `space-between`,
+    alignItems: `center`,
   },
   linkText: {
     textDecoration: `none`,
@@ -26,5 +27,8 @@ export default makeStyles({
     textDecoration: `none`,
     textTransform: `uppercase`,
     color: `#3CC141`
+  },
+  avatar: {
+    marginRight: "8px",
   },
 });

@@ -284,8 +284,17 @@ a {
 
 .content-table th,
 .content-table td {
-  padding: 12px 15px;
-  vertical-align:middle
+  padding: 10px 15px;
+  vertical-align: middle;
+}
+
+.matches-td {
+  display: flex;
+  align-items: center;
+}
+
+.matches-td-right {
+  justify-content: right;
 }
 
 .td-logo {

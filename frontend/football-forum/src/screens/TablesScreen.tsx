@@ -95,6 +95,7 @@ const TablesScreen: React.FC = () => {
                                             <td>-</td>
                                             <td>-</td>
                                             <td>-</td>
+                                            <td>-</td>
                                         </tr>
                                     }
                                 </tbody>

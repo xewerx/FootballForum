@@ -48,7 +48,7 @@ const LivechatScreen: React.FC<IProps> = (props) => {
                     <div className="caption">
                         <h2>Live chat</h2>
                     </div>
-                    <MessageBox variant="danger">Coś poszło nie tak :/</MessageBox>
+                    <MessageBox variant="danger">Coś poszło nie tak :/, zaloguj się ponownie</MessageBox>
                 </div>
             :
             <div className="screen-container">

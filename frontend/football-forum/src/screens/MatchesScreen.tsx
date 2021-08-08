@@ -60,13 +60,23 @@ const MatchesScreen: React.FC = () => {
                                             {
                                                 matches.map(match => (
                                                     <tr key={match.fixture.id}>
-                                                        <img className="team-logo" src={match.teams.home.logo} alt="logo"></img>
-                                                        <td>{match.teams.home.name}</td>
+
+                                                        <td>
+                                                            <div className="matches-td matches-td-right">
+                                                            <span>{match.teams.home.name}</span>
+                                                                <img className="team-logo" src={match.teams.home.logo} alt="logo"></img>
+                                                                
+                                                            </div>
+                                                        </td>
                                                         <td>{match.goals.home}</td>
                                                         <td>-</td>
                                                         <td>{match.goals.away}</td>
-                                                        <img className="team-logo" src={match.teams.away.logo} alt="logo"></img>
-                                                        <td>{match.teams.away.name}</td>
+                                                        <td>
+                                                            <div className="test">
+                                                                <img className="team-logo" src={match.teams.away.logo} alt="logo"></img>
+                                                                <span>{match.teams.away.name}</span>
+                                                            </div>
+                                                        </td>
                                                         {
                                                             match.fixture.status.short === "FT" ?
                                                                 <td>FT</td>

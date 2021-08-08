@@ -90,7 +90,7 @@ const AddMemScreen: React.FC<IProps> = (props) => {
     }, [dispatch, props.history, userInfo]);
 
     return (
-        <div>
+        <div className="screen-container">
             <form className="form" onSubmit={(e) => onFileSubmit(e)} >
             <div className="caption">
                 <h2>Dodaj mema</h2>
