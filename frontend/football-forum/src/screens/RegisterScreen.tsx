@@ -47,26 +47,24 @@ const RegisterScreen: React.FC<IProps> = (props) => {
     }, [props.history, userInfo]);
 
     return (
-        <div>
+        <div className="screen-container">
+            <div className="caption">
+                <h2>Zarejestruj się</h2>
+            </div>
             <form className="form" onSubmit={submitHandler}>
                 <div>
-                    <h1>Zarejestruj sie</h1>
+                    <input className="element-hover" type="email" id="email" placeholder="Adres e-mail" required onChange={(e) => setEmail(e.target.value)}></input>
                 </div>
                 <div>
-                    <label htmlFor="email">Email</label>
-                    <input className="element-hover" type="email" id="email" placeholder="Podaj email" required onChange={(e) => setEmail(e.target.value)}></input>
+                    <input className="element-hover" type="text" id="name" placeholder="Imię" required onChange={(e) => setName(e.target.value)}></input>
                 </div>
-                <div>
-                    <label htmlFor="name">Imie</label>
-                    <input className="element-hover" type="text" id="name" placeholder="Podaj imie" required onChange={(e) => setName(e.target.value)}></input>
+                <div className="form-group">
+                    <input className="element-hover" type="password" id="password" placeholder="Hasło" required onChange={(e) => setPassword(e.target.value)}></input>
+                    <span className="fa fa-fw field-icon fa-eye"></span>
                 </div>
-                <div>
-                    <label htmlFor="password">Haslo</label>
-                    <input className="element-hover" type="password" id="password" placeholder="Podaj haslo" required onChange={(e) => setPassword(e.target.value)}></input>
-                </div>
-                <div>
-                    <label htmlFor="confirmPassword">Potwierdz haslo</label>
-                    <input className="element-hover" type="password" id="confirmPassword" placeholder="Potwierdz haslo" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
+                <div className="form-group">
+                    <input className="element-hover" type="password" id="confirmPassword" placeholder="Potwierdz hasło" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
+                    <span className="fa fa-fw field-icon fa-eye"></span>
                 </div>
                 {validationPasswordError ? (<MessageBox variant="danger">{validationPasswordError}</MessageBox>)
                 :
@@ -74,11 +72,11 @@ const RegisterScreen: React.FC<IProps> = (props) => {
                 }
                 {loading && <LoadingBox></LoadingBox>}
                 <div>
-                    <button className="primary element-hover" type="submit">Zarejestruj sie</button>
+                    <button className="primary element-hover" type="submit">Zarejestruj się</button>
                 </div>
                 <div>
                     <label>
-                        Posiadasz juz konto? <Link to={`/signin`}>Zaloguj sie</Link>
+                        Posiadasz juz konto? <Link to={`/signin`}>Zaloguj się!</Link>
                     </label>
                 </div>
             </form>

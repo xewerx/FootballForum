@@ -80,7 +80,7 @@ const Mem: React.FC<memesTypes.Mem> = (props) => {
           </IconButton>
         }
         title={props.title}
-        subheader={`${moment(props.createdAt).format('MMMM Do YYYY, h:mm ')} by ${props.creatorName}`}
+        subheader={`Dodane przez ${props.creatorName} ${moment(props.createdAt).format('hh:mm DD.MM.YYYY')}`}
       />
       <CardMedia
         className={classes.media}

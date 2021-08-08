@@ -2,13 +2,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles({
   bar: {
-    backgroundColor: '#124413',
+    backgroundColor: '#009933;',
   },
   navbarDisplayFlex: {
     display: `flex`,
     justifyContent: `space-between`,
     alignItems: `center`,
-    maxWidth: 'auto'
+    maxWidth: 'auto',
   },
   navListDisplayFlex: {
     display: `flex`,
@@ -25,6 +25,6 @@ export default makeStyles({
   linkTextGreen: {
     textDecoration: `none`,
     textTransform: `uppercase`,
-    color: `#124413`
+    color: `#3CC141`
   },
 });

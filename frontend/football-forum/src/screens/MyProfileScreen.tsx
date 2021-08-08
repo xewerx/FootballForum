@@ -48,6 +48,7 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
     // SET AVATAR
     const [imagePreview, setImagePreview] = useState<string>();
     const [base64, setBase64] = useState<string>('');
+    const [fileName, setFileName] = useState<string>('');
     const [size, setSize] = useState<string>();
 
     const [errorAvatar, setErrorAvatar] = useState<string>('');
@@ -55,6 +56,7 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
     const onChangeInput = (e: any) => {
         let file = e.target.files[0];
         if (file) {
+            setFileName(file.name);
             const reader = new FileReader();
             reader.onload = handleReaderLoaded
             reader.readAsBinaryString(file)
@@ -99,16 +101,15 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
     }, [dispatch, props.history, userInfo]); // bez userInfo zeby mi state nie czyscilo po zmianie danych usera 
 
     return (
-        <div>
-            <div>
-                <h1>Mój profil</h1>
+        <div className="screen-container">
+            <div className="caption">
+                <h2>Mój profil</h2>
             </div>
+            <form className="form my-profile-form" onSubmit={submitChangeNameHandler}>
             {error && <MessageBox variant="danger">{error}</MessageBox>}
             {loading && <LoadingBox></LoadingBox>}
             {result && <MessageBox variant="success">{result}</MessageBox>}
-            <form className="form my-profile-form" onSubmit={submitChangeNameHandler}>
                 <div>
-                    <label htmlFor="name">Nazwa</label>
                     <input className="element-hover" type="text" id="name" required value={name} onChange={(e) => setName(e.target.value)}></input>
                 </div>
                 <div>
@@ -118,11 +119,9 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
 
             <form className="form my-profile-form" onSubmit={submitChangePasswordHandler}>
                 <div>
-                    <label htmlFor="password">Nowe hasło</label>
                     <input className="element-hover" type="password" id="password" placeholder="Podaj hasło" required onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 <div>
-                    <label htmlFor="confirmPassword">Potwierdź hasło</label>
                     <input className="element-hover" type="password" id="confirmPassword" placeholder="Potwierdz hasło" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
                 </div>
                 {validationPasswordError ? (<MessageBox variant="danger">{validationPasswordError}</MessageBox>)
@@ -135,6 +134,9 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
 
             <form className="form my-profile-form" onChange={(e) => onChangeInput(e)} onSubmit={(e) => onFileSubmit(e)}>
                 <div>
+                    <label htmlFor="file" className="custom-file-upload">
+                        <i className="fa fa-cloud-upload"></i> { fileName ? fileName : 'Wybierz plik'}
+                    </label>
                     <input type="file" name="avatar" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} required />
                 </div>
                 <div>

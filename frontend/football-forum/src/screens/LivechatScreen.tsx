@@ -19,7 +19,10 @@ const LivechatScreen: React.FC<IProps> = (props) => {
     return (
         userInfo ?
             userInfo.livechat_credentials ?
-                <div className="livechat-container">
+                <div className="livechat-container screen-container">
+                    <div className="caption">
+                        <h2>Live chat</h2>
+                    </div>
                     <ChatEngineWrapper>
                         <ChatSocket
                             projectID={userInfo.livechat_credentials!.livechat_projectID}
@@ -41,9 +44,20 @@ const LivechatScreen: React.FC<IProps> = (props) => {
                     </ChatEngineWrapper>
                 </div>
                 :
-                <MessageBox variant="danger">Coś poszło nie tak :/</MessageBox>
-                :
+                <div className="screen-container">
+                    <div className="caption">
+                        <h2>Live chat</h2>
+                    </div>
+                    <MessageBox variant="danger">Coś poszło nie tak :/</MessageBox>
+                </div>
+            :
+            <div className="screen-container">
+                <div className="caption">
+                    <h2>Live chat</h2>
+                </div>
                 <MessageBox variant="danger">Zaloguj się aby korzystać z czatu</MessageBox>
+            </div>
+
     )
 }
 

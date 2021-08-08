@@ -82,7 +82,7 @@ const SideDrawer: React.FC = () => {
           :
           <Link to={'/signin'} className={classes.linkTextGreen}>
             <ListItem button>
-              <ListItemText primary={'Zaloguj sie'} />
+              <ListItemText primary={'Zaloguj się'} />
             </ListItem>
           </Link>
         }

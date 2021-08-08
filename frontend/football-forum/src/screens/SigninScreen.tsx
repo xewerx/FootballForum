@@ -8,6 +8,7 @@ import MessageBox from '../components/MessageBox/MessageBox';
 import { getLiveChatCredentials, signin } from '../actions/userActions';
 import stateType from '../@types/globaStateType';
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import GoogleButton from 'react-google-button'
 import { USER_SIGNIN_FAIL, USER_SIGNIN_SUCCESS } from '../constants/userConstants';
 import * as userTypes from '../@types/userTypes'
 interface IProps {
@@ -68,40 +69,40 @@ const SigninScreen: React.FC<IProps> = (props) => {
     }, [props.history, userInfo]);
 
     return (
-        <div>
+        <div className="screen-container">
+            <div className="caption">
+                <h2>Zaloguj się</h2>
+            </div>
             <form className="form" onSubmit={submitHandler}>
                 <div>
-                    <h1>Zaloguj sie</h1>
+                    <input className="element-hover" type="email" id="email" placeholder="Adres e-mail" required onChange={(e) => setEmail(e.target.value)}></input>
                 </div>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input className="element-hover" type="email" id="email" placeholder="Podaj email" required onChange={(e) => setEmail(e.target.value)}></input>
-                </div>
-                <div>
-                    <label htmlFor="password">Haslo</label>
-                    <input className="element-hover" type="password" id="password" placeholder="Podaj haslo" required onChange={(e) => setPassword(e.target.value)}></input>
+                <div className="form-group">
+                    <input className="element-hover" type="password" id="password" placeholder="Hasło" required onChange={(e) => setPassword(e.target.value)}></input>
+                    <span className="fa fa-fw field-icon fa-eye"></span>
                 </div>
                 {error && <MessageBox variant="danger">{error}</MessageBox>}
                 {loading && <LoadingBox></LoadingBox>}
                 <div>
-                    <button className="primary element-hover" type="submit">Zaloguj sie</button>
+                    <button className="primary element-hover" type="submit">Zaloguj się</button>
                 </div>
-                <div>
-                    <GoogleLogin
-                        clientId="5765202109-h2g1avs9eppdl39fr7iancatig2dvp65.apps.googleusercontent.com"
-                        render={(renderProps) => (
-                            <button className="primary element-hover" onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                                Google Sign In
-                            </button>
-                        )}
-                        onSuccess={googleSuccess}
-                        onFailure={googleError}
-                        cookiePolicy="single_host_origin"
-                    />
-                    <label>
-                        Nie posiadasz konta? <Link to={`/register`}>Zarejestruj sie</Link>
-                    </label>
+                <div className="google-signin-container">
+                    <p>— Lub —</p>
+                    <div>
+                        <GoogleLogin
+                            clientId="5765202109-h2g1avs9eppdl39fr7iancatig2dvp65.apps.googleusercontent.com"
+                            render={(renderProps) => (
+                                <GoogleButton label='Zaloguj się z Google' onClick={renderProps.onClick} disabled={renderProps.disabled} />
+                            )}
+                            onSuccess={googleSuccess}
+                            onFailure={googleError}
+                            cookiePolicy="single_host_origin"
+                        />
+                    </div>
                 </div>
+                <label>
+                            Nie posiadasz konta? <Link to={`/register`}>Zarejestruj się!</Link>
+                        </label>
             </form>
         </div>
     )

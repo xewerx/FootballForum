@@ -62,7 +62,7 @@ select,
 textarea,
 button {
   padding: 1rem;
-  border-radius: 0.2rem;
+  border-radius: 2rem;
   border: 0.1rem #a4a4a4 solid;
   font-size: 1rem;
   font-family: Helvetica, Arial, sans-serif;
@@ -70,8 +70,29 @@ button {
   -moz-osx-font-smoothing: grayscale;
 }
 
+input {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+input::placeholder {
+  color: #fff;
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+textarea:focus, input:focus, textarea:hover, input:hover{
+  outline: none;
+}
+
 .element-hover:hover {
-  border: 0.1rem #404040 solid;
   cursor: pointer;
 }
 
@@ -81,6 +102,7 @@ button.primary {
 
 button.block {
   width: 100%;
+  margin-bottom: 0.3rem;
 }
 
 ul {
@@ -95,6 +117,7 @@ li {
 
 a {
   text-decoration: none;
+  color: #009933;
 }
 
 .center {
@@ -103,15 +126,28 @@ a {
   justify-content: center;
 }
 
+.caption {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+}
 .screen-container {
   margin-top: 13vh;
   margin-bottom: 8vh;
   color: #d8d8d8;
 }
 
+.loader {
+  color: #ffe0e0e0;
+}
+
+.logo-container {
+  fill: #413CC1;
+}
+
 /* Form */
 .form {
-  max-width: 60rem;
+  max-width: 40rem;
   margin: 0 auto;
 }
 
@@ -129,6 +165,41 @@ a {
   margin-bottom: 4rem;
 }
 
+.form-group {
+  position: relative;
+}
+
+.field-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: internal-light-dark(black, white);
+  z-index: 100;
+  cursor: pointer;
+}
+
+.fa-fw {
+  width: 1.28571429em;
+  text-align: center;
+}
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.google-signin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* Alert */
 .success {
   color: #20a020;
@@ -155,16 +226,8 @@ a {
 }
 
 .alert-success {
-  color: #20a020;
+  color: #009933;
   background-color: #ffe0e0e0;
-}
-
-.loader {
-  color: #ffe0e0e0;
-}
-
-.logo-container {
-  fill: #d8d8d8;
 }
 
 /* Dropdown */
@@ -175,12 +238,12 @@ a {
   z-index: 1;
   margin-top: 1rem;
   background-color: #d8d8d8;
-  color: #124413;
+  color: #413CC1;
   font-size: 1rem;
 }
 
 .dropdown-content a {
-  color: #124413;
+  color: #413CC1;
   display: block;
   padding: 0.8rem 1rem 0.8rem 1rem;
 }
@@ -196,13 +259,13 @@ a {
 
 .dropdown-content li:hover {
   background-color: #ffffff;
-  border: 0.1rem#124413 solid;
+  border: 0.1rem#413CC1 solid;
 }
 
 /* Table */
 .content-table {
   border-collapse: collapse;
-  margin: 25px 0;
+  margin-bottom: 25px;
   color: #000000;
   font-size: 1rem;
   min-width: 400px;
@@ -254,6 +317,7 @@ a {
 .table-buttons-container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 3rem;
 }
 
 .table-buttons-container button {
@@ -275,15 +339,13 @@ a {
 
 .team-logo {
   max-width: 25px;
+  padding: 12px 15px;
 }
 
 /* Livechat */
 .livechat-container {
   width: 80vw;
   max-height: 80vh;
-  margin-top: 4rem;
-  border: 0.15rem #009933 solid;
-  padding: 1rem;
 }
 
 .ce-chat-title {
@@ -302,7 +364,7 @@ a {
 .ce-chat-feed,
 .ce-chat-feed-container {
   height: 60vh !important;
-  max-height: 60vh !important;
+  max-height: 55vh !important;
 }
 
 .ce-feed-container-bottom {
@@ -335,7 +397,7 @@ a {
   border-radius: 0.2rem;
   border: 0.1rem #a02020 solid;
   font-size: 1rem;
-  color: #124413;
+  color: #413CC1;
   background-color: #f3f3f3;
 }
 
@@ -371,10 +433,10 @@ a {
   width: 100%;
   position: fixed;
   bottom: 0;
-  background-color: #124413;
+  background-color: #000;
   font-size: 1rem;
   display: flex;
-  color: #f3f3f3;
+  color: #fff;
   flex-direction: row;
   justify-content:space-evenly
 }
@@ -387,6 +449,12 @@ a {
 .footer-links p, .footer-links img {
   display: inline-block;
   margin: 0.3rem;
+  width: 24px;
+  height: 24px;
+}
+
+.footer-links p {
+  width: auto;
 }
 
 .footer-links a:last-child img {

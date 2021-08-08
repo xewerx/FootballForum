@@ -37,7 +37,9 @@ const TablesScreen: React.FC = () => {
     return (
         <div className="screen-container">
             <div className="table">
-            <h2>Dzisiejsze mecze</h2>
+            <div className="caption">
+                    <h2>Tabele ligowe</h2>
+                </div>
                 <div className="table-buttons-container">
                     <button className="block button-selected" onClick={(e) => selectLeagueTable(e, 39)}>Premier League</button>
                     <button className="block" onClick={(e) => selectLeagueTable(e, 140)}>La Liga</button>

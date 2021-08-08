@@ -34,7 +34,6 @@ const Header: React.FC = () => {
   }
 
   return (
-    <>
       <AppBar className={classes.bar} position="fixed">
         <Toolbar component="nav">
           <Container className={classes.navbarDisplayFlex}>
@@ -97,7 +96,7 @@ const Header: React.FC = () => {
                   :
                   <Link to={'/signin'} className={classes.linkText}>
                     <ListItem button>
-                      <ListItemText primary={'Zaloguj sie'} />
+                      <ListItemText primary={'Zaloguj się'} />
                     </ListItem>
                   </Link>
                 }
@@ -109,7 +108,6 @@ const Header: React.FC = () => {
           </Container>
         </Toolbar>
       </AppBar>
-    </>
   );
 };
 

@@ -36,7 +36,9 @@ const MatchesScreen: React.FC = () => {
     return (
         <div className="screen-container">
             <div className='table'>
-                <h2>Dzisiejsze mecze</h2>
+                <div className="caption">
+                    <h2>Dzisiejsze mecze</h2>
+                </div>
                 <div className="table-buttons-container">
                     <button className="block button-selected" onClick={(e) => selectLeagueTable(e, 39)}>Premier League</button>
                     <button className="block" onClick={(e) => selectLeagueTable(e, 140)}>La Liga</button>
@@ -80,7 +82,7 @@ const MatchesScreen: React.FC = () => {
                                         </tbody>
                                     </table>
                                     :
-                                    <p>W tej lidze dzisiaj nie ma meczy</p>
+                                    <MessageBox variant="danger">W tej lidze dzisiaj nie ma meczy</MessageBox>
                                 }
 
 

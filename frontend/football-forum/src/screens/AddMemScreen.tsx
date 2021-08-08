@@ -18,7 +18,7 @@ const AddMemScreen: React.FC<IProps> = (props) => {
     const [imagePreview, setImagePreview] = useState<string>();
     const [base64, setBase64] = useState<string>('');
     const [size, setSize] = useState<string>();
-
+    const [fileName, setFileName] = useState<string>('');
     const [error, setError] = useState<string>('');
 
     const [title, setTitle] = useState<string>('');
@@ -38,6 +38,7 @@ const AddMemScreen: React.FC<IProps> = (props) => {
     const onChangeInput = (e: any) => {
         let file = e.target.files[0];
         if (file) {
+            setFileName(file.name)
             const reader = new FileReader();
             reader.onload = _handleReaderLoaded
             reader.readAsBinaryString(file)
@@ -91,20 +92,20 @@ const AddMemScreen: React.FC<IProps> = (props) => {
     return (
         <div>
             <form className="form" onSubmit={(e) => onFileSubmit(e)} >
+            <div className="caption">
+                <h2>Dodaj mema</h2>
+            </div>
                 <div>
-                    <h1>Dodaj mema</h1>
-                </div>
-                <div>
-                    <label htmlFor="title">Tytuł</label>
                     <input type="text" id="title" placeholder="Podaj tytul" required onChange={(e) => setTitle(e.target.value)}></input>
                 </div>
                 <div>
-                    <label htmlFor="description">Opis</label>
                     <input type="text" id="description" placeholder="Podaj opis" required onChange={(e) => setDescription(e.target.value)}></input>
                 </div>
                 <div onChange={(e) => onChangeInput(e)}>
-                    <label htmlFor="file">Plik</label>
-                    <input type="file" name="mem" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} />
+                <label htmlFor="file" className="custom-file-upload">
+                        <i className="fa fa-cloud-upload"></i> { fileName ? fileName : 'Wybierz plik'}
+                    </label>
+                    <input type="file" name="avatar" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} required />
                 </div>
                 {error && <MessageBox variant="danger">{error}</MessageBox>}
                 {response && <MessageBox variant="success">{response}</MessageBox>}
@@ -115,10 +116,12 @@ const AddMemScreen: React.FC<IProps> = (props) => {
 
             </form>
 
+            {/* 
             <div>
-                {/*eslint-disable-next-line jsx-a11y/alt-text*/}
+                
                 <img className="viewMem" src={`data:image/png;base64,${base64}`}></img>
             </div>
+            */}
 
         </div>
     )
