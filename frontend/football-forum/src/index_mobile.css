@@ -1,0 +1,31 @@
+@media (max-width: 880px) {
+    /* Layout */
+    .row > div {
+        width: 75%;
+    }
+}
+
+@media (max-width: 570px) {
+    /* Layout */
+    .row > div {
+        width: 90%;
+    }
+
+    /* Footer */
+    .footer {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    }
+    .footer p {
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+}
+
+@media (max-width: 450px) {
+    /* Layout */
+    .row > div {
+        width: 95%;
+    }
+}

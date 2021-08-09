@@ -23,9 +23,12 @@ const AcceptMemesScreen: React.FC<IProps> = (props) => {
     // conditional rendering in order to not render(api call) if user is not admin
     return (
         userInfo?.isAdmin ?
-        <div>
-            <h1>Akceptuj memy</h1>
-            <p>Tutaj jako admin akceptujesz memy dodane przez innych użytkowników forum. Przed akceptacją nie pojawią się one na głównej stronie.</p>
+        <div className="screen-container">
+            <div className="caption">
+                <h2>Akceptuj memy</h2>
+            </div>
+            <p>Tutaj jako admin akceptujesz memy dodane przez innych użytkowników forum.</p>
+            <p>Przed akceptacją nie pojawią się one na głównej stronie.</p>
             
             <MemesContainer isAcceptationMemes={true} ></MemesContainer>
         </div>

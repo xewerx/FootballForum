@@ -19,7 +19,7 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import stateType from '../../../@types/globaStateType';
 import { deleteMem, likeOrUnlike } from '../../../actions/memesActions';
-import ConfirmBox from '../../ConfirmBox.ts/ConfirmBox';
+import ConfirmBox from '../../ConfirmBox/ConfirmBox';
 
 const Mem: React.FC<memesTypes.Mem> = (props) => {
 
