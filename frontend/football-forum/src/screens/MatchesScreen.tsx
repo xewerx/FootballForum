@@ -55,42 +55,44 @@ const MatchesScreen: React.FC = () => {
                             <div>
 
                                 {matches?.length ?
-                                    <table className="content-table">
-                                        <tbody>
-                                            {
-                                                matches.map(match => (
-                                                    <tr key={match.fixture.id}>
+                                    <div className="scroll-x">
+                                        <table className="content-table">
+                                            <tbody>
+                                                {
+                                                    matches.map(match => (
+                                                        <tr key={match.fixture.id}>
 
-                                                        <td>
-                                                            <div className="matches-td matches-td-right">
-                                                                <span>{match.teams.home.name}</span>
-                                                                <img className="team-logo" src={match.teams.home.logo} alt="logo"></img>
-                                                                
-                                                            </div>
-                                                        </td>
-                                                        <td>{match.goals.home}</td>
-                                                        <td>-</td>
-                                                        <td>{match.goals.away}</td>
-                                                        <td>
-                                                            <div className="matches-td">
-                                                                <img className="team-logo" src={match.teams.away.logo} alt="logo"></img>
-                                                                <span>{match.teams.away.name}</span>
-                                                            </div>
-                                                        </td>
-                                                        {
-                                                            match.fixture.status.short === "FT" ?
-                                                                <td>FT</td>
-                                                                :
-                                                                match.fixture.status.short === "TBD" || match.fixture.status.short === "NS" ?
-                                                                    <td>{match.fixture.date.slice(11, 16)}</td>
+                                                            <td>
+                                                                <div className="matches-td matches-td-right">
+                                                                    <span>{match.teams.home.name}</span>
+                                                                    <img className="team-logo" src={match.teams.home.logo} alt="logo"></img>
+
+                                                                </div>
+                                                            </td>
+                                                            <td>{match.goals.home}</td>
+                                                            <td>-</td>
+                                                            <td>{match.goals.away}</td>
+                                                            <td>
+                                                                <div className="matches-td">
+                                                                    <img className="team-logo" src={match.teams.away.logo} alt="logo"></img>
+                                                                    <span>{match.teams.away.name}</span>
+                                                                </div>
+                                                            </td>
+                                                            {
+                                                                match.fixture.status.short === "FT" ?
+                                                                    <td>FT</td>
                                                                     :
-                                                                    <td>{match.fixture.status.elapsed}'</td>
-                                                        }
-                                                    </tr>
-                                                ))
-                                            }
-                                        </tbody>
-                                    </table>
+                                                                    match.fixture.status.short === "TBD" || match.fixture.status.short === "NS" ?
+                                                                        <td>{match.fixture.date.slice(11, 16)}</td>
+                                                                        :
+                                                                        <td>{match.fixture.status.elapsed}'</td>
+                                                            }
+                                                        </tr>
+                                                    ))
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     :
                                     <MessageBox variant="danger">W tej lidze dzisiaj nie ma meczy</MessageBox>
                                 }

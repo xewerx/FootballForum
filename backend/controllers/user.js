@@ -50,7 +50,7 @@ export const signin = async (req, res) => {
         }
         return res.status(401).send({ message: 'Niepoprawny email lub hasło' });
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };
 
@@ -88,7 +88,7 @@ export const register = async (req, res) => {
             }
         });
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };
 
@@ -101,7 +101,7 @@ export const editProfile = async (req, res) => {
     try {
         user = await User.findOne({ email: req.body.email });
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 
     if(!user) {
@@ -124,7 +124,7 @@ export const editProfile = async (req, res) => {
         await user.save();
         return res.status(200).send({ message: "Dane zapisane pomyślnie"})
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };
 
@@ -145,7 +145,7 @@ export const uploadAvatar = async (req, res) => {
         }
         return res.status(200).send({ message: "Awatar ustawiony pomyślnie"});
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };
 
@@ -158,7 +158,7 @@ export const getAvatar = async (req, res) => {
         avatar = await Avatar.findOne({ ownerId: req.params.id });
         return res.status(200).send({ avatar: avatar })
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };
 
@@ -175,7 +175,7 @@ export const likeOrUnlike = async (req, res) => {
         const mem = await MemAccepted.findOne({ _id: req.params.id });
         return res.status(200).send({ message: mem.likes });
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };
 

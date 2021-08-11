@@ -17,7 +17,7 @@ export const getMemes = async (req, res) => {
         }
         return res.status(200).json(memes);
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };
 
@@ -36,7 +36,7 @@ export const getMemesToAcceptation = async (req, res) => {
 
         return res.status(200).json(memes);
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };
 
@@ -51,7 +51,7 @@ export const uploadMem = async (req, res) => {
         await newMem.save();
         return res.status(200).send({ message: "Mem dodany pomyslnie!"});
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };
 
@@ -65,7 +65,7 @@ export const acceptMem = async (req, res) => {
             await MemNoAccepted.deleteOne({_id: req.body._id});
             return res.status(200).send({ message: "Mem zaakceptowany pomyślnie!"});
         } catch (error) {
-            return res.status(500).send({ message: error.message });
+            return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
         }
     } 
 };
@@ -78,7 +78,7 @@ export const discardMem = async (req, res) => {
             await MemNoAccepted.deleteOne({_id: req.body._id});
             return res.status(200).send({ message: "Mem skasowany pomyślnie!"});
         } catch (error) {
-            return res.status(500).send({ message: error.message });
+            return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
         }
     } 
 };
@@ -92,6 +92,6 @@ export const deleteMem = async (req, res) => {
         await MemAccepted.deleteOne({_id: req.params.id});
         return res.status(200).send({ message: "Mem usunięty pomyślnie!"});
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: "Błąd serwera. Przepraszamy." });
     }
 };

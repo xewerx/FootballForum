@@ -16,9 +16,10 @@ const RegisterScreen: React.FC<IProps> = (props) => {
 
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('')
-    const [confirmPassword, setConfirmPassword] = useState<string>('')
-    const [validationPasswordError, setValidationPasswordError] = useState<string>('')
+    const [password, setPassword] = useState<string>('');
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [validationPasswordError, setValidationPasswordError] = useState<string>('');
+    const [isText, setIsText] = useState<boolean>(false);
 
     const userRegister = useSelector((state: stateType) => state.userRegister);
     const userSignin = useSelector((state: stateType) => state.userSignin);
@@ -26,6 +27,19 @@ const RegisterScreen: React.FC<IProps> = (props) => {
     const { userInfo } = userSignin;
     
     const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
+
+    const showPassword = () => {
+        let password = document.getElementById("password") as HTMLInputElement;
+        let confirmPassword = document.getElementById("confirmPassword") as HTMLInputElement;
+        if(isText) {
+            password!.type = "text";
+            confirmPassword!.type = "text";
+        } else {
+            password!.type = "password";
+            confirmPassword!.type = "password"; 
+        }
+        setIsText(!isText);
+    };
 
     const dispatch = useDispatch();
     const submitHandler = (e: React.SyntheticEvent) => {
@@ -60,11 +74,10 @@ const RegisterScreen: React.FC<IProps> = (props) => {
                 </div>
                 <div className="form-group">
                     <input className="element-hover" type="password" id="password" placeholder="Hasło" required onChange={(e) => setPassword(e.target.value)}></input>
-                    <span className="fa fa-fw field-icon fa-eye"></span>
+                    <span className="fa fa-fw field-icon fa-eye" onClick={showPassword} ></span>
                 </div>
                 <div className="form-group">
                     <input className="element-hover" type="password" id="confirmPassword" placeholder="Potwierdz hasło" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
-                    <span className="fa fa-fw field-icon fa-eye"></span>
                 </div>
                 {validationPasswordError ? (<MessageBox variant="danger">{validationPasswordError}</MessageBox>)
                 :

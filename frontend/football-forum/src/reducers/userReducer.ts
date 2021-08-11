@@ -19,8 +19,9 @@ export const signinReducer = (state: types.UserState = IStateUser, action: types
         case LIVECHAT_CREDENTIALS_SUCCESS:
             state.userInfo!.livechat_credentials = action.payload as types.LivechatCredentials;
             return { ...state }
-        case USER_SIGNIN_FAIL || LIVECHAT_CREDENTIALS_FAIL:
-                return { ...state, loading: false, error: action.error };
+        case LIVECHAT_CREDENTIALS_FAIL:
+        case USER_SIGNIN_FAIL:
+            return { ...state, loading: false, error: action.error };
         default:
             return state;
     }

@@ -139,10 +139,17 @@ a {
   text-align: center;
   text-transform: uppercase;
 }
+
 .screen-container {
   margin-top: 13vh;
   margin-bottom: 8vh;
   color: #d8d8d8;
+}
+
+.scroll-x {
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
 }
 
 .loader {
@@ -540,4 +547,6 @@ a {
   width: 31px;
   height: 31px;
 }
+
+
 
