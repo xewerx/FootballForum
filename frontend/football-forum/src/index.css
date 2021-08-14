@@ -89,6 +89,7 @@ input[type="file"] {
 .custom-file-upload {
   display: inline-block;
   padding: 6px 12px;
+  margin: 1rem !important;
   cursor: pointer;
 }
 
@@ -173,7 +174,8 @@ a {
 }
 
 .form label {
-  margin: 1rem 0 0 0.5rem;
+  display: block;
+  margin: 2rem 1rem;
 }
 
 .my-profile-form {
@@ -469,6 +471,10 @@ a {
 
 #ce-send-message-button {
   padding: 2px 6px !important;
+}
+
+.ql-editor p {
+  color: #000 !important;
 }
 
 /* ConfirmBox */

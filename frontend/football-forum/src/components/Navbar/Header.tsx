@@ -47,7 +47,6 @@ const Header: React.FC = () => {
 
   function handleResize() {
     setWindowDimensions(getWindowDimensions());
-    console.log("d")
   }
   document.addEventListener('resize', handleResize);
 

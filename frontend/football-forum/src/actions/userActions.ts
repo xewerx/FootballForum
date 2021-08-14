@@ -36,14 +36,16 @@ export const editProfile = (editProfileData: types.NewUserData) => async (dispat
                 Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
             }
         });
+        
         if(status === 200) {
-            dispatch({ type: USER_SIGNIN_SUCCESS, payload: {...userInfo, name: editProfileData.name} as types.User }); // zmiana danych w stacie Usera - tylko name w sumie
-            localStorage.setItem('userInfo', JSON.stringify({...userInfo, name: editProfileData.name}));
+            dispatch({ type: USER_SIGNIN_SUCCESS, payload: {...userInfo, name: editProfileData.name || userInfo!.name} as types.User }); // if editProfileData.name doesn't exist it's password change
+            localStorage.setItem('userInfo', JSON.stringify({...userInfo, name: editProfileData.name || userInfo!.name}));
             dispatch({ type: USER_EDIT_SUCCESS, payload: data.message });
         } else {
             dispatch({ type: USER_EDIT_FAIL, error: "Niepoprawne dane" });
         }
     } catch(error) {
+        console.log(error)
         dispatch({ type: USER_EDIT_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
     }
 };

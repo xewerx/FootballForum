@@ -6,13 +6,14 @@ import LoadingBox from '../components/LoadingBox/LoadingBox';
 import MessageBox from '../components/MessageBox/MessageBox';
 import { editProfile, uploadAvatar } from '../actions/userActions';
 import { History } from 'history';
+import { SET_INIT_STATE } from '../constants/userConstants';
 
 interface IProps {
     history: History
 }
 
 const MyProfileScreen: React.FC<IProps> = (props) => {
-
+    
     // NAME AND PASSWORD CHANGE
     const user = useSelector((state: stateType) => state.userSignin);
     const { userInfo } = user;
@@ -85,7 +86,7 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
     const onFileSubmit = (e: any) => {
         e.preventDefault()
 
-        if (Number(size) > 5242880) { // wieksze niz 5MB
+        if (Number(size) > 5242880) { // bigger than 5MB
             setErrorAvatar("Zbyt duzy plik");
         }
 
@@ -95,10 +96,11 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
     useEffect(() => {
         if (!userInfo) {
             props.history.push('/');
-        } else {
-            setName(userInfo!.name);  // screen tylko dla zalogowanych wiec te dane zawsze sa dostepne 
         }
-    }, [dispatch, props.history, userInfo]); // bez userInfo zeby mi state nie czyscilo po zmianie danych usera 
+        dispatch({ type: SET_INIT_STATE });
+        setName(userInfo!.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch, props.history, userInfo?._id]); // id because do not execute when I change password/name/avatar 
 
     return (
         <div className="screen-container">

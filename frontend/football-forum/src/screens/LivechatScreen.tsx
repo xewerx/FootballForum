@@ -29,7 +29,7 @@ const LivechatScreen: React.FC<IProps> = (props) => {
                             chatID={userInfo.livechat_credentials!.livechat_chatID}
                             chatAccessKey={userInfo.livechat_credentials!.livechat_chatAccessKey}
                             userName={userInfo.name}
-
+                            
                             onConnect={() => console.log("CONNECT")}
 
                             onNewMessage={(chatId: string, message: types.messageType) => {

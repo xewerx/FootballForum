@@ -87,11 +87,9 @@ const RegisterScreen: React.FC<IProps> = (props) => {
                 <div>
                     <button className="primary element-hover" type="submit">Zarejestruj się</button>
                 </div>
-                <div>
                     <label>
                         Posiadasz juz konto? <Link to={`/signin`}>Zaloguj się!</Link>
                     </label>
-                </div>
             </form>
         </div>
     )
