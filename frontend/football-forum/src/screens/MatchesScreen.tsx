@@ -86,7 +86,7 @@ const MatchesScreen: React.FC = () => {
                                                                         <td>FT</td>
                                                                         :
                                                                         match.fixture.status.short === "TBD" || match.fixture.status.short === "NS" ?
-                                                                            <td>{match.fixture.date.slice(11, 16)}</td>
+                                                                            <td>{`${Number(match.fixture.date.slice(11, 13)) + 2}${match.fixture.date.slice(13, 16)}`}</td> // time zone +2
                                                                             :
                                                                             <td>{match.fixture.status.elapsed}'</td>
                                                             }

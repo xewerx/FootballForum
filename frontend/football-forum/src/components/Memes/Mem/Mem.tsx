@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
@@ -82,11 +81,7 @@ const Mem: React.FC<memesTypes.Mem> = (props) => {
         title={props.title}
         subheader={`Dodane przez ${props.creatorName} ${moment(props.createdAt).format('hh:mm DD.MM.YYYY')}`}
       />
-      <CardMedia
-        className={classes.media}
-        image={`data:image/png;base64,${props.file}` || image}
-        title={props.title}
-      />
+      <img className={classes.img} src={`data:image/png;base64,${props.file}` || image} alt=""></img>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {props.description ? props.description : "Brak opisu"}

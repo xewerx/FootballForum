@@ -5,8 +5,8 @@ export default makeStyles((theme) => ({
       marginBottom: 140,
       color: "#000"
     },
-    media: {
-      paddingTop: '56.25%', // 16:9
+    img: {
+      height: "auto",
       width: "100%",
     },
     avatar: {
