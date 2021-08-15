@@ -79,13 +79,16 @@ const MatchesScreen: React.FC = () => {
                                                                 </div>
                                                             </td>
                                                             {
-                                                                match.fixture.status.short === "FT" ?
-                                                                    <td>FT</td>
+                                                                match.fixture.status.short === "PST" ?
+                                                                    <td>Przeł.</td>
                                                                     :
-                                                                    match.fixture.status.short === "TBD" || match.fixture.status.short === "NS" ?
-                                                                        <td>{match.fixture.date.slice(11, 16)}</td>
+                                                                    match.fixture.status.short === "FT" ?
+                                                                        <td>FT</td>
                                                                         :
-                                                                        <td>{match.fixture.status.elapsed}'</td>
+                                                                        match.fixture.status.short === "TBD" || match.fixture.status.short === "NS" ?
+                                                                            <td>{match.fixture.date.slice(11, 16)}</td>
+                                                                            :
+                                                                            <td>{match.fixture.status.elapsed}'</td>
                                                             }
                                                         </tr>
                                                     ))

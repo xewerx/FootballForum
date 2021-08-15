@@ -17,7 +17,7 @@ function App(): JSX.Element {
 
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter >
       <div className="overlayUnder"></div>
       <div className="overlayAbove"></div>
         <Header />

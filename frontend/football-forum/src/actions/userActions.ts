@@ -6,8 +6,7 @@ import stateType from "../@types/globaStateType";
 export const signin = (credentials: types.LoginCredentials) => async (dispatch: types.DispatchType) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: credentials });
     try {
-        const { data }: {data: types.User} = await axios.post('/api/user/signin', credentials);
-        console.log(data)
+        const { data }: {data: types.User} = await axios.post('https://fotball-forum-api.herokuapp.com/api/user/signin', credentials);
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
     } catch(error) {
@@ -18,7 +17,7 @@ export const signin = (credentials: types.LoginCredentials) => async (dispatch: 
 export const register = (newUserData: types.NewUserData) => async (dispatch: types.DispatchType) => {
     dispatch({ type: USER_REGISTER_REQUEST, payload: newUserData});
     try {
-        const { data }: {data: types.User} = await axios.post('/api/user/register', newUserData);
+        const { data }: {data: types.User} = await axios.post('https://fotball-forum-api.herokuapp.com/api/user/register', newUserData);
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data});
         dispatch({ type: USER_SIGNIN_SUCCESS, payload:data }); // after registration user is signin
         localStorage.setItem('userInfo', JSON.stringify(data));
@@ -31,7 +30,7 @@ export const editProfile = (editProfileData: types.NewUserData) => async (dispat
     dispatch({ type: USER_EDIT_REQUEST, payload: editProfileData });
     try {
         const { userSignin: { userInfo } } = getState();
-        const { data, status }: {data: {message: string}, status: number} = await axios.put('/api/user/edit', editProfileData, {
+        const { data, status }: {data: {message: string}, status: number} = await axios.put('https://fotball-forum-api.herokuapp.com/api/user/edit', editProfileData, {
             headers: {
                 Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
             }
@@ -45,7 +44,6 @@ export const editProfile = (editProfileData: types.NewUserData) => async (dispat
             dispatch({ type: USER_EDIT_FAIL, error: "Niepoprawne dane" });
         }
     } catch(error) {
-        console.log(error)
         dispatch({ type: USER_EDIT_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
     }
 };
@@ -54,7 +52,7 @@ export const uploadAvatar = (avatar: string) => async (dispatch: types.DispatchT
     dispatch({ type: USER_EDIT_REQUEST });
     try {
         const { userSignin: { userInfo } } = getState();
-        const { data, status }: {data: {message: string}, status: number} = await axios.post('/api/user/avatar', {image: avatar}, {
+        const { data, status }: {data: {message: string}, status: number} = await axios.post('https://fotball-forum-api.herokuapp.com/api/user/avatar', {image: avatar}, {
             headers: {
                 Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
             }
@@ -79,7 +77,7 @@ export const signout = () => (dispatch: types.DispatchType) => {
 export const getLiveChatCredentials = () => async (dispatch: types.DispatchType, getState: () => stateType) => {
     try {
         const { userSignin: { userInfo } } = getState();
-        const { data }: {data: types.LivechatCredentials} = await axios.get('/api/user/livechat-credentials',  {
+        const { data }: {data: types.LivechatCredentials} = await axios.get('https://fotball-forum-api.herokuapp.com/api/user/livechat-credentials',  {
             headers: {
                 Authorization: userInfo!.token // tylko dla zalogowanych googlem
             }

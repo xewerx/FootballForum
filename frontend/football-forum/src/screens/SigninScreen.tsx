@@ -36,6 +36,10 @@ const SigninScreen: React.FC<IProps> = (props) => {
         setIsText(!isText);
     };
 
+    const googleError = () => dispatch<userTypes.UserAction>({
+        type: USER_SIGNIN_FAIL, error: "Google Auth doesn't work"
+    });
+
     const googleSuccess = async (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
 
         let result, token;
@@ -61,13 +65,11 @@ const SigninScreen: React.FC<IProps> = (props) => {
             localStorage.setItem('userInfo', JSON.stringify(userData));
             dispatch(getLiveChatCredentials());
         } catch (error) {
-            console.log(error);
+            googleError();
         }
     };
 
-    const googleError = () => dispatch<userTypes.UserAction>({
-        type: USER_SIGNIN_FAIL, error: "Google Auth doesn't work"
-    });
+
 
     useEffect(() => {
         if (userInfo) {

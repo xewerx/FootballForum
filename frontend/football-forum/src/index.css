@@ -153,6 +153,17 @@ a {
   white-space: nowrap;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scroll-x {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .loader {
   color: #ffe0e0e0;
 }

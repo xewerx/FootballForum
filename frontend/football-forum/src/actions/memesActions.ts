@@ -6,11 +6,9 @@ import stateType from "../@types/globaStateType"
 export const getMemes = () => async (dispatch: types.DispatchType) => {
     dispatch({ type: MEMES_LIST_REQUEST });
     try {
-        const { data }: {data: types.Mem[]} = await axios.get('/api/memes');
-        console.log("dd")
+        const { data }: {data: types.Mem[]} = await axios.get('https://fotball-forum-api.herokuapp.com/api/memes');
         dispatch({ type: MEMES_LIST_SUCCESS, payload: data });
     } catch (error) {
-        console.log(error)
         dispatch({ type: MEMES_LIST_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
     }
 };
@@ -22,7 +20,7 @@ export const getMemesToAcceptation = () => async (dispatch: types.DispatchType, 
         if(!userInfo) {
             return;
         }
-        const { data }: {data: types.Mem[]} = await axios.get('/api/memes/toaccept', {
+        const { data }: {data: types.Mem[]} = await axios.get('https://fotball-forum-api.herokuapp.com/api/memes/toaccept', {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`
             }
@@ -40,7 +38,7 @@ export const uploadMem = (mem: types.NewMem) => async (dispatch: types.DispatchT
         if(!userInfo) {
             return;
         }
-        const { data }: {data: {message: string}} = await axios.post('/api/memes/upload', mem, {
+        const { data }: {data: {message: string}} = await axios.post('https://fotball-forum-api.herokuapp.com/api/memes/upload', mem, {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`
             }
@@ -58,7 +56,7 @@ export const acceptOrDeleteMem = (_id: string, action: "acceptmem" | "discardmem
             if(!userInfo) {
                 return;
             }
-            const { data }: {data: {message: string}} = await axios.put(`/api/memes/${action}`, {_id}, {
+            const { data }: {data: {message: string}} = await axios.put(`https://fotball-forum-api.herokuapp.com/api/memes/${action}`, {_id}, {
                 headers: {
                     Authorization: `Bearer ${userInfo.token}`
                 }
@@ -76,7 +74,7 @@ export const deleteMem = (_id: string) => async (dispatch: types.DispatchType, g
         if(!userInfo) {
             return;
         }
-        const { data }: {data: {message: string}} = await axios.delete(`/api/memes/delete/${_id}`, {
+        const { data }: {data: {message: string}} = await axios.delete(`https://fotball-forum-api.herokuapp.com/api/memes/delete/${_id}`, {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`
             }
@@ -91,7 +89,7 @@ export const likeOrUnlike = (isLike: boolean, memId: string) => async (dispatch:
     dispatch({ type: LIKE_OR_UNLIKE_MEM_REQUEST });
     try {
         const { userSignin: { userInfo } } = getState();
-        const { data, status }: {data: {message: string[]}, status: number} = await axios.put(`/api/user/like/${memId}`, {isLike: isLike}, {
+        const { data, status }: {data: {message: string[]}, status: number} = await axios.put(`https://fotball-forum-api.herokuapp.com/api/user/like/${memId}`, {isLike: isLike}, {
             headers: {
                 Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
             }
