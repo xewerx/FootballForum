@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const MyProfileScreen: React.FC<IProps> = (props) => {
-    
+
     // NAME AND PASSWORD CHANGE
     const user = useSelector((state: stateType) => state.userSignin);
     const { userInfo } = user;
@@ -96,10 +96,11 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
     useEffect(() => {
         if (!userInfo) {
             props.history.push('/');
+        } else {
+            dispatch({ type: SET_INIT_STATE });
+            setName(userInfo!.name);
         }
-        dispatch({ type: SET_INIT_STATE });
-        setName(userInfo!.name);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, props.history, userInfo?._id]); // id because do not execute when I change password/name/avatar 
 
     return (
@@ -108,9 +109,9 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
                 <h2>Mój profil</h2>
             </div>
             <form className="form my-profile-form" onSubmit={submitChangeNameHandler}>
-            {error && <MessageBox variant="danger">{error}</MessageBox>}
-            {loading && <LoadingBox></LoadingBox>}
-            {result && <MessageBox variant="success">{result}</MessageBox>}
+                {error && <MessageBox variant="danger">{error}</MessageBox>}
+                {loading && <LoadingBox></LoadingBox>}
+                {result && <MessageBox variant="success">{result}</MessageBox>}
                 <div>
                     <input className="element-hover" type="text" id="name" required value={name} onChange={(e) => setName(e.target.value)}></input>
                 </div>
@@ -137,7 +138,7 @@ const MyProfileScreen: React.FC<IProps> = (props) => {
             <form className="form my-profile-form" onChange={(e) => onChangeInput(e)} onSubmit={(e) => onFileSubmit(e)}>
                 <div>
                     <label htmlFor="file" className="custom-file-upload">
-                        <i className="fa fa-cloud-upload"></i> { fileName ? fileName : 'Wybierz plik'}
+                        <i className="fa fa-cloud-upload"></i> {fileName ? fileName : 'Wybierz plik'}
                     </label>
                     <input type="file" name="avatar" id="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} required />
                 </div>

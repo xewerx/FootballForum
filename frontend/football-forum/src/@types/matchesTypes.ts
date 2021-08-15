@@ -44,8 +44,8 @@ export interface MatchesAPIResponse {
             }
         }
         goals: {
-            home: 0
-            away: 0
+            home: number | null
+            away: number | null
         }
         score: {
             halftime: {

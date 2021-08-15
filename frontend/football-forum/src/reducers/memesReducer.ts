@@ -14,7 +14,7 @@ export const getAndAcceptOrDiscardMemesReducer = (state: types.MemState = IState
         case MEMES_LIST_REQUEST:
             return { ...state, loading: true };
         case MEMES_LIST_SUCCESS:
-            return { ...state, loading: false, memes: action.payload as types.Mem[] }; // tutaj uzywam as bo wiem dokladnie co za kazdym razem przekazuje to reducera ktorego uzywam raz
+            return { ...state, loading: false, memes: action.payload as types.Mem[] }; // always Mem[]
         case ACCEPT_OR_DELETE_MEM_REQUEST:
             return { ...state, loading: true };
         case ACCEPT_OR_DELETE_MEM_SUCCESS:

@@ -13,7 +13,7 @@ export const signinReducer = (state: types.UserState = IStateUser, action: types
         case USER_SIGNIN_REQUEST:
             return { ...state, loading: true };
         case USER_SIGNIN_SUCCESS:
-            return { ...state, loading: false, userInfo: action.payload as types.User }; // dane typu User zwrocone z API po zalogowaniu
+            return { ...state, loading: false, userInfo: action.payload as types.User }; // User type after log in
         case USER_SIGNOUT:
             return { ...state, userInfo: null };
         case LIVECHAT_CREDENTIALS_SUCCESS:
@@ -32,7 +32,7 @@ export const registerReducer = (state: types.UserState = { ...IStateUser, userIn
         case USER_REGISTER_REQUEST:
             return { ...state, loading: true };
         case USER_REGISTER_SUCCESS:
-            return { ...state, loading: false, userInfo: action.payload as types.User }; // dane typu User zwrocone z API po zarejestrowaniu
+            return { ...state, loading: false, userInfo: action.payload as types.User }; // User type after register
         case USER_REGISTER_FAIL:
             return { ...state, loading: false, error: action.error };
         default:
@@ -50,7 +50,7 @@ export const editProfileReducer = (state: types.EditUserState = IStateEditUser, 
         case USER_EDIT_REQUEST:
             return { ...state, loading: true };
         case USER_EDIT_SUCCESS:
-            return { ...state, loading: false, result: action.payload as string }; // result zwrocony jako string za API
+            return { ...state, loading: false, result: action.payload as string }; // result return as string from backend
         case USER_EDIT_FAIL:
             return { ...state, loading: false, error: action.error as string };
         case SET_INIT_STATE:

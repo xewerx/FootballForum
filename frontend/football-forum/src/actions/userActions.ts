@@ -32,7 +32,7 @@ export const editProfile = (editProfileData: types.NewUserData) => async (dispat
         const { userSignin: { userInfo } } = getState();
         const { data, status }: {data: {message: string}, status: number} = await axios.put('https://fotball-forum-api.herokuapp.com/api/user/edit', editProfileData, {
             headers: {
-                Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
+                Authorization: `Bearer ${userInfo!.token}` // only for logged users
             }
         });
         
@@ -54,11 +54,11 @@ export const uploadAvatar = (avatar: string) => async (dispatch: types.DispatchT
         const { userSignin: { userInfo } } = getState();
         const { data, status }: {data: {message: string}, status: number} = await axios.post('https://fotball-forum-api.herokuapp.com/api/user/avatar', {image: avatar}, {
             headers: {
-                Authorization: `Bearer ${userInfo!.token}` // tylko dla zalogowanych dlatego UserInfo zawsze jest
+                Authorization: `Bearer ${userInfo!.token}` // only for logged users
             }
         });
         if(status === 200) {
-            dispatch({ type: USER_SIGNIN_SUCCESS, payload: {...userInfo, avatar: avatar } as types.User }); // zmiana danych w stacie Usera - tylko name w sumie
+            dispatch({ type: USER_SIGNIN_SUCCESS, payload: {...userInfo, avatar: avatar } as types.User }); // state user update - name
             localStorage.setItem('userInfo', JSON.stringify({...userInfo, avatar: avatar }));
             dispatch({ type: USER_EDIT_SUCCESS, payload: data.message });
         } else {

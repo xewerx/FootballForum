@@ -71,7 +71,7 @@ const TablesScreen: React.FC = () => {
                                     </thead>
                                     <tbody>
                                         {table ?
-                                            table.league.standings[0].map(team => (  //nigdy nie bedzie nullem 
+                                            table.league.standings[0].map(team => (
                                                 <tr key={team.team.id}>
                                                     <td>{team.rank}</td>
                                                     <td className="td-logo"><img className="team-logo" src={team.team.logo} alt="logo"></img></td>

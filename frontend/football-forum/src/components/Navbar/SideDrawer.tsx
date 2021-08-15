@@ -20,7 +20,7 @@ const SideDrawer: React.FC = () => {
   const user = useSelector((state: stateType) => state.userSignin);
   const { userInfo } = user;
 
-  const toggleDrawer = (stateMobileNav: boolean) => (_event: any) => {
+  const toggleDrawer = (stateMobileNav: boolean) => () => {
     setStateMobileNav(stateMobileNav);
   };
 

@@ -69,7 +69,7 @@ const AddMemScreen: React.FC<IProps> = (props) => {
         if (!size) {
             setError("Dodaj plik");
             return
-        } else if (Number(size) > 5242880) { // wieksze niz 5MB
+        } else if (Number(size) > 5242880) {
             setError("Zbyt duzy plik");
         } else {
             setError("");
@@ -116,7 +116,7 @@ const AddMemScreen: React.FC<IProps> = (props) => {
 
             </form>
 
-            {/* 
+            {/* mem view
             <div>
                 
                 <img className="viewMem" src={`data:image/png;base64,${base64}`}></img>

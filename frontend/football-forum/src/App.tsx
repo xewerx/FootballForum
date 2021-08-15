@@ -13,7 +13,7 @@ import MyProfileScreen from './screens/MyProfileScreen';
 import AcceptMemesScreen from './screens/AcceptMemesScreen';
 import Footer from './components/Footer/Footer';
 
-function App(): JSX.Element {
+const App: React.FC = () => {
 
   return (
     <>
