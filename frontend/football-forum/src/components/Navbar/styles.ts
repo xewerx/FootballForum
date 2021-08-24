@@ -19,6 +19,7 @@ export default makeStyles({
     textDecoration: `none`,
     textTransform: `uppercase`,
     color: `white`,
+    whiteSpace: 'nowrap'
   },
   list: {
     width: 250,

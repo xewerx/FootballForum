@@ -32,18 +32,20 @@ const Mem: React.FC<memesTypes.Mem> = (props) => {
   const dispatch = useDispatch();
 
   const discardMem = () => {
+    console.log("discard "+props._id)
     dispatch(deleteMem(props._id));
-    const confirmBox: HTMLElement = document.querySelector(".confirm-box-container")!;
+    const confirmBox: HTMLElement = document.getElementById(props._id)!;
     confirmBox!.style.display = "none";
   };
 
   const cancelDiscardMem = () => {
-    const confirmBox: HTMLElement = document.querySelector(".confirm-box-container")!;
+    const confirmBox: HTMLElement = document.getElementById(props._id)!;
     confirmBox!.style.display = "none";
   };
 
   const showConfirmBox = () => {
-    const confirmBox: HTMLElement = document.querySelector(".confirm-box-container")!;
+    console.log(props._id)
+    const confirmBox: HTMLElement = document.getElementById(props._id)!;
     confirmBox!.style.display = "flex";
   };
   
@@ -62,7 +64,7 @@ const Mem: React.FC<memesTypes.Mem> = (props) => {
 
   return (
     <Card className={classes.root}>
-      <ConfirmBox question="Usunąć mema?" accept={discardMem} discard={cancelDiscardMem}></ConfirmBox>
+      <ConfirmBox id={props._id} question="Usunąć mema?" accept={discardMem} discard={cancelDiscardMem}></ConfirmBox>
       <CardHeader
         avatar={
           props.creatorAvatar ?
@@ -79,7 +81,7 @@ const Mem: React.FC<memesTypes.Mem> = (props) => {
           </IconButton>
         }
         title={props.title}
-        subheader={`Dodane przez ${props.creatorName} ${moment(props.createdAt).format('hh:mm DD.MM.YYYY')}`}
+        subheader={`Dodane przez ${props.creatorName} ${moment(props.createdAt).format('HH:mm DD.MM.YYYY')}`}
       />
       <img className={classes.img} src={`data:image/png;base64,${props.file}` || image} alt=""></img>
       <CardContent>

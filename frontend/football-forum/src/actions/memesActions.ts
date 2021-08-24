@@ -6,7 +6,8 @@ import stateType from "../@types/globaStateType"
 export const getMemes = () => async (dispatch: types.DispatchType) => {
     dispatch({ type: MEMES_LIST_REQUEST });
     try {
-        const { data }: {data: types.Mem[]} = await axios.get('https://fotball-forum-api.herokuapp.com/api/memes');
+        const { data }: {data: types.Mem[]} = await axios.get('http://localhost:5006/api/memes');
+        console.log(data)
         dispatch({ type: MEMES_LIST_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: MEMES_LIST_FAIL, error: error.response && error.response.data.message ? error.response.data.message : error.message });
@@ -20,7 +21,7 @@ export const getMemesToAcceptation = () => async (dispatch: types.DispatchType, 
         if(!userInfo) {
             return;
         }
-        const { data }: {data: types.Mem[]} = await axios.get('https://fotball-forum-api.herokuapp.com/api/memes/toaccept', {
+        const { data }: {data: types.Mem[]} = await axios.get('http://localhost:5006/api/memes/toaccept', {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`
             }
@@ -38,7 +39,7 @@ export const uploadMem = (mem: types.NewMem) => async (dispatch: types.DispatchT
         if(!userInfo) {
             return;
         }
-        const { data }: {data: {message: string}} = await axios.post('https://fotball-forum-api.herokuapp.com/api/memes/upload', mem, {
+        const { data }: {data: {message: string}} = await axios.post('http://localhost:5006/api/memes/upload', mem, {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`
             }
@@ -56,7 +57,7 @@ export const acceptOrDeleteMem = (_id: string, action: "acceptmem" | "discardmem
             if(!userInfo) {
                 return;
             }
-            const { data }: {data: {message: string}} = await axios.put(`https://fotball-forum-api.herokuapp.com/api/memes/${action}`, {_id}, {
+            const { data }: {data: {message: string}} = await axios.put(`http://localhost:5006/api/memes/${action}`, {_id}, {
                 headers: {
                     Authorization: `Bearer ${userInfo.token}`
                 }
@@ -69,12 +70,13 @@ export const acceptOrDeleteMem = (_id: string, action: "acceptmem" | "discardmem
 
 export const deleteMem = (_id: string) => async (dispatch: types.DispatchType, getState: () => stateType) => {
     dispatch({ type: ACCEPT_OR_DELETE_MEM_REQUEST });
+    console.log(_id)
     try {
         const { userSignin: { userInfo } } = getState();
         if(!userInfo) {
             return;
         }
-        const { data }: {data: {message: string}} = await axios.delete(`https://fotball-forum-api.herokuapp.com/api/memes/delete/${_id}`, {
+        const { data }: {data: {message: string}} = await axios.delete(`http://localhost:5006/api/memes/delete/${_id}`, {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`
             }
